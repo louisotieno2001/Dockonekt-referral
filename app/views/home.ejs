@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0c1e3e;
+        }
+
+        .top-menu {
+            background-color: #0c1e3e;
+            color: #fff;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        .tabs-container {
+            display: flex;
+            margin-top: 100px;
+            /* Adjust for top menu height */
+            height: calc(100vh - 40px);
+            /* Subtract top menu height */
+        }
+
+        .left-tab {
+            flex: 0 0 300px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 40px);
+            position: fixed;
+        }
+
+        .right-tab {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            overflow-y: auto;
+            margin-left: 284px;
+            height: calc(100vh - 40px);
+        }
+
+        .filter-container {
+            margin-bottom: 20px;
+        }
+
+        .filter-container select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .filter-btn {
+            width: 95%;
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Submenu */
+        .submenu {
+            position: absolute;
+            top: 60px;
+            right: 35px;
+            background-color: #0c1e3e;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+            z-index: 1500;
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        #close-menu {
+            display: none;
+            padding-right: 1em;
+            padding-top: 1.28em;
+            cursor: pointer;
+        }
+
+        #open-menu {
+            padding-right: 1em;
+            padding-top: 1.28em;
+            cursor: pointer;
+        }
+
+        #right-tab-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        #left-tab-icon {
+            cursor: pointer;
+        }
+
+        .module-container {
+            border: 1px #007bff solid;
+            width: max-content;
+            padding: .5em;
+            border-radius: 8px;
+            margin: 3px;
+        }
+
+        .module-container:hover {
+            background-color: #007bff;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .modules-container {
+            width: max-content;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .data {
+            display: none;
+        }
+
+        .module-container a{
+            text-decoration: none;
+            color: #000;
+        }
+
+        /* Styles for small screens */
+        @media only screen and (max-width: 768px) {
+            .tabs-container {
+                flex-direction: column;
+                margin-top: 50px;
+                height: auto;
+                max-width: 100vw;
+                padding: 0px;
+                margin-top: 105px;
+                overflow: hidden;
+                padding-left: 0px;
+                padding-right: 0;
+            }
+
+            .left-tab,
+            .right-tab {
+                flex: 1;
+                width: 95%;
+                position: static;
+                height: auto;
+                margin-left: 0;
+            }
+
+            .filter-container select {
+                width: 95%;
+            }
+
+            .modules-container {
+                width: max-content;
+                display: inline;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-menu">
+        <h1>Dockonekt</h1>
+        <span class="material-symbols-outlined" id="open-menu">menu</span>
+        <span class="material-symbols-outlined" id="close-menu">close</span>
+        <div class="submenu" id="submenu">
+            <h3><a href="/home">Home</a></h3>
+        </div>
+    </div>
+
+    <div class="tabs-container">
+        <div class="left-tab" id="left-tab">
+            <span class="material-symbols-outlined" id="left-tab-icon">tabs</span>
+            <h2>Filters</h2>
+            <div class="filter-container">
+                <label for="region">Select Region:</label>
+                <select id="region" name="region">
+                    <option value="all">All Regions</option>
+                    <option value="region1">Region 1</option>
+                    <option value="region2">Region 2</option>
+                    <option value="region3">Region 3</option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="level">Select Level:</label>
+                <select id="level" name="level">
+                    <option value="all">All Levels</option>
+                    <option value="level1">Level 1</option>
+                    <option value="level2">Level 2</option>
+                    <option value="level3">Level 3</option>
+                </select>
+            </div>
+            <div class="filter-container">
+                <label for="specialty">Select Specialty:</label>
+                <select id="specialty" name="specialty">
+                    <option value="all">All Specialties</option>
+                    <option value="specialty1">Specialty 1</option>
+                    <option value="specialty2">Specialty 2</option>
+                    <option value="specialty3">Specialty 3</option>
+                </select>
+            </div>
+            <button class="filter-btn" onclick="applyFilters()">Apply Filters</button>
+        </div>
+        <div class="right-tab" id="right-tab">
+            <span class="material-symbols-outlined" id="right-tab-icon">tabs</span>
+            <h2>Modules</h2>
+            <div class="modules-container">
+                <div class="module-container" title="Initiate referral to another hospital" id="referrals-module">
+                    Referrals
+                </div> 
+                <div class="module-container" title="Initiate a consultation referral" id="consultation-module">
+                    Consultation referrals
+                </div>
+                <div class="module-container" title="Initiate a specimen movement" id="specimen-module">
+                    Specimen-movement
+                </div>
+            </div>
+            <div class="display">
+                <div class="data" id="referrals-filter">
+                    <div class="module-container" title="See all incoming referrals" id="referrals-in">
+                        Referrals in
+                    </div>
+                    <div class="module-container" title="See all outgoing referrals" id="referrals-out">
+                        Referrals out
+                    </div>
+                    <div class="module-container" title="See all outgoing referrals" id="referrals-refer">
+                        <a href="/referral">Initiate patient referral</a>
+                    </div>
+                </div>
+                <div class="data" id="specimen-filter">
+                    <div class="module-container" title="See all incoming specimens" id="specimen-in">
+                        Specimens in
+                    </div>
+                    <div class="module-container" title="See all outgoing specimen" id="specimen-out">
+                        Specimens out
+                    </div>
+                    <div class="module-container" title="Initiate an outgoing specimen referral" id="specimen-refer">
+                        <a href="/specimen-movement">Initiate specimens referral</a>
+                    </div>
+                </div>
+                <div class="data" id="consultations-filter">
+                    <div class="module-container" title="See all incoming consultation" id="consultation-in">
+                        Consultations in
+                    </div>
+                    <div class="module-container" title="See all outgoing consultations" id="consultation-out">
+                        Consultations out
+                    </div>
+                    <div class="module-container" title="Initiate an outgoing consultations" id="consultation-refer">
+                        <a href="/consultation">Initiate a consultation referral</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const rightTabBtn = document.getElementById('right-tab-icon');
+            const leftTabBtn = document.getElementById('left-tab-icon');
+            const closeMenu = document.getElementById('close-menu');
+            const openMenu = document.getElementById('open-menu');
+            const leftTab = document.getElementById('left-tab');
+            const rightTab = document.getElementById('right-tab');
+            const submenu = document.getElementById('submenu');
+            const referralModule = document.getElementById('referrals-module');
+            const consultationModule = document.getElementById('consultation-module');
+            const specimenModule = document.getElementById('specimen-module');
+            const referralChild = document.getElementById('referrals-filter');
+            const consultationChild = document.getElementById('consultations-filter');
+            const specimenChild = document.getElementById('specimen-filter');
+
+            leftTabBtn.addEventListener('click', async (e) => {
+                leftTab.style.display = 'none';
+                rightTab.style.marginLeft = '0';
+                rightTabBtn.style.display = 'block';
+            });
+
+            rightTabBtn.addEventListener('click', async (e) => {
+                leftTab.style.display = 'block';
+                if (window.innerWidth > 768) { // Check screen width
+                    rightTab.style.marginLeft = '284px';
+                } else {
+                    rightTab.style.marginLeft = '0';
+                }
+                rightTabBtn.style.display = 'none';
+            });
+
+            openMenu.addEventListener('click', async (e) => {
+                openMenu.style.display = 'none';
+                closeMenu.style.display = 'block';
+                submenu.style.display = 'block'; // Show submenu
+            });
+
+            closeMenu.addEventListener('click', async (e) => {
+                closeMenu.style.display = 'none';
+                openMenu.style.display = 'block';
+                submenu.style.display = 'none'; // Hide submenu
+            });
+
+            // Adjust rightTab margin on window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && !rightTabBtn.style.display) { // Check screen width and rightTabBtn visibility
+                    rightTab.style.marginLeft = '284px';
+                } else {
+                    rightTab.style.marginLeft = '0';
+                }
+            });
+
+            referralModule.addEventListener('click', async (e) =>{
+                referralChild.style.display = 'block';
+                consultationModule.style.display = 'none';
+                specimenModule.style.display = 'none';
+            });
+
+            consultationModule.addEventListener('click', async (e) =>{
+                consultationChild.style.display = 'block';
+                referralModule.style.display = 'none';
+                specimenModule.style.display = 'none';
+            });
+
+            specimenModule.addEventListener('click', async (e) =>{
+                specimenChild.style.display = 'block';
+                consultationModule.style.display = 'none';
+                referralModule.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

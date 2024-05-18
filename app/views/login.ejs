@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0c1e3e; /* Dark blue background */
+            color: #fff; /* White text color */
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black container */
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); /* White shadow effect */
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input[type="email"],
+        input[type="text"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #fff; /* White border */
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: transparent; /* Transparent background */
+            color: #fff; /* White text color */
+        }
+        input[type="email"]:focus,
+        input[type="text"]:focus,
+        button:focus {
+            outline: none;
+            border-color: #00ffcc; /* Light green focus border */
+        }
+        button[type="submit"] {
+            background-color: #00ffcc; /* Light green button */
+            color: #0c1e3e; /* Dark blue text color */
+            border: none;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #00e6b8; /* Darker green hover color */
+        }
+
+        /* Media query for small screens */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+                max-width: 300px;
+            }
+            input[type="email"],
+            input[type="text"],
+            button {
+                padding: 8px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm" action="/login" method="POST">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="verificationCode">Verification Code:</label>
+            <input type="text" id="verificationCode" name="verificationCode" required>
+
+            <button type="submit" id="submit">Login</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitBtn = document.getElementById('submit');
+
+            submitBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                window.location.href = '/home'
+            });
+        });
+    </script>
+</body>
+</html>

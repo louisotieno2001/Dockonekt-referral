@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0c1e3e;
+            /* Dark blue background */
+            color: #fff;
+            /* White text color */
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Semi-transparent black container */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #fff;
+            /* White border */
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: transparent;
+            /* Transparent background */
+            color: #fff;
+            /* White text color */
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        button:focus {
+            outline: none;
+            border-color: #00ffcc;
+            /* Light green focus border */
+        }
+
+        .verification-field {
+            display: none;
+        }
+
+        button[type="submit"] {
+            background-color: #00ffcc;
+            /* Light green button */
+            color: #0c1e3e;
+            /* Dark blue text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #00e6b8;
+            /* Darker green hover color */
+        }
+
+        /* Styles for small screens */
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+                max-width: 300px; 
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            button {
+                padding: 8px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Healthcare Registration</h1>
+        <form id="registrationForm" action="/register" method="POST">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="uniqueCode">Unique Code:</label>
+            <input type="text" id="uniqueCode" name="uniqueCode" required>
+
+            <button type="submit" id="submit">Register</button>
+
+            <div class="verification-field" id="verificationField">
+                <p>A verification code has been sewmt to your email, enter it below to complete the registration</p>
+                <label for="emailVerification">Email Verification Code:</label>
+                <input type="text" id="emailVerification" name="emailVerification">
+                <button type="submit" id="verify">Verify</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitBtn = document.getElementById('submit');
+            const verification = document.getElementById('verificationField');
+            const verificationBtn = document.getElementById('verify');
+
+            submitBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                verification.style.display = 'block';
+            });
+
+            verificationBtn.addEventListener('click', async (e) =>{
+                e.preventDefault();
+                window.location.href = '/login'
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>

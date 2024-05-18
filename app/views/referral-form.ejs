@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Referral Form</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #01579B;
+            color: #fff;
+        }
+
+        .top-menu {
+            background-color: #0c1e3e;
+            color: #fff;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 120px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        h1,
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 98%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            background-color: transparent;
+            color: #fff;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            /* Blue button */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+            /* Darker blue on hover */
+        }
+
+        /* Space-themed background */
+        body {
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Submenu */
+        .submenu {
+            position: absolute;
+            top: 60px;
+            right: 35px;
+            background-color: #0c1e3e;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+            z-index: 1500;
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        #close-menu {
+            display: none;
+            padding-right: 1em;
+            padding-top: 1.28em;
+            cursor: pointer;
+        }
+
+        #open-menu {
+            padding-right: 1em;
+            padding-top: 1.28em;
+            cursor: pointer;
+        }
+
+        #specimen-details{
+            display: none;
+        }
+
+        /* Additional styles for smaller screens */
+        @media only screen and (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+                margin-top: 120px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            input[type="text"],
+            input[type="tel"],
+            input[type="number"],
+            select,
+            textarea {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-menu">
+        <h1>Dockonekt</h1>
+        <span class="material-symbols-outlined" id="open-menu">menu</span>
+        <span class="material-symbols-outlined" id="close-menu">close</span>
+        <div class="submenu" id="submenu">
+            <h3><a href="/home">Home</a></h3>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Client Referral Form</h1>
+        <form>
+            <div class="section">
+                <h2>Service Level</h2>
+                <label for="emergency">Emergency</label>
+                <input type="radio" id="emergency" name="serviceLevel">
+                <label for="urgent">Urgent</label>
+                <input type="radio" id="urgent" name="serviceLevel">
+                <label for="routine">Routine</label>
+                <input type="radio" id="routine" name="serviceLevel">
+            </div>
+            <div class="section">
+                <h2>Referral Type</h2>
+                <label for="local">Local</label>
+                <input type="radio" id="local" name="referralType">
+                <label for="interCounty">Inter-county</label>
+                <input type="radio" id="interCounty" name="referralType">
+                <label for="overseas">Overseas</label>
+                <input type="radio" id="overseas" name="referralType">
+            </div>
+            <div class="section">
+                <h2>Date & Time</h2>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time"> <br>
+                <br>
+                <label for="facilityCode">Facility Code:</label>
+                <input type="text" id="facilityCode" name="facilityCode">
+            </div>
+            <h2>Client Details</h2>
+            <div class="section">
+                <label for="clientName">Name:</label>
+                <input type="text" id="clientName" name="clientName">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age">
+                <label for="sex">Sex:</label>
+                <select name="sex" id="sex">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="section">
+                <label for="ipOpNumber">IP/OP Number:</label>
+                <input type="text" id="ipOpNumber" name="ipOpNumber">
+                <label for="idNumber">ID Number:(If applicable)</label>
+                <input type="text" id="idNumber" name="idNumber">
+            </div>
+            <div class="section">
+                <label for="nhifNumber">NHIF Number:(If applicable)</label>
+                <input type="text" id="nhifNumber" name="nhifNumber">
+                <label for="phoneNumber">Phone Number(s):</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber">
+            </div>
+            <div class="section">
+                <label for="address">Physical Address:</label>
+                <textarea id="address" name="address" rows="4" cols="50"></textarea>
+                <label for="county">County:</label>
+                <input type="text" id="county" name="county">
+            </div>
+            <div class="section">
+                <label for="subCounty">Sub County:</label>
+                <input type="text" id="subCounty" name="subCounty">
+                <label for="subLocation">Sub Location:</label>
+                <input type="text" id="subLocation" name="subLocation">
+            </div>
+            <div class="section">
+                <h2>Assistant Chief</h2>
+                <label for="assistantChief">Name:</label>
+                <input type="text" id="assistantChief" name="assistantChief">
+                <label for="assistantChiefPhoneNumber">Phone Number(s):</label>
+                <input type="tel" id="assistantChiefPhoneNumber" name="assistantChiefPhoneNumber">
+            </div>
+            <div class="section">
+                <h2>Facility Details</h2>
+                <label for="referringfacility">Referring Facility/Department</label>
+                <input type="text" name="referringfacility" id="referrer">
+                <label for="recipientfacility">Receiving Facility/Department</label>
+                <input type="text" name="referfacility" id="receiver">
+                <label for="investigations">History/Investigations (if any)</h2>
+                    <textarea id="investigations" name="investigations" rows="4" cols="50"></textarea>
+                <label for="diagnosis">Diagnosis (if known)</label>
+                <textarea id="diagnosis" name="diagnosis" rows="4" cols="50"></textarea>
+                    <label for="referralReason">Reasons for referral:</label>
+                    <textarea id="referralReason" name="referralReason" rows="4" cols="50"></textarea>
+            </div>
+            <div class="section">
+                <h2>Referring officer details</h2>
+                <label for="requestingOfficerName">Name:</label>
+                    <input type="text" id="requestingOfficerName" name="requestingOfficerName">
+                    <label for="designation">Designation:</label>
+                    <input type="text" id="designation" name="designation">
+                    <label for="phoneNumber">Telephone Number(s):</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber">
+                    <label for="signature">Signature:</label>
+                    <input type="text" id="signature" name="signature">
+            </div>
+            <h2>Next of Kin Details</h2>
+            <div class="section">
+                <label for="nextOfKinName">Name:</label>
+                <input type="text" id="nextOfKinName" name="nextOfKinName">
+                <label for="nextOfKinRelationship">Relationship:</label>
+                <input type="text" id="nextOfKinRelationship" name="nextOfKinRelationship">
+                <label for="nextOfKinPhoneNumber">Phone Number(s):</label>
+                <input type="tel" id="nextOfKinPhoneNumber" name="nextOfKinPhoneNumber">
+            </div>
+            <button type="submit" id="show-specimen">+ Add specimen details</button>
+            <div class="section" id="specimen-details">
+                <h2>Accompanying Specimen Details</h2>
+                <div class="section-row">
+                    <label for="specimen">Specimen and Description:</label>
+                    <textarea id="specimen" name="specimen" rows="4" cols="50"></textarea>
+                    <label for="source">Source:</label>
+                    <input type="text" id="source" name="source">
+                </div>
+                <div class="section-row">
+                    <label for="collectionDate">Collection Date (dd/mm/yyyy):</label>
+                    <input type="date" id="collectionDate" name="collectionDate">
+                    <label for="collectionTime">Time (24hrs):</label>
+                    <input type="time" id="collectionTime" name="collectionTime">
+                </div>
+                <div class="section-row">
+                    <label for="preservationDate">Date of Preservation:</label>
+                    <input type="date" id="preservationDate" name="preservationDate"> <br>
+                    <label for="preservationMethod">Method of Preservation:</label>
+                    <input type="text" id="preservationMethod" name="preservationMethod">
+                </div>
+            </div>
+            <div class="section">
+                <h2>Client in transit monitoring form</h2>
+            </div>
+            <button type="submit">Submit Referral</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const closeMenu = document.getElementById('close-menu');
+            const openMenu = document.getElementById('open-menu');
+            const submenu = document.getElementById('submenu');
+            const showSpecimen = document.getElementById('show-specimen');
+            const specimenForm = document.getElementById('specimen-details');
+
+            openMenu.addEventListener('click', async (e) => {
+                openMenu.style.display = 'none';
+                closeMenu.style.display = 'block';
+                submenu.style.display = 'block'; // Show submenu
+            });
+
+            closeMenu.addEventListener('click', async (e) => {
+                closeMenu.style.display = 'none';
+                openMenu.style.display = 'block';
+                submenu.style.display = 'none'; // Hide submenu
+            });
+
+            showSpecimen.addEventListener('click', async (e) =>{
+                e.preventDefault();
+               specimenForm.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+
+</html>

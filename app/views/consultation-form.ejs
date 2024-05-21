@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../public/icon.svg" type="image/x-icon" />
     <title>Client Consultation Request Form</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -12,7 +13,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #01579B;
+            background-color: #fff;
             color: #fff;
         }
 
@@ -20,7 +21,7 @@
             max-width: 800px;
             margin: 120px auto;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: #0c1e3e;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
@@ -191,7 +192,7 @@
         <h1>Client Consultation Request Form</h1>
         <form>
             <div class="section">
-                <h2>Service Level</h2>
+                <h2>Service Level(required)</h2>
                 <label for="emergency">Emergency</label>
                 <input type="radio" id="emergency" name="serviceLevel" value="emergency">
                 <label for="urgent">Urgent</label>
@@ -199,29 +200,30 @@
                 <label for="routine">Routine</label>
                 <input type="radio" id="routine" name="serviceLevel" value="routine">
                 <h2>Date & Time</h2>
-                <label for="date">Date:</label>
+                <label for="date">Date:(required)</label>
                 <input type="date" id="date" name="date">
-                <label for="time">Time:</label>
+                <label for="time">Time:(required)</label>
                 <input type="time" id="time" name="time"> <br>
             </div>
             <br>
             <div class="section">
                 <h2>Expert Details</h2>
                 <div class="section">
-                    <label for="clinicDepartment">Clinic/Department (Where the patient is being referred)</label>
+                    <label for="clinicDepartment">Clinic/Department (Where the patient is being
+                        referred):(required)</label>
                     <input type="text" id="clinicDepartment" name="clinicDepartment">
                 </div>
                 <br>
-                <label for="consultant">Doctor/MR/MS/PROF/DR (To whom the patient is referred):</label>
+                <label for="consultant">Doctor/MR/MS/PROF/DR (To whom the patient is referred):(required)</label>
                 <input type="text" id="consultant" name="consultant">
             </div>
             <h2>Client Details</h2>
             <div class="section">
-                <label for="clientName">Name:</label>
+                <label for="clientName">Name:(required)</label>
                 <input type="text" id="clientName" name="clientName">
-                <label for="age">Age:</label>
+                <label for="age">Age:(required)</label>
                 <input type="number" id="age" name="age">
-                <label for="sex">Sex:</label>
+                <label for="sex">Sex:(required)</label>
                 <select name="sex" id="sex">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -232,7 +234,7 @@
                 <input type="text" id="bedNumber" name="bedNumber">
             </div>
             <div class="section">
-                <label for="currentIpOpNumber">Current IP/OP Number</label>
+                <label for="currentIpOpNumber">Current IP/OP Number:(required)</label>
                 <input type="text" id="currentIpOpNumber" name="currentIpOpNumber">
             </div>
             <div class="section">
@@ -243,34 +245,34 @@
                 <input type="text" id="previousIpOpNumber2" name="previousIpOpNumber2">
                 <label for="previousIpOpNumber3">c) </label>
                 <input type="text" id="previousIpOpNumber3" name="previousIpOpNumber3">
-                <label for="previousIpOpNumberSpecify">Specify if(IP/OP):</label>
+                <label for="previousIpOpNumberSpecify">Specify if(IP/OP):(required)</label>
                 <input type="text" id="previousIpOpNumberSpecify" name="previousIpOpNumberSpecify">
             </div>
             <label for="diagnosis">Diagnosis (if known)</label>
             <textarea id="diagnosis" name="diagnosis" rows="4" cols="50"></textarea>
             <label for="investigations">Investigations (if any)</h2>
                 <textarea id="investigations" name="investigations" rows="4" cols="50"></textarea>
-                <label for="consultationReason">Reasons for Consultation Request</label>
+                <label for="consultationReason">Reasons for Consultation Request:(required)</label>
                 <textarea id="consultationReason" name="consultationReason" rows="4" cols="50"></textarea>
                 <h2>Requesting Officer Details</h2>
                 <div class="section">
-                    <label for="requestingOfficerName">Name:</label>
+                    <label for="requestingOfficerName">Name:(required)</label>
                     <input type="text" id="requestingOfficerName" name="requestingOfficerName">
-                    <label for="designation">Designation:</label>
+                    <label for="designation">Designation:(required)</label>
                     <input type="text" id="designation" name="designation">
-                    <label for="phoneNumber">Telephone Number(s):</label>
+                    <label for="phoneNumber">Telephone Number(s):(required)</label>
                     <input type="tel" id="phoneNumber" name="phoneNumber">
-                    <label for="department">Department:</label>
+                    <label for="department">Department:(required)</label>
                     <input type="text" id="department" name="department">
-                    <label for="facility">Facility:</label>
+                    <label for="facility">Facility:(required)</label>
                     <input type="text" id="facility" name="facility">
-                    <label for="signature">Signature:</label>
+                    <label for="signature">Signature:(required)</label>
                     <input type="text" id="signature" name="signature">
-                    <label for="date">Date:</label>
+                    <label for="date">Date:(required)</label>
                     <input type="date" id="date" name="date">
                 </div>
                 <br>
-                <button type="submit">Submit Request</button>
+                <button type="submit" id="submit-consultation">Submit Request</button>
         </form>
     </div>
     <script>
@@ -278,6 +280,7 @@
             const closeMenu = document.getElementById('close-menu');
             const openMenu = document.getElementById('open-menu');
             const submenu = document.getElementById('submenu');
+            const submitConsultation = document.getElementById('submit-consultation');
 
             openMenu.addEventListener('click', async (e) => {
                 openMenu.style.display = 'none';
@@ -289,6 +292,131 @@
                 closeMenu.style.display = 'none';
                 openMenu.style.display = 'block';
                 submenu.style.display = 'none'; // Hide submenu
+            });
+
+            submitConsultation.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                // Get all the input elements by their IDs
+                // Get all the input elements by their IDs
+                const serviceLevelInputs = document.querySelectorAll('input[name="serviceLevel"]');
+                const serviceLevelInput = Array.from(serviceLevelInputs).find(input => input.checked);
+                const dateInput = document.getElementById('date');
+                const timeInput = document.getElementById('time');
+                const clinicDepartmentInput = document.getElementById('clinicDepartment');
+                const consultantInput = document.getElementById('consultant');
+                const clientNameInput = document.getElementById('clientName');
+                const ageInput = document.getElementById('age');
+                const sexSelect = document.getElementById('sex');
+                const wardClinicInput = document.getElementById('wardClinic');
+                const bedNumberInput = document.getElementById('bedNumber');
+                const currentIpOpNumberInput = document.getElementById('currentIpOpNumber');
+                const previousIpOpNumber1Input = document.getElementById('previousIpOpNumber1');
+                const previousIpOpNumber2Input = document.getElementById('previousIpOpNumber2');
+                const previousIpOpNumber3Input = document.getElementById('previousIpOpNumber3');
+                const previousIpOpNumberSpecifyInput = document.getElementById('previousIpOpNumberSpecify');
+                const diagnosisTextarea = document.getElementById('diagnosis');
+                const investigationsTextarea = document.getElementById('investigations');
+                const consultationReasonTextarea = document.getElementById('consultationReason');
+                const requestingOfficerNameInput = document.getElementById('requestingOfficerName');
+                const designationInput = document.getElementById('designation');
+                const phoneNumberInput = document.getElementById('phoneNumber');
+                const departmentInput = document.getElementById('department');
+                const facilityInput = document.getElementById('facility');
+                const requestingOfficerSignatureInput = document.getElementById('signature');
+                const requestingOfficerDateInput = document.getElementById('date');
+
+                // Retrieve values
+                // const serviceLevelValue = Array.from(serviceLevelInputs).find(input => input.checked).value;
+                const serviceLevelValue = serviceLevelInput ? serviceLevelInput.value : "";
+                const dateValue = dateInput.value;
+                const timeValue = timeInput.value;
+                const clinicDepartmentValue = clinicDepartmentInput.value;
+                const consultantValue = consultantInput.value;
+                const clientNameValue = clientNameInput.value;
+                const ageValue = ageInput.value;
+                const sexValue = sexSelect.value;
+                const wardClinicValue = wardClinicInput.value;
+                const bedNumberValue = bedNumberInput.value;
+                const currentIpOpNumberValue = currentIpOpNumberInput.value;
+                const previousIpOpNumber1Value = previousIpOpNumber1Input.value;
+                const previousIpOpNumber2Value = previousIpOpNumber2Input.value;
+                const previousIpOpNumber3Value = previousIpOpNumber3Input.value;
+                const previousIpOpNumberSpecifyValue = previousIpOpNumberSpecifyInput.value;
+                const diagnosisValue = diagnosisTextarea.value;
+                const investigationsValue = investigationsTextarea.value;
+                const consultationReasonValue = consultationReasonTextarea.value;
+                const requestingOfficerNameValue = requestingOfficerNameInput.value;
+                const designationValue = designationInput.value;
+                const phoneNumberValue = phoneNumberInput.value;
+                const departmentValue = departmentInput.value;
+                const facilityValue = facilityInput.value;
+                const requestingOfficerSignatureValue = requestingOfficerSignatureInput.value;
+                const requestingOfficerDateValue = requestingOfficerDateInput.value;
+
+                if (serviceLevelValue === "" ||
+                    dateValue === "" ||
+                    timeValue === "" ||
+                    clinicDepartmentValue === "" ||
+                    consultantValue === "" ||
+                    clientNameValue === "" ||
+                    ageValue === "" ||
+                    sexValue === "" ||
+                    currentIpOpNumberValue === "" ||
+                    consultationReasonValue === "" ||
+                    requestingOfficerNameValue === "" ||
+                    designationValue === "" ||
+                    phoneNumberValue === "" ||
+                    departmentValue === "" ||
+                    facilityValue === "" ||
+                    requestingOfficerSignatureValue === "" ||
+                    requestingOfficerDateValue === "") {
+                    alert("All fields with (required) attribute must be filled");
+                } else {
+                    try {
+                        const response = await fetch('/consultation', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                serviceLevel: serviceLevelValue,
+                                date: dateValue,
+                                time: timeValue,
+                                clinicDepartment: clinicDepartmentValue,
+                                consultant: consultantValue,
+                                clientName: clientNameValue,
+                                age: ageValue,
+                                sex: sexValue,
+                                wardClinic: wardClinicValue,
+                                currentIpOpNumber: currentIpOpNumberValue,
+                                previousIpOpNumber1: previousIpOpNumber1Value,
+                                previousIpOpNumber2: previousIpOpNumber2Value,
+                                previousIpOpNumber3: previousIpOpNumber3Value,
+                                previousIpOpNumberSpecify: previousIpOpNumberSpecifyValue,
+                                diagnosis: diagnosisValue, // Assuming you still want to include diagnosis
+                                investigations: investigationsValue,
+                                consultationReason: consultationReasonValue,
+                                requestingOfficerName: requestingOfficerNameValue,
+                                designation: designationValue,
+                                phoneNumber: phoneNumberValue,
+                                department: departmentValue,
+                                facility: facilityValue,
+                                requestingOfficerSignature: requestingOfficerSignatureValue,
+                                requestingOfficerDate: requestingOfficerDateValue
+                            })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error("Failed to submit consultation. Please try again later.");
+                            alert("Something went wrong")
+                        }
+
+                    } catch (error) {
+                        console.error('Error:', error.message);
+                    }
+
+                }
             });
         });
     </script>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../public/icon.svg" type="image/x-icon" />
     <title>Sample and Specimen Referral Form</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -12,12 +13,13 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #01579B; 
-            color: #fff; /* White text color */
+            background-color: #fff;
+            color: #fff;
+            /* White text color */
         }
 
-         /* Submenu */
-         .submenu {
+        /* Submenu */
+        .submenu {
             position: absolute;
             top: 60px;
             right: 35px;
@@ -63,13 +65,17 @@
             max-width: 800px;
             margin: 120px auto;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            background-color: #0c1e3e;
+            /* Semi-transparent background */
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* White shadow */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            /* White shadow */
         }
 
-        h1, h2 {
-            font-family: 'Orbitron', sans-serif; /* Space-themed font */
+        h1,
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            /* Space-themed font */
         }
 
         h1 {
@@ -100,37 +106,49 @@
         textarea {
             width: 96%;
             padding: 8px;
-            border-radius: 5px;         
+            border-radius: 5px;
             border: 1px solid #ccc;
             margin-bottom: 10px;
-            background-color: transparent; /* Dark background */
-            color: #fff; /* White text color */
+            background-color: transparent;
+            /* Dark background */
+            color: #fff;
+            /* White text color */
         }
 
         select {
-            background-color: transparent; /* Dark background */
-            color: #fff; /* White text color */
+            background-color: transparent;
+            /* Dark background */
+            color: #fff;
+            /* White text color */
             padding: 8px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            width: calc(100% - 20px); /* Adjust width for arrow icon */
+            width: calc(100% - 20px);
+            /* Adjust width for arrow icon */
             margin-bottom: 10px;
-            appearance: none; /* Remove default arrow icon */
-            -webkit-appearance: none; /* Remove default arrow icon for Safari */
-            -moz-appearance: none; /* Remove default arrow icon for Firefox */
+            appearance: none;
+            /* Remove default arrow icon */
+            -webkit-appearance: none;
+            /* Remove default arrow icon for Safari */
+            -moz-appearance: none;
+            /* Remove default arrow icon for Firefox */
             background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"%3E%3Cpath fill="%23fff" d="M5 5L0 0h10z"%3E%3C/path%3E%3C/svg%3E');
-            background-size: 10px 5px; /* Size of custom arrow icon */
+            background-size: 10px 5px;
+            /* Size of custom arrow icon */
             background-repeat: no-repeat;
-            background-position: calc(100% - 10px) center; /* Position of custom arrow icon */
+            background-position: calc(100% - 10px) center;
+            /* Position of custom arrow icon */
         }
 
         textarea {
-            resize: vertical; /* Allow vertical resizing */
+            resize: vertical;
+            /* Allow vertical resizing */
         }
 
         button[type="submit"] {
             padding: 10px 20px;
-            background-color: #007bff; /* Blue button */
+            background-color: #007bff;
+            /* Blue button */
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -138,7 +156,8 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #0056b3;
+            /* Darker blue on hover */
         }
 
         /* Space-themed background */
@@ -238,7 +257,7 @@
         <h2>III. Details of Person Referring Sample</h2>
         <div class="section-row">
             <label for="referrrerName">Name:</label>
-            <input type="text" id="referrrerName" name="referrrerName">
+            <input type="text" id="referrerName" name="referrrerName">
             <label for="designation">Designation:</label>
             <input type="text" id="designation" name="designation">
             <label for="mobileNo">Mobile No.:</label>
@@ -261,28 +280,20 @@
             <label for="receiverDesignation">Designation:</label>
             <input type="text" id="receiverDesignation" name="receiverDesignation">
             <label for="mobileNo">Mobile No.:</label>
-            <input type="tel" id="mobileNo" name="mobileNo">
+            <input type="tel" id="receiverMobileNo" name="mobileNo">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="receiverEmail" name="email">
             <label for="signature">Signature:</label>
-            <input type="text" id="signature" name="signature">
+            <input type="text" id="receiverSignature" name="signature">
         </div>
-        <h2>VII. Condition of sample</h2>
-        <div class="section-row">
-            <label for="accepted">Accepted</label>
-            <input type="radio" id="accepted" name="condition" value="accepted">
-            <label for="rejected">Rejected</label>
-            <input type="radio" id="rejected" name="condition" value="rejected">
-            <label for="reason">Specify reason</label>
-            <input type="text" id="reason" name="reason">
-        </div>
-        <button type="submit">Submit Referral</button>
+        <button type="submit" id="submit-specimen">Submit Referral</button>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
             const closeMenu = document.getElementById('close-menu');
             const openMenu = document.getElementById('open-menu');
             const submenu = document.getElementById('submenu');
+            const submitSpecimen = document.getElementById('submit-specimen');
 
             openMenu.addEventListener('click', async (e) => {
                 openMenu.style.display = 'none';
@@ -294,6 +305,114 @@
                 closeMenu.style.display = 'none';
                 openMenu.style.display = 'block';
                 submenu.style.display = 'none'; // Hide submenu
+            });
+
+            submitSpecimen.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                const refnoValue = document.getElementById('refno').value;
+                const ipOpNumberValue = document.getElementById('ipOpNumber').value;
+                const patientNameValue = document.getElementById('patientName').value;
+                const ageValue = document.getElementById('age').value;
+                const sexValue = document.getElementById('sex').value;
+                const residenceValue = document.getElementById('residence').value;
+                const postalAddressValue = document.getElementById('postalAddress').value;
+                const specimenValue = document.getElementById('specimen').value;
+                const sourceValue = document.getElementById('source').value;
+                const collectionDateValue = document.getElementById('collectionDate').value;
+                const collectionTimeValue = document.getElementById('collectionTime').value;
+                const preservationDateValue = document.getElementById('preservationDate').value;
+                const preservationMethodValue = document.getElementById('preservationMethod').value;
+                const referringLabValue = document.getElementById('referringLab').value;
+                const referrrerNameValue = document.getElementById('referrerName').value;
+                const designationValue = document.getElementById('designation').value;
+                const mobileNoValue = document.getElementById('mobileNo').value;
+                const emailValue = document.getElementById('email').value;
+                const signatureValue = document.getElementById('signature').value;
+                const investigationsRequestedValue = document.getElementById('investigationsRequested').value;
+                const labReferredToValue = document.getElementById('labReferredTo').value;
+                const receiverNameValue = document.getElementById('receiverName').value;
+                const receiverDesignationValue = document.getElementById('receiverDesignation').value;
+                const receiverMobileNoValue = document.getElementById('receiverMobileNo').value;
+                const receiverEmailValue = document.getElementById('receiverEmail').value;
+                const receiverSignatureValue = document.getElementById('receiverSignature').value;
+
+                if (
+                    refnoValue === "" ||
+                    ipOpNumberValue === "" ||
+                    patientNameValue === "" ||
+                    ageValue === "" ||
+                    sexValue === "" ||
+                    residenceValue === "" ||
+                    postalAddressValue === "" ||
+                    specimenValue === "" ||
+                    sourceValue === "" ||
+                    collectionDateValue === "" ||
+                    collectionTimeValue === "" ||
+                    preservationDateValue === "" ||
+                    preservationMethodValue === "" ||
+                    referringLabValue === "" ||
+                    referrrerNameValue === "" ||
+                    designationValue === "" ||
+                    mobileNoValue === "" ||
+                    emailValue === "" ||
+                    signatureValue === "" ||
+                    investigationsRequestedValue === "" ||
+                    labReferredToValue === "" ||
+                    receiverNameValue === "" ||
+                    receiverDesignationValue === "" ||
+                    receiverMobileNoValue === "" ||
+                    receiverEmailValue === "" ||
+                    receiverSignatureValue === ""
+                ) {
+                    alert("All fields are required");
+                } else {
+
+                    try {
+
+                        const response = await fetch('/specimen-movement', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                refno: refnoValue,
+                                ipOpNumber: ipOpNumberValue,
+                                patientName: patientNameValue,
+                                age: ageValue,
+                                sex: sexValue,
+                                residence: residenceValue,
+                                postalAddress: postalAddressValue,
+                                specimen: specimenValue,
+                                source: sourceValue,
+                                collectionDate: collectionDateValue,
+                                collectionTime: collectionTimeValue,
+                                preservationDate: preservationDateValue,
+                                preservationMethod: preservationMethodValue,
+                                referringLab: referringLabValue,
+                                referrrerName: referrrerNameValue,
+                                designation: designationValue,
+                                mobileNo: mobileNoValue,
+                                email: emailValue,
+                                signature: signatureValue,
+                                investigationsRequested: investigationsRequestedValue,
+                                labReferredTo: labReferredToValue,
+                                receiverName: receiverNameValue,
+                                receiverDesignation: receiverDesignationValue,
+                                receiverMobileNo: receiverMobileNoValue,
+                                receiverEmail: receiverEmailValue,
+                                receiverSignature: receiverSignatureValue
+                            })
+                        });
+
+                        if (!response.ok) {
+                            alert("Data not submitted. Try again");
+                        }
+                    } catch (error) {
+                        alert("Something went wrong");
+                    }
+                }
+
             });
         });
     </script>

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../public/icon.svg" type="image/x-icon" />
     <title>Client Referral Form</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -12,14 +13,14 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #01579B;
+            background-color: #fff;
             color: #fff;
         }
 
         .top-menu {
             background-color: #0c1e3e;
             color: #fff;
-            padding: 5px 10px;
+            padding: 0px 10px;
             display: flex;
             justify-content: space-between;
             position: fixed;
@@ -32,7 +33,7 @@
             max-width: 800px;
             margin: 120px auto;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: #0c1e3e;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
@@ -129,7 +130,7 @@
             cursor: pointer;
         }
 
-        #specimen-details{
+        #specimen-details {
             display: none;
         }
 
@@ -172,108 +173,109 @@
     <div class="container">
         <h1>Client Referral Form</h1>
         <form>
+
             <div class="section">
                 <h2>Service Level</h2>
                 <label for="emergency">Emergency</label>
-                <input type="radio" id="emergency" name="serviceLevel">
+                <input type="radio" id="emergency" name="serviceLevel" value="emergency" required>
                 <label for="urgent">Urgent</label>
-                <input type="radio" id="urgent" name="serviceLevel">
+                <input type="radio" id="urgent" name="serviceLevel" value="urgent" required>
                 <label for="routine">Routine</label>
-                <input type="radio" id="routine" name="serviceLevel">
+                <input type="radio" id="routine" name="serviceLevel" value="routine" required>
             </div>
             <div class="section">
-                <h2>Referral Type</h2>
+                <h2>Referral Type (required)</h2>
                 <label for="local">Local</label>
-                <input type="radio" id="local" name="referralType">
+                <input type="radio" id="local" name="referralType" value="local-referral" required>
                 <label for="interCounty">Inter-county</label>
-                <input type="radio" id="interCounty" name="referralType">
+                <input type="radio" id="interCounty" name="referralType" value="intercounty-referral" required>
                 <label for="overseas">Overseas</label>
-                <input type="radio" id="overseas" name="referralType">
+                <input type="radio" id="overseas" name="referralType" value="overseas-referral" required>
             </div>
             <div class="section">
                 <h2>Date & Time</h2>
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
-                <label for="time">Time:</label>
-                <input type="time" id="time" name="time"> <br>
+                <label for="date">Date:(required)</label>
+                <input type="date" id="date" name="date" required>
+                <label for="time">Time:(required)</label>
+                <input type="time" id="time" name="time" required> <br>
                 <br>
-                <label for="facilityCode">Facility Code:</label>
-                <input type="text" id="facilityCode" name="facilityCode">
+                <label for="facilityCode">Facility Code:(required)</label>
+                <input type="text" id="facilityCode" name="facilityCode" required>
             </div>
             <h2>Client Details</h2>
             <div class="section">
-                <label for="clientName">Name:</label>
-                <input type="text" id="clientName" name="clientName">
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age">
-                <label for="sex">Sex:</label>
-                <select name="sex" id="sex">
+                <label for="clientName">Name:(required)</label>
+                <input type="text" id="clientName" name="clientName" required>
+                <label for="age">Age:(required)</label>
+                <input type="number" id="age" name="age" required>
+                <label for="sex">Sex:(required)</label>
+                <select name="sex" id="sex" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
             </div>
             <div class="section">
-                <label for="ipOpNumber">IP/OP Number:</label>
-                <input type="text" id="ipOpNumber" name="ipOpNumber">
+                <label for="ipOpNumber">IP/OP Number:(required)</label>
+                <input type="text" id="ipOpNumber" name="ipOpNumber" required>
                 <label for="idNumber">ID Number:(If applicable)</label>
-                <input type="text" id="idNumber" name="idNumber">
+                <input type="text" id="idNumber" name="idNumber" required>
             </div>
             <div class="section">
                 <label for="nhifNumber">NHIF Number:(If applicable)</label>
-                <input type="text" id="nhifNumber" name="nhifNumber">
-                <label for="phoneNumber">Phone Number(s):</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber">
+                <input type="text" id="nhifNumber" name="nhifNumber" required>
+                <label for="phoneNumber">Phone Number(s):(required)</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required>
             </div>
             <div class="section">
-                <label for="address">Physical Address:</label>
-                <textarea id="address" name="address" rows="4" cols="50"></textarea>
-                <label for="county">County:</label>
-                <input type="text" id="county" name="county">
+                <label for="address">Physical Address:(required)</label>
+                <textarea id="address" name="address" rows="4" cols="50" required></textarea>
+                <label for="county">County:(required)</label>
+                <input type="text" id="county" name="county" required>
             </div>
             <div class="section">
-                <label for="subCounty">Sub County:</label>
-                <input type="text" id="subCounty" name="subCounty">
-                <label for="subLocation">Sub Location:</label>
-                <input type="text" id="subLocation" name="subLocation">
+                <label for="subCounty">Sub County:(required)</label>
+                <input type="text" id="subCounty" name="subCounty" required>
+                <label for="subLocation">Sub Location:(required)</label>
+                <input type="text" id="subLocation" name="subLocation" required>
             </div>
             <div class="section">
                 <h2>Assistant Chief</h2>
-                <label for="assistantChief">Name:</label>
-                <input type="text" id="assistantChief" name="assistantChief">
-                <label for="assistantChiefPhoneNumber">Phone Number(s):</label>
-                <input type="tel" id="assistantChiefPhoneNumber" name="assistantChiefPhoneNumber">
+                <label for="assistantChief">Name:(required)</label>
+                <input type="text" id="assistantChief" name="assistantChief" required>
+                <label for="assistantChiefPhoneNumber">Phone Number(s):(required)</label>
+                <input type="tel" id="assistantChiefPhoneNumber" name="assistantChiefPhoneNumber" required>
             </div>
             <div class="section">
                 <h2>Facility Details</h2>
-                <label for="referringfacility">Referring Facility/Department</label>
-                <input type="text" name="referringfacility" id="referrer">
-                <label for="recipientfacility">Receiving Facility/Department</label>
-                <input type="text" name="referfacility" id="receiver">
-                <label for="investigations">History/Investigations (if any)</h2>
+                <label for="referringfacility">Referring Facility/Department:(required)</label>
+                <input type="text" name="referringfacility" id="referringfacility">
+                <label for="recipientfacility">Receiving Facility/Department:(required)</label>
+                <input type="text" name="referfacility" id="referfacility">
+                <label for="investigations">History/Investigations (if any)(required)</h2>
                     <textarea id="investigations" name="investigations" rows="4" cols="50"></textarea>
-                <label for="diagnosis">Diagnosis (if known)</label>
-                <textarea id="diagnosis" name="diagnosis" rows="4" cols="50"></textarea>
-                    <label for="referralReason">Reasons for referral:</label>
+                    <label for="diagnosis">Diagnosis (if known)</label>
+                    <textarea id="diagnosis" name="diagnosis" rows="4" cols="50"></textarea>
+                    <label for="referralReason">Reasons for referral:(required)</label>
                     <textarea id="referralReason" name="referralReason" rows="4" cols="50"></textarea>
             </div>
             <div class="section">
                 <h2>Referring officer details</h2>
-                <label for="requestingOfficerName">Name:</label>
-                    <input type="text" id="requestingOfficerName" name="requestingOfficerName">
-                    <label for="designation">Designation:</label>
-                    <input type="text" id="designation" name="designation">
-                    <label for="phoneNumber">Telephone Number(s):</label>
-                    <input type="tel" id="phoneNumber" name="phoneNumber">
-                    <label for="signature">Signature:</label>
-                    <input type="text" id="signature" name="signature">
+                <label for="requestingOfficerName">Name:(required)</label>
+                <input type="text" id="requestingOfficerName" name="requestingOfficerName">
+                <label for="designation">Designation:(required)</label>
+                <input type="text" id="requesting-officer-designation" name="designation">
+                <label for="phoneNumber">Telephone Number(s):(required)</label>
+                <input type="tel" id="requesting-officer-phone" name="phoneNumber">
+                <label for="signature">Signature:(required)</label>
+                <input type="text" id="requesting-officer-signature" name="signature">
             </div>
             <h2>Next of Kin Details</h2>
             <div class="section">
-                <label for="nextOfKinName">Name:</label>
+                <label for="nextOfKinName">Name:(required)</label>
                 <input type="text" id="nextOfKinName" name="nextOfKinName">
-                <label for="nextOfKinRelationship">Relationship:</label>
+                <label for="nextOfKinRelationship">Relationship:(required)</label>
                 <input type="text" id="nextOfKinRelationship" name="nextOfKinRelationship">
-                <label for="nextOfKinPhoneNumber">Phone Number(s):</label>
+                <label for="nextOfKinPhoneNumber">Phone Number(s):(required)</label>
                 <input type="tel" id="nextOfKinPhoneNumber" name="nextOfKinPhoneNumber">
             </div>
             <button type="submit" id="show-specimen">+ Add specimen details</button>
@@ -301,7 +303,7 @@
             <div class="section">
                 <h2>Client in transit monitoring form</h2>
             </div>
-            <button type="submit">Submit Referral</button>
+            <button type="submit" id="submit_referral">Submit Referral</button>
         </form>
     </div>
     <script>
@@ -311,6 +313,7 @@
             const submenu = document.getElementById('submenu');
             const showSpecimen = document.getElementById('show-specimen');
             const specimenForm = document.getElementById('specimen-details');
+            const submitReferral = document.getElementById('submit_referral');
 
             openMenu.addEventListener('click', async (e) => {
                 openMenu.style.display = 'none';
@@ -324,9 +327,197 @@
                 submenu.style.display = 'none'; // Hide submenu
             });
 
-            showSpecimen.addEventListener('click', async (e) =>{
+            showSpecimen.addEventListener('click', async (e) => {
                 e.preventDefault();
-               specimenForm.style.display = 'block';
+                specimenForm.style.display = 'block';
+            });
+
+            submitReferral.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const serviceLevel = document.getElementsByName('serviceLevel');
+                const referralType = document.getElementsByName('referralType');
+                const dateInput = document.getElementById('date');
+                const timeInput = document.getElementById('time');
+                const facilityCodeInput = document.getElementById('facilityCode');
+                const clientNameInput = document.getElementById('clientName');
+                const ageInput = document.getElementById('age');
+                const sexSelect = document.getElementById('sex');
+                const ipOpNumberInput = document.getElementById('ipOpNumber');
+                const idNumberInput = document.getElementById('idNumber');
+                const nhifNumberInput = document.getElementById('nhifNumber');
+                const phoneNumberInput = document.getElementById('phoneNumber');
+                const addressTextarea = document.getElementById('address');
+                const countyInput = document.getElementById('county');
+                const subCountyInput = document.getElementById('subCounty');
+                const subLocationInput = document.getElementById('subLocation');
+                const assistantChiefInput = document.getElementById('assistantChief');
+                const assistantChiefPhoneNumberInput = document.getElementById('assistantChiefPhoneNumber');
+                const referringFacilityInput = document.getElementById('referringfacility');
+                const receivingFacilityInput = document.getElementById('referfacility');
+                const investigationsTextarea = document.getElementById('investigations');
+                const diagnosisTextarea = document.getElementById('diagnosis');
+                const referralReasonTextarea = document.getElementById('referralReason');
+                const requestingOfficerNameInput = document.getElementById('requestingOfficerName');
+                const requestingOfficerDesignationInput = document.getElementById('requesting-officer-designation');
+                const requestingPhoneNumberInput = document.getElementById('requesting-officer-phone');
+                const requestingOfficerSignatureInput = document.getElementById('requesting-officer-signature');
+                const nextOfKinNameInput = document.getElementById('nextOfKinName');
+                const nextOfKinRelationshipInput = document.getElementById('nextOfKinRelationship');
+                const nextOfKinPhoneNumberInput = document.getElementById('nextOfKinPhoneNumber');
+                const specimenTextarea = document.getElementById('specimen');
+                const sourceInput = document.getElementById('source');
+                const collectionDateInput = document.getElementById('collectionDate');
+                const collectionTimeInput = document.getElementById('collectionTime');
+                const preservationDateInput = document.getElementById('preservationDate');
+                const preservationMethodInput = document.getElementById('preservationMethod');
+
+
+
+                // Getting values from the input elements
+                const dateValue = dateInput.value;
+                const timeValue = timeInput.value;
+                const facilityCodeValue = facilityCodeInput.value;
+                const clientNameValue = clientNameInput.value;
+                const ageValue = ageInput.value;
+                const sexValue = sexSelect.value;
+                const ipOpNumberValue = ipOpNumberInput.value;
+                const idNumberValue = idNumberInput.value;
+                const nhifNumberValue = nhifNumberInput.value;
+                const phoneNumberValue = phoneNumberInput.value;
+                const addressValue = addressTextarea.value;
+                const countyValue = countyInput.value;
+                const subCountyValue = subCountyInput.value;
+                const subLocationValue = subLocationInput.value;
+                const assistantChiefValue = assistantChiefInput.value;
+                const assistantChiefPhoneNumberValue = assistantChiefPhoneNumberInput.value;
+                const referringFacilityValue = referringFacilityInput.value;
+                const receivingFacilityValue = receivingFacilityInput.value;
+                const investigationsValue = investigationsTextarea.value;
+                const diagnosisValue = diagnosisTextarea.value;
+                const referralReasonValue = referralReasonTextarea.value;
+                const requestingOfficerNameValue = requestingOfficerNameInput.value;
+                const requestingOfficerDesignationValue = requestingOfficerDesignationInput.value;
+                const requestingPhoneNumberInputValue = requestingPhoneNumberInput.value;
+                const requestingOfficerSignatureValue = requestingOfficerSignatureInput.value;
+                const nextOfKinNameValue = nextOfKinNameInput.value;
+                const nextOfKinRelationshipValue = nextOfKinRelationshipInput.value;
+                const nextOfKinPhoneNumberValue = nextOfKinPhoneNumberInput.value;
+                const specimenValue = specimenTextarea.value;
+                const sourceValue = sourceInput.value;
+                const collectionDateValue = collectionDateInput.value;
+                const collectionTimeValue = collectionTimeInput.value;
+                const preservationDateValue = preservationDateInput.value;
+                const preservationMethodValue = preservationMethodInput.value;
+
+                let selectedService = null;
+
+                for (var i = 0; i < serviceLevel.length; i++) {
+                    if (serviceLevel[i].checked) {
+                        selectedService = serviceLevel[i].value;
+                        // console.log("Selected service level: " + selectedService);
+                        break;
+                    }
+                }
+
+                if (!selectedService) {
+                    alert('Please select a service level.');
+
+                }
+
+                // console.log("Selected service level: " + selectedService);
+
+                let selectedType = null;
+
+                for (var i = 0; i < referralType.length; i++) {
+                    if (referralType[i].checked) {
+                        selectedType = referralType[i].value;
+                        // console.log("Referral type selected: " + selectedType);
+                        break;
+                    }
+                }
+
+                if (!selectedType) {
+                    alert('Please select a service level.');
+                }
+
+                // console.log("Referral type selected: " + selectedType);
+
+                // Collecting all the data
+                if (clientNameValue === ""|| ageValue===""||sexValue===""||dateValue===""||timeValue===""||facilityCodeValue===""||
+                    phoneNumberValue===""||addressValue===""||countyInput===""||subCountyValue===""||subLocationValue===""||assistantChiefValue===""||
+                    assistantChiefPhoneNumberValue===""||referringFacilityValue===""||receivingFacilityValue===""||investigationsValue===""||
+                    referralReasonValue===""||requestingOfficerDesignationValue===""||requestingOfficerNameValue===""||requestingOfficerSignatureValue===""||
+                    requestingPhoneNumberInputValue===""||nextOfKinNameValue===""||nextOfKinRelationshipValue===""||nextOfKinPhoneNumberValue===""
+                ) {
+                    alert("All fields with (required) attribute must be filled")
+
+                } else {
+
+
+
+                    const data = {
+                        date: dateValue,
+                        time: timeValue,
+                        facilityCode: facilityCodeValue,
+                        clientName: clientNameValue,
+                        age: ageValue,
+                        sex: sexValue,
+                        ipOpNumber: ipOpNumberValue,
+                        idNumber: idNumberValue,
+                        nhifNumber: nhifNumberValue,
+                        phoneNumber: phoneNumberValue,
+                        address: addressValue,
+                        county: countyValue,
+                        subCounty: subCountyValue,
+                        subLocation: subLocationValue,
+                        assistantChief: assistantChiefValue,
+                        assistantChiefPhoneNumber: assistantChiefPhoneNumberValue,
+                        referringFacility: referringFacilityValue,
+                        receivingFacility: receivingFacilityValue,
+                        investigations: investigationsValue,
+                        diagnosis: diagnosisValue,
+                        referralReason: referralReasonValue,
+                        requestingOfficerName: requestingOfficerNameValue,
+                        requestingOfficerDesignation: requestingOfficerDesignationValue,
+                        requestingPhoneNumber: requestingPhoneNumberInputValue,
+                        requestingOfficerSignature: requestingOfficerSignatureValue,
+                        nextOfKinName: nextOfKinNameValue,
+                        nextOfKinRelationship: nextOfKinRelationshipValue,
+                        nextOfKinPhoneNumber: nextOfKinPhoneNumberValue,
+                        specimen: specimenValue,
+                        source: sourceValue,
+                        collectionDate: collectionDateValue,
+                        collectionTime: collectionTimeValue,
+                        preservationDate: preservationDateValue,
+                        preservationMethod: preservationMethodValue,
+                        selectedService: selectedService,
+                        selectedType: selectedType
+                    };
+
+                    try {
+                        const response = await fetch('/referral', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Failed to submit referral. Server error.');
+                            alert("Failed to submit");
+                        }
+
+                        // Handle successful response from the server
+                        alert('Referral submitted successfully.');
+
+                    } catch (error) {
+                        // Handle any errors that occur during form submission
+                        console.error('Error submitting referral:', error.message);
+                        alert("Something went wrong while submiting form");
+                    }
+
+                }
             });
         });
     </script>

@@ -1,0 +1,54 @@
+service_level, referral_type, date, time, facility_code, client_name, client_age, client_sex, client_ipop_number,
+client_id_number, client_nhif_number, client_phone,
+client_physical_address, client_county, client_subcounty, client_sublocation, assistchief_name, assistchief_phonenumber,
+referring_facility
+receiving_facility, client_history, client_diagnosis, reason_for_referral, referring_officer_name,
+referring_officer_designation, referring_officer_phone, referring_officer_signature
+nextofkin_name, nextofkin_relationship, nextofkin_phone, specimen_description, specimen_source, collection_date,
+collection_time, preservation_date,
+preservation_method
+
+console.log('Date:', dateValue);
+console.log('Time:', timeValue);
+console.log('Facility Code:', facilityCodeValue);
+console.log('Name:', clientNameValue);
+console.log('Age:', ageValue);
+console.log('Sex:', sexValue);
+console.log('IP/OP Number:', ipOpNumberValue);
+console.log('ID Number:', idNumberValue);
+console.log('NHIF Number:', nhifNumberValue);
+console.log('Phone Number(s):', phoneNumberValue);
+console.log('Physical Address:', addressValue);
+console.log('County:', countyValue);
+console.log('Sub County:', subCountyValue);
+console.log('Sub Location:', subLocationValue);
+console.log('Assistant Chief Name:', assistantChiefValue);
+console.log('Assistant Chief Phone Number(s):', assistantChiefPhoneNumberValue);
+console.log('Referring Facility/Department:', referringFacilityValue);
+console.log('Receiving Facility/Department:', receivingFacilityValue);
+console.log('History/Investigations (if any):', investigationsValue);
+console.log('Diagnosis (if known):', diagnosisValue);
+console.log('Reasons for referral:', referralReasonValue);
+console.log('Requesting Officer Name:', requestingOfficerNameValue);
+console.log('Designation:', requestingOfficerDesignationValue);
+console.log('Telephone Number(s):', phoneNumberValue);
+console.log('Signature:', requestingOfficerSignatureValue);
+console.log('Next of Kin Name:', nextOfKinNameValue);
+console.log('Next of Kin Relationship:', nextOfKinRelationshipValue);
+console.log('Next of Kin Phone Number(s):', nextOfKinPhoneNumberValue);
+console.log('Specimen and Description:', specimenValue);
+console.log('Source:', sourceValue);
+console.log('Collection Date:', collectionDateValue);
+console.log('Collection Time:', collectionTimeValue);
+console.log('Preservation Date:', preservationDateValue);
+console.log('Method of Preservation:', preservationMethodValue);
+
+<h2>VII. Condition of sample</h2>
+<div class="section-row">
+    <label for="accepted">Accepted</label>
+    <input type="radio" id="accepted" name="condition" value="accepted">
+    <label for="rejected">Rejected</label>
+    <input type="radio" id="rejected" name="condition" value="rejected">
+    <label for="reason">Specify reason</label>
+    <input type="text" id="reason" name="reason">
+</div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../public/icon.svg" type="image/x-icon" />
+    <link rel="icon" href="icon.svg" type="image/x-icon" />
     <title>Sample and Specimen Referral Form</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -190,6 +190,10 @@
             textarea {
                 font-size: 14px;
             }
+
+            button{
+                margin: 5px;
+            }
         }
     </style>
 </head>
@@ -201,6 +205,9 @@
         <span class="material-symbols-outlined" id="close-menu">close</span>
         <div class="submenu" id="submenu">
             <h3><a href="/home">Home</a></h3>
+            <h3><a href="/referral">Referrals</a></h3>
+            <h3><a href="/consultation">Consultations</a></h3>
+            <h3><a href="/specimen-movement">Specimen movement</a></h3>
         </div>
     </div>
     <div class="container">
@@ -286,7 +293,8 @@
             <label for="signature">Signature:</label>
             <input type="text" id="receiverSignature" name="signature">
         </div>
-        <button type="submit" id="submit-specimen">Submit Referral</button>
+        <button type="submit" id="submit-specimen">Save Specimen Data</button>
+        <button type="submit" id="send-specimen">Send Specimen</button>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
@@ -294,6 +302,14 @@
             const openMenu = document.getElementById('open-menu');
             const submenu = document.getElementById('submenu');
             const submitSpecimen = document.getElementById('submit-specimen');
+            function getQueryParam(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            const facilityPath = getQueryParam('facilityPath');
+
+            console.log(facilityPath);
 
             openMenu.addEventListener('click', async (e) => {
                 openMenu.style.display = 'none';

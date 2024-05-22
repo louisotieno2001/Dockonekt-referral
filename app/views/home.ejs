@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/app/public/icon.svg" type="image/x-icon"/>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <title>Home</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -51,7 +52,7 @@
             background-color: #fff;
             padding: 25px;
             overflow-y: auto;
-            margin-left: 284px;
+            margin-left: 294px;
             height: calc(100vh - 40px);
         }
 
@@ -143,9 +144,34 @@
             display: none;
         }
 
-        .module-container a{
+        .module-container a {
             text-decoration: none;
             color: #000;
+        }
+
+        .data-display {
+            height: fit-content;
+            /* background-color: red; */
+            margin: 8px;
+        }
+
+        .card {
+            background-color: #007bff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 3px;
+
+        }
+
+        .data-container {
+            display: none;
+        }
+
+        .divider{
+            height: 2px;
+            background-color: #0c1e3e;
+            width: 100%;
+            margin-top: 10px;
         }
 
         /* Styles for small screens */
@@ -160,6 +186,7 @@
                 overflow: hidden;
                 padding-left: 0px;
                 padding-right: 0;
+                padding-right: 10px;
             }
 
             .left-tab,
@@ -182,6 +209,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="top-menu">
         <h1>Dockonekt</h1>
@@ -189,7 +217,11 @@
         <span class="material-symbols-outlined" id="close-menu">close</span>
         <div class="submenu" id="submenu">
             <h3><a href="/home">Home</a></h3>
+            <h3><a href="/referral">Referrals</a></h3>
+            <h3><a href="/consultation">Consultations</a></h3>
+            <h3><a href="/specimen-movement">Specimen movement</a></h3>
         </div>
+    </div>
     </div>
 
     <div class="tabs-container">
@@ -231,7 +263,7 @@
             <div class="modules-container">
                 <div class="module-container" title="Initiate referral to another hospital" id="referrals-module">
                     Referrals
-                </div> 
+                </div>
                 <div class="module-container" title="Initiate a consultation referral" id="consultation-module">
                     Consultation referrals
                 </div>
@@ -242,36 +274,57 @@
             <div class="display">
                 <div class="data" id="referrals-filter">
                     <div class="module-container" title="See all incoming referrals" id="referrals-in">
-                        Referrals in
+                        Outgoing Referrals
                     </div>
                     <div class="module-container" title="See all outgoing referrals" id="referrals-out">
-                        Referrals out
+                        Outgoing Referrals
                     </div>
                     <div class="module-container" title="See all outgoing referrals" id="referrals-refer">
-                        <a href="/referral">Initiate patient referral</a>
+                        <a href="/facilities">Initiate patient referral</a>
                     </div>
                 </div>
                 <div class="data" id="specimen-filter">
                     <div class="module-container" title="See all incoming specimens" id="specimen-in">
-                        Specimens in
+                        Incoming Specimens
                     </div>
                     <div class="module-container" title="See all outgoing specimen" id="specimen-out">
-                        Specimens out
+                        Outgoing Specimens
                     </div>
                     <div class="module-container" title="Initiate an outgoing specimen referral" id="specimen-refer">
-                        <a href="/specimen-movement">Initiate specimens referral</a>
+                        <a href="/facilities">Initiate specimens referral</a>
                     </div>
                 </div>
                 <div class="data" id="consultations-filter">
                     <div class="module-container" title="See all incoming consultation" id="consultation-in">
-                        Consultations in
+                        Outgoing Consultations
                     </div>
                     <div class="module-container" title="See all outgoing consultations" id="consultation-out">
-                        Consultations out
+                        Outgoing Consultations
                     </div>
                     <div class="module-container" title="Initiate an outgoing consultations" id="consultation-refer">
-                        <a href="/consultation">Initiate a consultation referral</a>
+                        <a href="/facilities">Initiate a consultation referral</a>
                     </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="data-display">
+                <div class="data-container" id="referralContainer">
+                    <!-- Cards will be added here -->
+                </div>
+                <div class="data-container" id="referralInContainer">
+                    <!-- Cards will be added here -->
+                </div>
+                <div class="data-container" id="consultationContainer">
+                    <!-- Cards will be added here -->
+                </div>
+                <div class="data-container" id="consultationInContainer">
+                    <!-- Cards will be added here -->
+                </div>
+                <div class="data-container" id="specimenContainer">
+                    <!-- Cards will be added here -->
+                </div>
+                <div class="data-container" id="specimenInContainer">
+                    <!-- Cards will be added here -->
                 </div>
             </div>
         </div>
@@ -292,6 +345,10 @@
             const referralChild = document.getElementById('referrals-filter');
             const consultationChild = document.getElementById('consultations-filter');
             const specimenChild = document.getElementById('specimen-filter');
+            const referralsOut = document.getElementById('referrals-out');
+            const referralsIn = document.getElementById('referrals-in');
+            const consultationsOut = document.getElementById('consultation-out');
+            const specimensOut = document.getElementById('specimen-out');
 
             leftTabBtn.addEventListener('click', async (e) => {
                 leftTab.style.display = 'none';
@@ -330,24 +387,221 @@
                 }
             });
 
-            referralModule.addEventListener('click', async (e) =>{
+            referralModule.addEventListener('click', async (e) => {
                 referralChild.style.display = 'block';
                 consultationModule.style.display = 'none';
                 specimenModule.style.display = 'none';
             });
 
-            consultationModule.addEventListener('click', async (e) =>{
+            consultationModule.addEventListener('click', async (e) => {
                 consultationChild.style.display = 'block';
                 referralModule.style.display = 'none';
                 specimenModule.style.display = 'none';
             });
 
-            specimenModule.addEventListener('click', async (e) =>{
+            specimenModule.addEventListener('click', async (e) => {
                 specimenChild.style.display = 'block';
                 consultationModule.style.display = 'none';
                 referralModule.style.display = 'none';
             });
+
+            // Fetch data from backend and display in cards
+            try {
+                const response = await fetch('/fetch-outgoing-referrals', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({}) // If you need to pass any data to the backend
+                });
+                const data = await response.json();
+
+                // console.log("Data:",data);
+
+                const referralContainer = document.getElementById('referralContainer');
+
+                // Iterate through the data and create cards
+                data.forEach(referral => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+
+                    // Customize the structure of the card based on your data
+                    card.innerHTML = `
+                        <h2>Referral Information For Patient ${referral.id}</h2>
+                        <p><strong>Service Level:</strong> ${referral.service_level}</p>
+                        <p><strong>Referral Type:</strong> ${referral.referral_type}</p>
+                        <p><strong>Date:</strong> ${referral.date}</p>
+                        <p><strong>Time:</strong> ${referral.time}</p>
+                        <p><strong>Facility Code:</strong> ${referral.facility_code}</p>
+                        <p><strong>Client Name:</strong> ${referral.client_name}</p>
+                        <p><strong>Client Age:</strong> ${referral.client_age}</p>
+                        <p><strong>Client Sex:</strong> ${referral.client_sex}</p>
+                        <p><strong>Client IP/OP Number:</strong> ${referral.client_ipop_number}</p>
+                        <p><strong>Client ID Number:</strong> ${referral.client_id_number}</p>
+                        <p><strong>Client NHIF Number:</strong> ${referral.client_nhif_number}</p>
+                        <p><strong>Client Phone:</strong> ${referral.client_phone}</p>
+                        <p><strong>Client Physical Address:</strong> ${referral.client_physical_address}</p>
+                        <p><strong>Client County:</strong> ${referral.client_county}</p>
+                        <p><strong>Client Subcounty:</strong> ${referral.client_subcounty}</p>
+                        <p><strong>Client Sublocation:</strong> ${referral.client_sublocation}</p>
+                        <p><strong>Assistant Chief Name:</strong> ${referral.assistchief_name}</p>
+                        <p><strong>Assistant Chief Phone Number:</strong> ${referral.assistchief_phonenumber}</p>
+                        <p><strong>Referring Facility:</strong> ${referral.referring_facility}</p>
+                        <p><strong>Receiving Facility:</strong> ${referral.receiving_facility}</p>
+                        <p><strong>Client History:</strong> ${referral.client_history}</p>
+                        <p><strong>Client Diagnosis:</strong> ${referral.client_diagnosis}</p>
+                        <p><strong>Reason for Referral:</strong> ${referral.reason_for_referral}</p>
+                        <p><strong>Referring Officer Name:</strong> ${referral.referring_officer_name}</p>
+                        <p><strong>Referring Officer Designation:</strong> ${referral.referring_officer_designation}</p>
+                        <p><strong>Referring Officer Phone:</strong> ${referral.referring_officer_phone}</p>
+                        <p><strong>Referring Officer Signature:</strong> ${referral.referring_officer_signature}</p>
+                        <p><strong>Next of Kin Name:</strong> ${referral.nextofkin_name}</p>
+                        <p><strong>Next of Kin Relationship:</strong> ${referral.nextofkin_relationship}</p>
+                        <p><strong>Next of Kin Phone:</strong> ${referral.nextofkin_phone}</p>
+                        <p><strong>Specimen Description:</strong> ${referral.specimen_description}</p>
+                        <p><strong>Specimen Source:</strong> ${referral.specimen_source}</p>
+                        <p><strong>Collection Date:</strong> ${referral.collection_date}</p>
+                        <p><strong>Collection Time:</strong> ${referral.collection_time}</p>
+                        <p><strong>Preservation Date:</strong> ${referral.preservation_date}</p>
+                        <p><strong>Preservation Method:</strong> ${referral.preservation_method}</p>
+                    `;
+
+                    referralContainer.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+
+            try {
+                const response = await fetch('/fetch-outgoing-consultations', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({}) // If you need to pass any data to the backend
+                });
+                const data = await response.json();
+
+                // console.log("Data:",data);
+                const consultationContainer = document.getElementById('consultationContainer');
+
+                // Iterate through the data and create cards
+                data.forEach(consultation => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+
+                    // Customize the structure of the card based on your data
+                    card.innerHTML = `
+                        <h2>Consultation Information For Patient ${consultation.id}</h2>
+                        <p><strong>Service Level:</strong> ${consultation.service_level}</p>
+                        <p><strong>Date:</strong> ${consultation.date}</p>
+                        <p><strong>Time:</strong> ${consultation.time}</p>
+                        <p><strong>Clinic Department:</strong> ${consultation.clinic_department}</p>
+                        <p><strong>Consultant:</strong> ${consultation.consultant}</p>
+                        <p><strong>Client Name:</strong> ${consultation.client_name}</p>
+                        <p><strong>Age:</strong> ${consultation.age}</p>
+                        <p><strong>Sex:</strong> ${consultation.sex}</p>
+                        <p><strong>Ward/Clinic:</strong> ${consultation.ward_clinic}</p>
+                        <p><strong>Bed Number:</strong> ${consultation.bed_number}</p>
+                        <p><strong>Current IP/OP Number:</strong> ${consultation.current_ip_op_number}</p>
+                        <p><strong>Previous IP/OP Number 1:</strong> ${consultation.previous_ip_op_number1}</p>
+                        <p><strong>Previous IP/OP Number 2:</strong> ${consultation.previous_ip_op_number2}</p>
+                        <p><strong>Previous IP/OP Number 3:</strong> ${consultation.previous_ip_op_number3}</p>
+                        <p><strong>Specify Previous IP/OP Number:</strong> ${consultation.previous_ip_op_number_specify}</p>
+                        <p><strong>Diagnosis:</strong> ${consultation.diagnosis}</p>
+                        <p><strong>Investigations:</strong> ${consultation.investigations}</p>
+                        <p><strong>Consultation Reason:</strong> ${consultation.consultation_reason}</p>
+                        <p><strong>Requesting Officer Name:</strong> ${consultation.requesting_officer_name}</p>
+                        <p><strong>Designation:</strong> ${consultation.designation}</p>
+                        <p><strong>Phone Number:</strong> ${consultation.phone_number}</p>
+                        <p><strong>Department:</strong> ${consultation.department}</p>
+                        <p><strong>Facility:</strong> ${consultation.facility}</p>
+                        <p><strong>Requesting Officer Signature:</strong> ${consultation.requesting_officer_signature}</p>
+                        <p><strong>Requesting Officer Date:</strong> ${consultation.requesting_officer_date}</p>
+                    `;
+
+                    consultationContainer.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+
+            try {
+                const response = await fetch('/fetch-outgoing-specimen', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({}) // If you need to pass any data to the backend
+                });
+                const data = await response.json();
+
+                // console.log("Data:",data);
+
+                const specimenContainer = document.getElementById('specimenContainer');
+
+                // Iterate through the data and create cards
+                data.forEach(specimen => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+
+                    // Customize the structure of the card based on your data
+                    card.innerHTML = `
+                        <h2>Specimen Information</h2>
+                        <p><strong>Reference Number:</strong> ${specimen.refno}</p>
+                        <p><strong>IP/OP Number:</strong> ${specimen.ip_op_number}</p>
+                        <p><strong>Patient Name:</strong> ${specimen.patient_name}</p>
+                        <p><strong>Age:</strong> ${specimen.age}</p>
+                        <p><strong>Sex:</strong> ${specimen.sex}</p>
+                        <p><strong>Residence:</strong> ${specimen.residence}</p>
+                        <p><strong>Postal Address:</strong> ${specimen.postal_address}</p>
+                        <p><strong>Specimen Type:</strong> ${specimen.specimen}</p>
+                        <p><strong>Source:</strong> ${specimen.source}</p>
+                        <p><strong>Collection Date:</strong> ${specimen.collection_date}</p>
+                        <p><strong>Collection Time:</strong> ${specimen.collection_time}</p>
+                        <p><strong>Preservation Date:</strong> ${specimen.preservation_date}</p>
+                        <p><strong>Preservation Method:</strong> ${specimen.preservation_method}</p>
+                        <p><strong>Referring Lab:</strong> ${specimen.referring_lab}</p>
+                        <p><strong>Referrer Name:</strong> ${specimen.referrer_name}</p>
+                        <p><strong>Designation:</strong> ${specimen.designation}</p>
+                        <p><strong>Mobile Number:</strong> ${specimen.mobile_no}</p>
+                        <p><strong>Email:</strong> ${specimen.email}</p>
+                        <p><strong>Signature:</strong> ${specimen.signature}</p>
+                        <p><strong>Investigations Requested:</strong> ${specimen.investigations_requested}</p>
+                        <p><strong>Lab Referred To:</strong> ${specimen.lab_referred_to}</p>
+                        <p><strong>Receiver Name:</strong> ${specimen.receiver_name}</p>
+                        <p><strong>Receiver Designation:</strong> ${specimen.receiver_designation}</p>
+                        <p><strong>Receiver Mobile Number:</strong> ${specimen.receiver_mobile_no}</p>
+                        <p><strong>Receiver Email:</strong> ${specimen.receiver_email}</p>
+                        <p><strong>Receiver Signature:</strong> ${specimen.receiver_signature}</p>
+                    `;
+                    specimenContainer.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+
+            referralsOut.addEventListener('click', async (e) => {
+                e.preventDefault()
+                referralContainer.style.display = 'block';
+            });
+
+            referralsIn.addEventListener('click', async (e) => {
+                e.preventDefault()
+                referralInContainer.style.display = 'block';
+            });
+
+            consultationsOut.addEventListener('click', async (e) => {
+                e.preventDefault()
+                consultationContainer.style.display = 'block';
+            });
+
+            specimensOut.addEventListener('click', async (e) => {
+                e.preventDefault()
+                specimenContainer.style.display = 'block';
+            });
         });
+
     </script>
 </body>
 

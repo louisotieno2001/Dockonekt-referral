@@ -1,54 +1,111 @@
-service_level, referral_type, date, time, facility_code, client_name, client_age, client_sex, client_ipop_number,
-client_id_number, client_nhif_number, client_phone,
-client_physical_address, client_county, client_subcounty, client_sublocation, assistchief_name, assistchief_phonenumber,
-referring_facility
-receiving_facility, client_history, client_diagnosis, reason_for_referral, referring_officer_name,
-referring_officer_designation, referring_officer_phone, referring_officer_signature
-nextofkin_name, nextofkin_relationship, nextofkin_phone, specimen_description, specimen_source, collection_date,
-collection_time, preservation_date,
-preservation_method
+<!DOCTYPE html>
+<html lang="en">
 
-console.log('Date:', dateValue);
-console.log('Time:', timeValue);
-console.log('Facility Code:', facilityCodeValue);
-console.log('Name:', clientNameValue);
-console.log('Age:', ageValue);
-console.log('Sex:', sexValue);
-console.log('IP/OP Number:', ipOpNumberValue);
-console.log('ID Number:', idNumberValue);
-console.log('NHIF Number:', nhifNumberValue);
-console.log('Phone Number(s):', phoneNumberValue);
-console.log('Physical Address:', addressValue);
-console.log('County:', countyValue);
-console.log('Sub County:', subCountyValue);
-console.log('Sub Location:', subLocationValue);
-console.log('Assistant Chief Name:', assistantChiefValue);
-console.log('Assistant Chief Phone Number(s):', assistantChiefPhoneNumberValue);
-console.log('Referring Facility/Department:', referringFacilityValue);
-console.log('Receiving Facility/Department:', receivingFacilityValue);
-console.log('History/Investigations (if any):', investigationsValue);
-console.log('Diagnosis (if known):', diagnosisValue);
-console.log('Reasons for referral:', referralReasonValue);
-console.log('Requesting Officer Name:', requestingOfficerNameValue);
-console.log('Designation:', requestingOfficerDesignationValue);
-console.log('Telephone Number(s):', phoneNumberValue);
-console.log('Signature:', requestingOfficerSignatureValue);
-console.log('Next of Kin Name:', nextOfKinNameValue);
-console.log('Next of Kin Relationship:', nextOfKinRelationshipValue);
-console.log('Next of Kin Phone Number(s):', nextOfKinPhoneNumberValue);
-console.log('Specimen and Description:', specimenValue);
-console.log('Source:', sourceValue);
-console.log('Collection Date:', collectionDateValue);
-console.log('Collection Time:', collectionTimeValue);
-console.log('Preservation Date:', preservationDateValue);
-console.log('Method of Preservation:', preservationMethodValue);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="icon.svg" type="image/x-icon" />
+    <title>Facility selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
 
-<h2>VII. Condition of sample</h2>
-<div class="section-row">
-    <label for="accepted">Accepted</label>
-    <input type="radio" id="accepted" name="condition" value="accepted">
-    <label for="rejected">Rejected</label>
-    <input type="radio" id="rejected" name="condition" value="rejected">
-    <label for="reason">Specify reason</label>
-    <input type="text" id="reason" name="reason">
-</div>
+        .container {
+            width: 100%;
+            padding: 20px;
+            background-color: #ffffff;
+            /* White background */
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            /* Semi-transparent white cards */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin-bottom: 20px;
+            width: fit-content;
+            /* Adjusting width to fit content */
+            height: fit-content;
+            /* Adjusting height to fit content */
+            backdrop-filter: blur(10px);
+            /* Blur effect */
+            background-color: #0c1e3e;
+            cursor: pointer;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #ffffff;
+        }
+
+        .card h2 strong {
+            color: #0d47a1;
+            /* Dark blue text for strong elements */
+        }
+
+        .card h2:first-child {
+            border-bottom: 1px solid #0d47a1;
+            /* Dark blue border for the first h2 */
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="facilitiesContainer">
+        <!-- Card appears here -->
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            const response = await fetch('/fetch-facilities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({}) // If you need to pass any data to the backend
+            });
+            const data = await response.json();
+
+            // console.log("Data:",data);
+
+            const facilitiesContainer = document.getElementById('facilitiesContainer');
+
+            // Iterate through the data and create cards
+            data.forEach(facility => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                // Customize the structure of the card based on your data
+                card.innerHTML = `
+                        <h2>${facility.name}</h2>
+                    `;
+
+                facilitiesContainer.appendChild(card);
+
+                card.addEventListener('click', function () {
+                    // Log the name of the selected card
+                    console.log('Selected card name:', facility.name);
+
+                    // Construct the URL with the selected card's name as a query parameter
+                    const url = `/confirm-action?accessPath=${encodeURIComponent(facility.ip_address)}`;
+
+                    // Redirect to the confirm-action page with the selected card's name as a query parameter
+                    window.location.href = url;
+                });
+
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+</script>
+
+</html>

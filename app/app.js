@@ -5,16 +5,26 @@ const path = require('path');
 const cors = require('cors');
 const ejs = require('ejs');
 const { Pool } = require('pg');
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// Enable CORS for all routes
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -23,6 +33,25 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
 });
+
+app.use(session({
+  store: new pgSession({
+    pool: pool,
+    tableName: 'sessions'
+  }),
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+function checkSession(req, res, next) {
+  if (!req.session.facilities) {
+    // If no session exists, redirect to /facilities route and display alert
+    res.redirect('/facilities');
+    return;
+  }
+  next();
+}
 
 // Get stuff
 app.get('/', (req, res) => {
@@ -37,93 +66,97 @@ app.get('/home', async (req, res) => {
   res.render('home');
 });
 
-app.get('/referral', async (req, res) => {
+app.get('/referral', checkSession, (req, res) => {
   res.render('referral-form');
-})
+});
 
-app.get('/specimen-movement', async (req, res) => {
+app.get('/specimen-movement', checkSession, async (req, res) => {
   res.render('specimen-movement-form');
 })
 
-app.get('/consultation', async (req, res) => {
+app.get('/consultation', checkSession, async (req, res) => {
   res.render('consultation-form');
 })
 
+app.get('/confirm-action', checkSession, async (req, res) => {
+  res.render('action');
+})
+
+app.get('/facilities', async (req, res) => {
+  res.render('institution-selection');
+})
+
 // Post stuff
-app.post('/referral', async (req, res) => {
+app.post('/referral', checkSession, async (req, res) => {
   try {
-    // Destructure data from request body
     const {
-      service_level,
-      referral_type,
       date,
       time,
-      facility_code,
-      client_name,
-      client_age,
-      client_sex,
-      client_ipop_number,
-      client_id_number,
-      client_nhif_number,
-      client_phone,
-      client_physical_address,
-      client_county,
-      client_subcounty,
-      client_sublocation,
-      assistchief_name,
-      assistchief_phonenumber,
-      referring_facility,
-      receiving_facility,
-      client_history,
-      client_diagnosis,
-      reason_for_referral,
-      referring_officer_name,
-      referring_officer_designation,
-      referring_officer_phone,
-      referring_officer_signature,
-      nextofkin_name,
-      nextofkin_relationship,
-      nextofkin_phone,
-      specimen_description,
-      specimen_source,
-      collection_date,
-      collection_time,
-      preservation_date,
-      preservation_method
+      facilityCode,
+      clientName,
+      age,
+      sex,
+      ipOpNumber,
+      idNumber,
+      nhifNumber,
+      phoneNumber,
+      address,
+      county,
+      subCounty,
+      subLocation,
+      assistantChief,
+      assistantChiefPhoneNumber,
+      referringFacility,
+      receivingFacility,
+      investigations,
+      diagnosis,
+      referralReason,
+      requestingOfficerName,
+      requestingOfficerDesignation,
+      requestingPhoneNumber,
+      requestingOfficerSignature,
+      nextOfKinName,
+      nextOfKinRelationship,
+      nextOfKinPhoneNumber,
+      specimen,
+      source,
+      collectionDate,
+      collectionTime,
+      preservationDate,
+      preservationMethod,
+      selectedService,
+      selectedType
     } = req.body;
 
     // Insert referral data into PostgreSQL database
     const query = `
-          INSERT INTO referrals (
-              service_level, referral_type, date, time, facility_code,
-              client_name, client_age, client_sex, client_ipop_number,
-              client_id_number, client_nhif_number, client_phone,
-              client_physical_address, client_county, client_subcounty,
-              client_sublocation, assistchief_name, assistchief_phonenumber,
-              referring_facility, receiving_facility, client_history,
-              client_diagnosis, reason_for_referral, referring_officer_name,
-              referring_officer_designation, referring_officer_phone,
-              referring_officer_signature, nextofkin_name,
-              nextofkin_relationship, nextofkin_phone, specimen_description,
-              specimen_source, collection_date, collection_time,
-              preservation_date, preservation_method
-          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14,
-              $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27,
-              $28, $29, $30, $31, $32, $33, $34, $35, $36)
-      `;
+      INSERT INTO referrals (
+          date, time, facility_code, client_name, client_age, client_sex,
+          client_ipop_number, client_id_number, client_nhif_number,
+          client_phone, client_physical_address, client_county,
+          client_subcounty, client_sublocation, assistchief_name,
+          assistchief_phonenumber, referring_facility, receiving_facility,
+          client_history, client_diagnosis, reason_for_referral,
+          referring_officer_name, referring_officer_designation,
+          referring_officer_phone, referring_officer_signature,
+          nextofkin_name, nextofkin_relationship, nextofkin_phone,
+          specimen_description, specimen_source, collection_date,
+          collection_time, preservation_date, preservation_method,
+          service_level, referral_type
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14,
+          $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27,
+          $28, $29, $30, $31, $32, $33, $34, $35, $36)
+    `;
     const values = [
-      service_level, referral_type, date, time, facility_code,
-      client_name, client_age, client_sex, client_ipop_number,
-      client_id_number, client_nhif_number, client_phone,
-      client_physical_address, client_county, client_subcounty,
-      client_sublocation, assistchief_name, assistchief_phonenumber,
-      referring_facility, receiving_facility, client_history,
-      client_diagnosis, reason_for_referral, referring_officer_name,
-      referring_officer_designation, referring_officer_phone,
-      referring_officer_signature, nextofkin_name,
-      nextofkin_relationship, nextofkin_phone, specimen_description,
-      specimen_source, collection_date, collection_time,
-      preservation_date, preservation_method
+      date, time, facilityCode, clientName, age, sex, ipOpNumber,
+      idNumber, nhifNumber, phoneNumber, address, county, subCounty,
+      subLocation, assistantChief, assistantChiefPhoneNumber,
+      referringFacility, receivingFacility, investigations, diagnosis,
+      referralReason, requestingOfficerName, requestingOfficerDesignation,
+      requestingPhoneNumber, requestingOfficerSignature, nextOfKinName,
+      nextOfKinRelationship, nextOfKinPhoneNumber, specimen, source,
+      collectionDate, collectionTime, preservationDate, preservationMethod,
+      selectedService, selectedType
     ];
 
     await pool.query(query, values);
@@ -135,7 +168,7 @@ app.post('/referral', async (req, res) => {
   }
 });
 
-app.post('/consultation', async (req, res) => {
+app.post('/consultation', checkSession, async (req, res) => {
   const {
     serviceLevel,
     date,
@@ -213,7 +246,7 @@ app.post('/consultation', async (req, res) => {
   }
 });
 
-app.post('/specimen-movement', async (req, res) => {
+app.post('/specimen-movement', checkSession, async (req, res) => {
   try {
     const {
       refno,
@@ -314,8 +347,76 @@ app.post('/specimen-movement', async (req, res) => {
   }
 });
 
-app.post('/fetch-referrals', async (req, res)=>{
-  
+app.post('/fetch-outgoing-referrals', async (req, res) => {
+  try {
+    // SQL query to fetch all data from referrals table
+    const query = "SELECT * FROM referrals";
+
+    // Execute the query
+    const { rows } = await pool.query(query);
+
+    // Send the results back as a response
+    res.json(rows);
+  } catch (error) {
+    // If any error occurs, send a 500 status code with the error message
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.post('/fetch-outgoing-consultations', async (req, res) => {
+  try {
+    // SQL query to fetch all data from referrals table
+    const query = "SELECT * FROM consultations";
+
+    // Execute the query
+    const { rows } = await pool.query(query);
+
+    // Send the results back as a response
+    res.json(rows);
+  } catch (error) {
+    // If any error occurs, send a 500 status code with the error message
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.post('/fetch-outgoing-specimen', async (req, res) => {
+  try {
+    // SQL query to fetch all data from referrals table
+    const query = "SELECT * FROM specimens";
+
+    // Execute the query
+    const { rows } = await pool.query(query);
+
+    // Send the results back as a response
+    res.json(rows);
+  } catch (error) {
+    // If any error occurs, send a 500 status code with the error message
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.post('/fetch-facilities', async (req, res) => {
+  try {
+    // SQL query to fetch all data from facilities table
+    const query = "SELECT * FROM facilities";
+
+    // Execute the query
+    const { rows } = await pool.query(query);
+
+    if (rows.length === 0) {
+      // If no data is found, throw an error
+      throw new Error("No facilities found in the database.");
+    }
+
+    // Store the fetched data in the session
+    req.session.facilities = rows;
+
+    // Send the results back as a response
+    res.json(rows);
+  } catch (error) {
+    // If any error occurs, send a 500 status code with the error message
+    res.status(500).json({ message: error.message });
+  }
 });
 
 app.listen(port, () => {

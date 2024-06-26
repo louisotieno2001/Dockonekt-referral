@@ -277,7 +277,7 @@
                 }
 
                 try {
-                    const response = await fetch('/register', {
+                    const response = await fetch('/hospital-admin-register', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -293,7 +293,7 @@
 
                     if (response.ok) {
                         // Registration successful
-                        window.location.href = '/login';
+                        window.location.href = '/hospital/admin/login';
                     } else {
                         // Registration failed
                         console.error('Registration failed:', response.statusText);
@@ -312,7 +312,7 @@
 
             loginLink.addEventListener('click', async (e) => {
                 e.preventDefault();
-                window.location.href = '/login'
+                window.location.href = '/hospital/admin/login'
             });
 
             const inputField = document.getElementById('hospital');
@@ -353,6 +353,8 @@
             });
 
         });
+
+        
     </script>
 </body>
 

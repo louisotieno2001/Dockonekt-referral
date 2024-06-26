@@ -40,6 +40,7 @@
         h2 {
             font-size: 24px;
             margin-bottom: 10px;
+            color: #007bff;
         }
 
         p {
@@ -48,7 +49,8 @@
 
         label {
             display: inline;
-            margin-bottom: 5px;
+            padding-bottom: 8px;
+            padding-top: 8px;
         }
 
         input[type="text"],
@@ -112,14 +114,16 @@
         /* Submenu */
         .submenu {
             position: absolute;
-            top: 60px;
-            right: 35px;
+            top: 85px;
+            right: 2px;
+            left: 0px;
             background-color: #0c1e3e;
-            border-radius: 5px;
             padding: 10px;
             display: none;
+            width: 100%;
             z-index: 1500;
         }
+
 
         .top-menu {
             background-color: #0c1e3e;
@@ -152,6 +156,58 @@
             cursor: pointer;
         }
 
+        .suggestions-div {
+            background-color: #0941a1;
+            opacity: 95%;
+            border-radius: 8px;
+            margin-top: -10px;
+            z-index: 1000;
+            position: relative;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #suggestions1 {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #suggestions1 li {
+            cursor: pointer;
+            padding: 5px;
+            margin: 15px;
+            color: #00e676;
+        }
+
+        #suggestions1 li:hover {
+            background-color: #032766;
+            border-radius: 8px;
+        }
+
+        #suggestions2 {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #suggestions2 li {
+            cursor: pointer;
+            padding: 5px;
+            margin: 15px;
+            color: #00e676;
+        }
+
+        #suggestions2 li:hover {
+            background-color: #535151;
+            border-radius: 8px;
+        }
+
+        .section label {
+            padding-top: .8em;
+        }
+
         /* Additional styles for smaller screens */
         @media only screen and (max-width: 768px) {
             .container {
@@ -175,22 +231,48 @@
             textarea {
                 font-size: 14px;
             }
+
+            .suggestions-div {
+                background-color: rgba(0, 0, 0, 0.9);
+                opacity: 95%;
+                border-radius: 8px;
+                margin-top: -10px;
+                z-index: 1000;
+                position: relative;
+                width: 100%;
+                max-height: 200px;
+                overflow-y: auto;
+            }
+
+            .submenu {
+                position: absolute;
+                top: 80px;
+                right: 2px;
+                left: 0px;
+                background-color: #0c1e3e;
+                padding: 10px;
+                display: none;
+                width: 100%;
+                z-index: 1500;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="top-menu">
-        <h1>Dockonekt</h1>
+        <h1>
+            Dockonekt
+        </h1>
         <span class="material-symbols-outlined" id="open-menu">menu</span>
         <span class="material-symbols-outlined" id="close-menu">close</span>
         <div class="submenu" id="submenu">
-            <h3><a href="/home">Home</a></h3>
-            <h3><a href="/referral">Referrals</a></h3>
-            <h3><a href="/consultation">Consultations</a></h3>
-            <h3><a href="/specimen-movement">Specimen movement</a></h3>
+            <h3><a href="/home?id=<%= user.id %>">Home</a></h3>
+            <h3><a href="/referral?id=<%= user.id %>">Referrals</a></h3>
+            <h3><a href="/consultation?id=<%= user.id %>">Consultations</a></h3>
+            <h3><a href="/specimen-movement?id=<%= user.id %>">Specimen movement</a></h3>
         </div>
-        </div>
+    </div>
     </div>
     <div class="container">
         <h1>Client Consultation Request Form</h1>
@@ -204,22 +286,30 @@
                 <label for="routine">Routine</label>
                 <input type="radio" id="routine" name="serviceLevel" value="routine">
                 <h2>Date & Time</h2>
-                <label for="date">Date:(required)</label>
-                <input type="date" id="date" name="date">
-                <label for="time">Time:(required)</label>
+                <label for="date">Date:(required)</label><br>
+                <input type="date" id="date" name="date"><br>
+                <label for="time">Time:(required)</label><br>
                 <input type="time" id="time" name="time"> <br>
             </div>
-            <br>
             <div class="section">
-                <h2>Expert Details</h2>
+                <h2>Facility Details</h2>
                 <div class="section">
-                    <label for="clinicDepartment">Clinic/Department (Where the patient is being
-                        referred):(required)</label>
+                    <div class="value-suggestion">
+                        <label for="clinicName">Clinic name (Where the patient is being
+                            referred to):(required)</label>
+                        <input type="text" id="clinicName" name="clinicName">
+                        <div class="suggestions-div">
+                            <ul id="suggestions2"></ul>
+                        </div>
+                    </div>
+                    <br>
+                    <label for="clinicDepartment">Clinic Department (Where the patient is being
+                        referred to):(required)</label>
                     <input type="text" id="clinicDepartment" name="clinicDepartment">
+                    <h2>Expert Details</h2>
+                    <label for="consultant">Doctor/MR/MS/PROF/DR (To whom the patient is referred):(required)</label>
+                    <input type="text" id="consultant" name="consultant">
                 </div>
-                <br>
-                <label for="consultant">Doctor/MR/MS/PROF/DR (To whom the patient is referred):(required)</label>
-                <input type="text" id="consultant" name="consultant">
             </div>
             <h2>Client Details</h2>
             <div class="section">
@@ -236,12 +326,8 @@
                 <input type="text" id="wardClinic" name="wardClinic">
                 <label for="bedNumber">Bed Number (if applicable):</label>
                 <input type="text" id="bedNumber" name="bedNumber">
-            </div>
-            <div class="section">
                 <label for="currentIpOpNumber">Current IP/OP Number:(required)</label>
                 <input type="text" id="currentIpOpNumber" name="currentIpOpNumber">
-            </div>
-            <div class="section">
                 <label for="previousIpOpNumber1">Previous IP/OP Number(s) (if applicable)</label> <br>
                 <label for="previousIpOpNumber1">a) </label>
                 <input type="text" id="previousIpOpNumber1" name="previousIpOpNumber1">
@@ -252,32 +338,424 @@
                 <label for="previousIpOpNumberSpecify">Specify if(IP/OP):(required)</label>
                 <input type="text" id="previousIpOpNumberSpecify" name="previousIpOpNumberSpecify">
             </div>
-            <label for="diagnosis">Diagnosis (if known)</label>
-            <textarea id="diagnosis" name="diagnosis" rows="4" cols="50"></textarea>
-            <label for="investigations">Investigations (if any)</h2>
-                <textarea id="investigations" name="investigations" rows="4" cols="50"></textarea>
+            <div class="section">
+                <label for="county">County:(required)</label>
+
+                <select name="county" id="county">
+                    <option value="">Select a county</option>
+                    <option value="Baringo">Baringo</option>
+                    <option value="Bomet">Bomet</option>
+                    <option value="Bungoma">Bungoma</option>
+                    <option value="Busia">Busia</option>
+                    <option value="Elgeyo-Marakwet">Elgeyo-Marakwet</option>
+                    <option value="Embu">Embu</option>
+                    <option value="Garissa">Garissa</option>
+                    <option value="Homa Bay">Homa Bay</option>
+                    <option value="Isiolo">Isiolo</option>
+                    <option value="Kajiado">Kajiado</option>
+                    <option value="Kakamega">Kakamega</option>
+                    <option value="Kericho">Kericho</option>
+                    <option value="Kiambu">Kiambu</option>
+                    <option value="Kilifi">Kilifi</option>
+                    <option value="Kirinyaga">Kirinyaga</option>
+                    <option value="Kisii">Kisii</option>
+                    <option value="Kisumu">Kisumu</option>
+                    <option value="Kitui">Kitui</option>
+                    <option value="Kwale">Kwale</option>
+                    <option value="Laikipia">Laikipia</option>
+                    <option value="Lamu">Lamu</option>
+                    <option value="Machakos">Machakos</option>
+                    <option value="Makueni">Makueni</option>
+                    <option value="Mandera">Mandera</option>
+                    <option value="Marsabit">Marsabit</option>
+                    <option value="Meru">Meru</option>
+                    <option value="Migori">Migori</option>
+                    <option value="Mombasa">Mombasa</option>
+                    <option value="Murang'a">Murang'a</option>
+                    <option value="Nairobi">Nairobi</option>
+                    <option value="Nakuru">Nakuru</option>
+                    <option value="Nandi">Nandi</option>
+                    <option value="Narok">Narok</option>
+                    <option value="Nyamira">Nyamira</option>
+                    <option value="Nyandarua">Nyandarua</option>
+                    <option value="Nyeri">Nyeri</option>
+                    <option value="Samburu">Samburu</option>
+                    <option value="Siaya">Siaya</option>
+                    <option value="Taita-Taveta">Taita-Taveta</option>
+                    <option value="Tana River">Tana River</option>
+                    <option value="Tharaka-Nithi">Tharaka-Nithi</option>
+                    <option value="Trans-Nzoia">Trans-Nzoia</option>
+                    <option value="Turkana">Turkana</option>
+                    <option value="Uasin Gishu">Uasin Gishu</option>
+                    <option value="Vihiga">Vihiga</option>
+                    <option value="Wajir">Wajir</option>
+                    <option value="West Pokot">West Pokot</option>
+                </select>
+
+                <label for="subCounty">Sub County:(required)</label>
+                <select id="subCounty">
+                    <option value="Kisumu Central">Kisumu Central</option>
+                    <option value="Kisumu East">Kisumu East</option>
+                    <option value="Kisumu West">Kisumu West</option>
+                    <option value="Kisumu North">Kisumu North</option>
+                    <option value="Kisumu South">Kisumu South</option>
+                    <option value="Nyando">Nyando</option>
+                    <option value="Muhoroni">Muhoroni</option>
+                    <option value="Seme">Seme</option>
+                    <option value="Changamwe">Changamwe</option>
+                    <option value="Jomvu">Jomvu</option>
+                    <option value="Kisauni">Kisauni</option>
+                    <option value="Nyali">Nyali</option>
+                    <option value="Likoni">Likoni</option>
+                    <option value="Mvita">Mvita</option>
+                    <option value="Msambweni">Msambweni</option>
+                    <option value="Lungalunga">Lungalunga</option>
+                    <option value="Matuga">Matuga</option>
+                    <option value="Kinango">Kinango</option>
+                    <option value="Kilifi North">Kilifi North</option>
+                    <option value="Kilifi South">Kilifi South</option>
+                    <option value="Kilifi Central">Kilifi Central</option>
+                    <option value="Malindi">Malindi</option>
+                    <option value="Magarini">Magarini</option>
+                    <option value="Ganze">Ganze</option>
+                    <option value="Rabai">Rabai</option>
+                    <option value="Kaloleni">Kaloleni</option>
+                    <option value="Bura">Bura</option>
+                    <option value="Galole">Galole</option>
+                    <option value="Garsen">Garsen</option>
+                    <option value="Balambala">Balambala</option>
+                    <option value="Dadaab">Dadaab</option>
+                    <option value="Fafi">Fafi</option>
+                    <option value="Garissa Township">Garissa Township</option>
+                    <option value="Hulugho">Hulugho</option>
+                    <option value="Ijara">Ijara</option>
+                    <option value="Lagdera">Lagdera</option>
+                    <option value="Banissa">Banissa</option>
+                    <option value="Lafey">Lafey</option>
+                    <option value="Mandera East">Mandera East</option>
+                    <option value="Mandera North">Mandera North</option>
+                    <option value="Mandera South">Mandera South</option>
+                    <option value="Eldas">Eldas</option>
+                    <option value="Wajir East">Wajir East</option>
+                    <option value="Wajir North">Wajir North</option>
+                    <option value="Wajir South">Wajir South</option>
+                    <option value="Wajir West">Wajir West</option>
+                    <option value="Laisamis">Laisamis</option>
+                    <option value="Marsabit Central">Marsabit Central</option>
+                    <option value="Marsabit North">Marsabit North</option>
+                    <option value="Marsabit South">Marsabit South</option>
+                    <option value="Moyale">Moyale</option>
+                    <option value="North Horr">North Horr</option>
+                    <option value="Saku">Saku</option>
+                    <option value="Garbatulla">Garbatulla</option>
+                    <option value="Isiolo North">Isiolo North</option>
+                    <option value="Isiolo South">Isiolo South</option>
+                    <option value="Merti">Merti</option>
+                    <option value="Buuri">Buuri</option>
+                    <option value="Igembe Central">Igembe Central</option>
+                    <option value="Igembe North">Igembe North</option>
+                    <option value="Igembe South">Igembe South</option>
+                    <option value="Imenti Central">Imenti Central</option>
+                    <option value="Imenti North">Imenti North</option>
+                    <option value="Imenti South">Imenti South</option>
+                    <option value="Meru Central">Meru Central</option>
+                    <option value="Tigania Central">Tigania Central</option>
+                    <option value="Tigania East">Tigania East</option>
+                    <option value="Tigania West">Tigania West</option>
+                    <option value="Tigania South">Tigania South</option>
+                    <option value="Meru South">Meru South</option>
+                    <option value="Tharaka">Tharaka</option>
+                    <option value="Chuka">Chuka</option>
+                    <option value="Igambang'ombe">Igambang'ombe</option>
+                    <option value="Maara">Maara</option>
+                    <option value="Tharaka">Tharaka</option>
+                    <option value="Manyatta">Manyatta</option>
+                    <option value="Mbeere North">Mbeere North</option>
+                    <option value="Mbeere South">Mbeere South</option>
+                    <option value="Runyenjes">Runyenjes</option>
+                    <option value="Siakago">Siakago</option>
+                    <option value="Kitui Central">Kitui Central</option>
+                    <option value="Kitui East">Kitui East</option>
+                    <option value="Kitui Rural">Kitui Rural</option>
+                    <option value="Kitui South">Kitui South</option>
+                    <option value="Kitui West">Kitui West</option>
+                    <option value="Mwingi Central">Mwingi Central</option>
+                    <option value="Mwingi North">Mwingi North</option>
+                    <option value="Mwingi West">Mwingi West</option>
+                    <option value="Athi River">Athi River</option>
+                    <option value="Kangundo">Kangundo</option>
+                    <option value="Kathiani">Kathiani</option>
+                    <option value="Machakos Central">Machakos Central</option>
+                    <option value="Masinga">Masinga</option>
+                    <option value="Matungulu">Matungulu</option>
+                    <option value="Mavoko">Mavoko</option>
+                    <option value="Mwala">Mwala</option>
+                    <option value="Yatta">Yatta</option>
+                    <option value="Kaiti">Kaiti</option>
+                    <option value="Kibwezi East">Kibwezi East</option>
+                    <option value="Kibwezi West">Kibwezi West</option>
+                    <option value="Kilome">Kilome</option>
+                    <option value="Makueni">Makueni</option>
+                    <option value="Mbooni">Mbooni</option>
+                    <option value="Kinangop">Kinangop</option>
+                    <option value="Kipipiri">Kipipiri</option>
+                    <option value="Ol Joro Orok">Ol Joro Orok</option>
+                    <option value="Ndaragwa">Ndaragwa</option>
+                    <option value="Kieni East">Kieni East</option>
+                    <option value="Kieni West">Kieni West</option>
+                    <option value="Mathira East">Mathira East</option>
+                    <option value="Mathira West">Mathira West</option>
+                    <option value="Mukurweini">Mukurweini</option>
+                    <option value="Nyeri Central">Nyeri Central</option>
+                    <option value="Tetu">Tetu</option>
+                    <option value="Gichugu">Gichugu</option>
+                    <option value="Kirinyaga Central">Kirinyaga Central</option>
+                    <option value="Kirinyaga East">Kirinyaga East</option>
+                    <option value="Kirinyaga West">Kirinyaga West</option>
+                    <option value="Mwea East">Mwea East</option>
+                    <option value="Mwea West">Mwea West</option>
+                    <option value="Gatanga">Gatanga</option>
+                    <option value="Kahuro">Kahuro</option>
+                    <option value="Kandara">Kandara</option>
+                    <option value="Kangema">Kangema</option>
+                    <option value="Kigumo">Kigumo</option>
+                    <option value="Mathioya">Mathioya</option>
+                    <option value="Murang'a South">Murang'a South</option>
+                    <option value="Murang'a North">Murang'a North</option>
+                    <option value="Gatundu North">Gatundu North</option>
+                    <option value="Gatundu South">Gatundu South</option>
+                    <option value="Githunguri">Githunguri</option>
+                    <option value="Juja">Juja</option>
+                    <option value="Kabete">Kabete</option>
+                    <option value="Kiambaa">Kiambaa</option>
+                    <option value="Kiambu">Kiambu</option>
+                    <option value="Kiambu Town">Kiambu Town</option>
+                    <option value="Kikuyu">Kikuyu</option>
+                    <option value="Limuru">Limuru</option>
+                    <option value="Lari">Lari</option>
+                    <option value="Ruiru">Ruiru</option>
+                    <option value="Thika East">Thika East</option>
+                    <option value="Thika West">Thika West</option>
+                    <option value="Loima">Loima</option>
+                    <option value="Turkana Central">Turkana Central</option>
+                    <option value="Turkana East">Turkana East</option>
+                    <option value="Turkana North">Turkana North</option>
+                    <option value="Turkana South">Turkana South</option>
+                    <option value="Kacheliba">Kacheliba</option>
+                    <option value="Pokot Central">Pokot Central</option>
+                    <option value="Pokot North">Pokot North</option>
+                    <option value="Pokot South">Pokot South</option>
+                    <option value="Sigor">Sigor</option>
+                    <option value="Samburu Central">Samburu Central</option>
+                    <option value="Samburu East">Samburu East</option>
+                    <option value="Samburu North">Samburu North</option>
+                    <option value="Cherangany">Cherangany</option>
+                    <option value="Endebess">Endebess</option>
+                    <option value="Kiminini">Kiminini</option>
+                    <option value="Saboti">Saboti</option>
+                    <option value="Kwanza">Kwanza</option>
+                    <option value="Ainabkoi">Ainabkoi</option>
+                    <option value="Kapseret">Kapseret</option>
+                    <option value="Kesses">Kesses</option>
+                    <option value="Moiben">Moiben</option>
+                    <option value="Soy">Soy</option>
+                    <option value="Turbo">Turbo</option>
+                    <option value="Keiyo North">Keiyo North</option>
+                    <option value="Keiyo South">Keiyo South</option>
+                    <option value="Marakwet East">Marakwet East</option>
+                    <option value="Marakwet West">Marakwet West</option>
+                    <option value="Aldai">Aldai</option>
+                    <option value="Chesumei">Chesumei</option>
+                    <option value="Emgwen">Emgwen</option>
+                    <option value="Mosop">Mosop</option>
+                    <option value="Nandi Central">Nandi Central</option>
+                    <option value="Nandi East">Nandi East</option>
+                    <option value="Nandi North">Nandi North</option>
+                    <option value="Nandi South">Nandi South</option>
+                    <option value="Tindiret">Tindiret</option>
+                    <option value="Baringo Central">Baringo Central</option>
+                    <option value="Baringo North">Baringo North</option>
+                    <option value="Baringo South">Baringo South</option>
+                    <option value="Eldama Ravine">Eldama Ravine</option>
+                    <option value="Mogotio">Mogotio</option>
+                    <option value="Tiaty">Tiaty</option>
+                    <option value="Laikipia East">Laikipia East</option>
+                    <option value="Laikipia North">Laikipia North</option>
+                    <option value="Laikipia West">Laikipia West</option>
+                    <option value="Gilgil">Gilgil</option>
+                    <option value="Kuresoi North">Kuresoi North</option>
+                    <option value="Kuresoi South">Kuresoi South</option>
+                    <option value="Molo">Molo</option>
+                    <option value="Nakuru East">Nakuru East</option>
+                    <option value="Nakuru North">Nakuru North</option>
+                    <option value="Nakuru West">Nakuru West</option>
+                    <option value="Njoro">Njoro</option>
+                    <option value="Rongai">Rongai</option>
+                    <option value="Subukia">Subukia</option>
+                    <option value="Narok East">Narok East</option>
+                    <option value="Narok North">Narok North</option>
+                    <option value="Narok South">Narok South</option>
+                    <option value="Narok West">Narok West</option>
+                    <option value="Transmara East">Transmara East</option>
+                    <option value="Transmara West">Transmara West</option>
+                    <option value="Kajiado Central">Kajiado Central</option>
+                    <option value="Kajiado East">Kajiado East</option>
+                    <option value="Kajiado North">Kajiado North</option>
+                    <option value="Kajiado South">Kajiado South</option>
+                    <option value="Kajiado West">Kajiado West</option>
+                    <option value="Ainamoi">Ainamoi</option>
+                    <option value="Belgut">Belgut</option>
+                    <option value="Bureti">Bureti</option>
+                    <option value="Kipkelion East">Kipkelion East</option>
+                    <option value="Kipkelion West">Kipkelion West</option>
+                    <option value="Soin/Sigowet">Soin/Sigowet</option>
+                    <option value="Bomet Central">Bomet Central</option>
+                    <option value="Bomet East">Bomet East</option>
+                    <option value="Chepalungu">Chepalungu</option>
+                    <option value="Konoin">Konoin</option>
+                    <option value="Butere">Butere</option>
+                    <option value="Kakamega Central">Kakamega Central</option>
+                    <option value="Kakamega East">Kakamega East</option>
+                    <option value="Kakamega North">Kakamega North</option>
+                    <option value="Kakamega South">Kakamega South</option>
+                    <option value="Kakamega West">Kakamega West</option>
+                    <option value="Lugari">Lugari</option>
+                    <option value="Lurambi">Lurambi</option>
+                    <option value="Malava">Malava</option>
+                    <option value="Matete">Matete</option>
+                    <option value="Matungu">Matungu</option>
+                    <option value="Mumias East">Mumias East</option>
+                    <option value="Mumias West">Mumias West</option>
+                    <option value="Navakholo">Navakholo</option>
+                    <option value="Emuhaya">Emuhaya</option>
+                    <option value="Hamisi">Hamisi</option>
+                    <option value="Luanda">Luanda</option>
+                    <option value="Sabatia">Sabatia</option>
+                    <option value="Vihiga">Vihiga</option>
+                    <option value="Bumula">Bumula</option>
+                    <option value="Bungoma Central">Bungoma Central</option>
+                    <option value="Bungoma East">Bungoma East</option>
+                    <option value="Bungoma North">Bungoma North</option>
+                    <option value="Bungoma South">Bungoma South</option>
+                    <option value="Cheptais">Cheptais</option>
+                    <option value="Kanduyi">Kanduyi</option>
+                    <option value="Kimilili">Kimilili</option>
+                    <option value="Mount Elgon">Mount Elgon</option>
+                    <option value="Sirisia">Sirisia</option>
+                    <option value="Tongaren">Tongaren</option>
+                    <option value="Bunyala">Bunyala</option>
+                    <option value="Butula">Butula</option>
+                    <option value="Matayos">Matayos</option>
+                    <option value="Nambale">Nambale</option>
+                    <option value="Teso North">Teso North</option>
+                    <option value="Teso South">Teso South</option>
+                    <option value="Samia">Samia</option>
+                    <option value="Alego Usonga">Alego Usonga</option>
+                    <option value="Gem">Gem</option>
+                    <option value="Rarieda">Rarieda</option>
+                    <option value="Ugenya">Ugenya</option>
+                    <option value="Ugunja">Ugunja</option>
+                    <option value="Bondo">Bondo</option>
+                    <option value="Homa Bay Town">Homa Bay Town</option>
+                    <option value="Ndhiwa">Ndhiwa</option>
+                    <option value="Rachuonyo North">Rachuonyo North</option>
+                    <option value="Rachuonyo South">Rachuonyo South</option>
+                    <option value="Rangwe">Rangwe</option>
+                    <option value="Suba North">Suba North</option>
+                    <option value="Suba South">Suba South</option>
+                    <option value="Awendo">Awendo</option>
+                    <option value="Kuria East">Kuria East</option>
+                    <option value="Kuria West">Kuria West</option>
+                    <option value="Nyatike">Nyatike</option>
+                    <option value="Rongo">Rongo</option>
+                    <option value="Suna East">Suna East</option>
+                    <option value="Suna West">Suna West</option>
+                    <option value="Uriri">Uriri</option>
+                    <option value="Bobasi">Bobasi</option>
+                    <option value="Bomachoge Borabu">Bomachoge Borabu</option>
+                    <option value="Bomachoge Chache">Bomachoge Chache</option>
+                    <option value="Kitutu Chache North">Kitutu Chache North</option>
+                    <option value="Kitutu Chache South">Kitutu Chache South</option>
+                    <option value="Nyaribari Chache">Nyaribari Chache</option>
+                    <option value="Nyaribari Masaba">Nyaribari Masaba</option>
+                    <option value="South Mugirango">South Mugirango</option>
+                    <option value="Borabu">Borabu</option>
+                    <option value="Manga">Manga</option>
+                    <option value="Masaba North">Masaba North</option>
+                    <option value="Masaba South">Masaba South</option>
+                    <option value="Nyamira North">Nyamira North</option>
+                    <option value="Nyamira South">Nyamira South</option>
+                    <option value="Dagoretti North">Dagoretti North</option>
+                    <option value="Dagoretti South">Dagoretti South</option>
+                    <option value="Embakasi Central">Embakasi Central</option>
+                    <option value="Embakasi East">Embakasi East</option>
+                    <option value="Embakasi North">Embakasi North</option>
+                    <option value="Embakasi South">Embakasi South</option>
+                    <option value="Embakasi West">Embakasi West</option>
+                    <option value="Kamukunji">Kamukunji</option>
+                    <option value="Kasarani">Kasarani</option>
+                    <option value="Kibra">Kibra</option>
+                    <option value="Lang'ata">Lang'ata</option>
+                    <option value="Makadara">Makadara</option>
+                    <option value="Mathare">Mathare</option>
+                    <option value="Nairobi Central">Nairobi Central</option>
+                    <option value="Roysambu">Roysambu</option>
+                    <option value="Ruaraka">Ruaraka</option>
+                    <option value="Starehe">Starehe</option>
+                    <option value="Westlands">Westlands</option>
+                </select>
+                <label for="location">Location:(required)</label>
+                <input type="text" id="location" name="location" required>
+                <label for="subLocation">Sub Location:(required)</label>
+                <input type="text" id="subLocation" name="subLocation" required>
+            </div>
+
+            <div class="section">
+                <h2>History and Investigations</h2>
+                <label for="category">Special Category(From Investigations)</label>
+                <select name="department" id="department">
+                    <option value="Communicable diseases">Communicable diseases</option>
+                    <option value="TB">Tuberculosis (TB)</option>
+                    <option value="NCD">Non-Communicable Diseases (NCDs)</option>
+                    <option value="ID">Infectious Diseases (ID)</option>
+                </select>
+                <label for="diagnosis">Diagnosis (if known)</label>
+                <textarea id="diagnosis" name="diagnosis" rows="4" cols="50"></textarea>
+                <label for="investigations">Investigations (if any)</h2>
+                    <textarea id="investigations" name="investigations" rows="4" cols="50"></textarea>
+            </div>
+
+            <div class="section">
+                <h2>Reason for Referral</h2>
                 <label for="consultationReason">Reasons for Consultation Request:(required)</label>
-                <textarea id="consultationReason" name="consultationReason" rows="4" cols="50"></textarea>
-                <h2>Requesting Officer Details</h2>
-                <div class="section">
-                    <label for="requestingOfficerName">Name:(required)</label>
-                    <input type="text" id="requestingOfficerName" name="requestingOfficerName">
-                    <label for="designation">Designation:(required)</label>
-                    <input type="text" id="designation" name="designation">
-                    <label for="phoneNumber">Telephone Number(s):(required)</label>
-                    <input type="tel" id="phoneNumber" name="phoneNumber">
-                    <label for="department">Department:(required)</label>
-                    <input type="text" id="department" name="department">
-                    <label for="facility">Facility:(required)</label>
+                <select name="consultationReason" id="consultationReason">
+                    <option value="Further treatment">Further treatment</option>
+                    <option value="Specialized Treatment">Specialized Treatment</option>
+                    <option value="Higher Level of Care">Higher Level of Care</option>
+                </select>
+            </div>
+
+            <h2>Requesting Officer Details</h2>
+            <div class="section">
+                <label for="requestingOfficerName">Name:(required)</label>
+                <input type="text" id="requestingOfficerName" name="requestingOfficerName">
+                <label for="designation">Designation:(required)</label>
+                <input type="text" id="designation" name="designation">
+                <label for="phoneNumber">Telephone Number(s):(required)</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber">
+                <div class="value-suggestion">
+                    <label for="facility">Referring Facility:(required)</label>
                     <input type="text" id="facility" name="facility">
-                    <label for="signature">Signature:(required)</label>
-                    <input type="text" id="signature" name="signature">
-                    <label for="date">Date:(required)</label>
-                    <input type="date" id="date" name="date">
+                    <div class="suggestions-div">
+                        <ul id="suggestions1"></ul>
+                    </div>
                 </div>
-                <br>
-                <button type="submit" id="submit-consultation">Save Referral Data</button>
-                <button type="submit" id="send-consultation">Send Referral</button>
+                <label for="department">Department:(required)</label>
+                <input type="text" id="department" name="department">
+
+            </div>
+            <br>
+            <button type="submit" id="submit-consultation">Submit Referral Data</button>
         </form>
     </div>
     <script>
@@ -310,15 +788,18 @@
 
             submitConsultation.addEventListener('click', async (e) => {
                 e.preventDefault();
-
-                // Get all the input elements by their IDs
-                // Get all the input elements by their IDs
+                // Service level
                 const serviceLevelInputs = document.querySelectorAll('input[name="serviceLevel"]');
                 const serviceLevelInput = Array.from(serviceLevelInputs).find(input => input.checked);
+                // Date and time
                 const dateInput = document.getElementById('date');
                 const timeInput = document.getElementById('time');
+                // Facility details
+                const clinicName = document.getElementById('clinicName');
                 const clinicDepartmentInput = document.getElementById('clinicDepartment');
+                // Expert details
                 const consultantInput = document.getElementById('consultant');
+                // Client details
                 const clientNameInput = document.getElementById('clientName');
                 const ageInput = document.getElementById('age');
                 const sexSelect = document.getElementById('sex');
@@ -329,53 +810,71 @@
                 const previousIpOpNumber2Input = document.getElementById('previousIpOpNumber2');
                 const previousIpOpNumber3Input = document.getElementById('previousIpOpNumber3');
                 const previousIpOpNumberSpecifyInput = document.getElementById('previousIpOpNumberSpecify');
+                // History and investigations
+                const categorySelect = document.getElementById('category');
                 const diagnosisTextarea = document.getElementById('diagnosis');
                 const investigationsTextarea = document.getElementById('investigations');
+                // Consultation reason
                 const consultationReasonTextarea = document.getElementById('consultationReason');
+                // Referring officer details
                 const requestingOfficerNameInput = document.getElementById('requestingOfficerName');
                 const designationInput = document.getElementById('designation');
                 const phoneNumberInput = document.getElementById('phoneNumber');
                 const departmentInput = document.getElementById('department');
                 const facilityInput = document.getElementById('facility');
-                const requestingOfficerSignatureInput = document.getElementById('signature');
-                const requestingOfficerDateInput = document.getElementById('date');
 
-                // Retrieve values
-                // const serviceLevelValue = Array.from(serviceLevelInputs).find(input => input.checked).value;
-                const serviceLevelValue = serviceLevelInput ? serviceLevelInput.value : "";
-                const dateValue = dateInput.value;
-                const timeValue = timeInput.value;
-                const clinicDepartmentValue = clinicDepartmentInput.value;
-                const consultantValue = consultantInput.value;
-                const clientNameValue = clientNameInput.value;
-                const ageValue = ageInput.value;
-                const sexValue = sexSelect.value;
-                const wardClinicValue = wardClinicInput.value;
-                const bedNumberValue = bedNumberInput.value;
-                const currentIpOpNumberValue = currentIpOpNumberInput.value;
-                const previousIpOpNumber1Value = previousIpOpNumber1Input.value;
-                const previousIpOpNumber2Value = previousIpOpNumber2Input.value;
-                const previousIpOpNumber3Value = previousIpOpNumber3Input.value;
-                const previousIpOpNumberSpecifyValue = previousIpOpNumberSpecifyInput.value;
-                const diagnosisValue = diagnosisTextarea.value;
-                const investigationsValue = investigationsTextarea.value;
-                const consultationReasonValue = consultationReasonTextarea.value;
-                const requestingOfficerNameValue = requestingOfficerNameInput.value;
-                const designationValue = designationInput.value;
-                const phoneNumberValue = phoneNumberInput.value;
-                const departmentValue = departmentInput.value;
-                const facilityValue = facilityInput.value;
-                const requestingOfficerSignatureValue = requestingOfficerSignatureInput.value;
-                const requestingOfficerDateValue = requestingOfficerDateInput.value;
+                // Service level
+                const serviceLevelValue = serviceLevelInput ? serviceLevelInput.value.trim() : "";
+                // Date and time
+                const dateValue = dateInput.value.trim();
+                const timeValue = timeInput.value.trim();
+                // Facility details
+                const clinicNameValue = clinicName.value.trim();
+                const clinicDepartmentValue = clinicDepartmentInput.value.trim();
+                // Expert details
+                const consultantValue = consultantInput.value.trim();
+                // Client details
+                const clientNameValue = clientNameInput.value.trim();
+                const ageValue = ageInput.value.trim();
+                const sexValue = sexSelect.value.trim();
+                const wardClinicValue = wardClinicInput.value.trim();
+                const bedNumberValue = bedNumberInput.value.trim();
+                const currentIpOpNumberValue = currentIpOpNumberInput.value.trim();
+                const previousIpOpNumber1Value = previousIpOpNumber1Input.value.trim();
+                const previousIpOpNumber2Value = previousIpOpNumber2Input.value.trim();
+                const previousIpOpNumber3Value = previousIpOpNumber3Input.value.trim();
+                const previousIpOpNumberSpecifyValue = previousIpOpNumberSpecifyInput.value.trim();
+                const countyValue = document.getElementById('county').value.trim();;
+                const subCountyValue = document.getElementById('subCounty').value.trim();
+                const locationValue = document.getElementById('location').value.trim();
+                const subLocationValue = document.getElementById('subLocation').value.trim();
+                // History and investigations
+                const selectedCategory = categorySelect.value.trim();
+                const diagnosisValue = diagnosisTextarea.value.trim();
+                const investigationsValue = investigationsTextarea.value.trim();
+                // Reason for consultation
+                const consultationReasonValue = consultationReasonTextarea.value.trim();
+                // Referring officer details
+                const requestingOfficerNameValue = requestingOfficerNameInput.value.trim();
+                const designationValue = designationInput.value.trim();
+                const phoneNumberValue = phoneNumberInput.value.trim();
+                const departmentValue = departmentInput.value.trim();
+                const facilityValue = facilityInput.value.trim();
+
 
                 if (serviceLevelValue === "" ||
                     dateValue === "" ||
                     timeValue === "" ||
+                    clinicNameValue === "" ||
                     clinicDepartmentValue === "" ||
                     consultantValue === "" ||
                     clientNameValue === "" ||
                     ageValue === "" ||
                     sexValue === "" ||
+                    countyValue === "" ||
+                    subCountyValue === "" ||
+                    locationValue === "" ||
+                    subLocationValue === "" ||
                     currentIpOpNumberValue === "" ||
                     consultationReasonValue === "" ||
                     requestingOfficerNameValue === "" ||
@@ -383,22 +882,52 @@
                     phoneNumberValue === "" ||
                     departmentValue === "" ||
                     facilityValue === "" ||
-                    requestingOfficerSignatureValue === "" ||
-                    requestingOfficerDateValue === "") {
-                    alert("All fields with (required) attribute must be filled");
+                    selectedCategory === "") {
+
+                    let missingDetails = "Please fill in the following details:\n";
+
+                    if (serviceLevelValue === "") missingDetails += "- Service level\n";
+                    if (dateValue === "") missingDetails += "- Date\n";
+                    if (timeValue === "") missingDetails += "- Time\n";
+                    if (clinicNameValue === "") missingDetails += "- Clinic name\n";
+                    if (clinicDepartmentValue === "") missingDetails += "- Clinic department\n";
+                    if (consultantValue === "") missingDetails += "- Consultant\n";
+                    if (clientNameValue === "") missingDetails += "- Client name\n";
+                    if (ageValue === "") missingDetails += "- Age\n";
+                    if (sexValue === "") missingDetails += "- Sex\n";
+                    if (countyValue === "") missingDetails += "- County\n";
+                    if (subCountyValue === "") missingDetails += "- Sub-County\n";
+                    if (locationValue === "") missingDetails += "- Location\n";
+                    if (subLocationValue === "") missingDetails += "- Sub-Location\n";
+                    if (currentIpOpNumberValue === "") missingDetails += "- Current IP/OP number\n";
+                    if (consultationReasonValue === "") missingDetails += "- Consultation reason\n";
+                    if (requestingOfficerNameValue === "") missingDetails += "- Requesting officer name\n";
+                    if (designationValue === "") missingDetails += "- Designation\n";
+                    if (phoneNumberValue === "") missingDetails += "- Phone number\n";
+                    if (departmentValue === "") missingDetails += "- Department\n";
+                    if (facilityValue === "") missingDetails += "- Facility\n";
+                    if (selectedCategory === "") missingDetails += "- Category\n";
+
+                    alert(missingDetails);
                 } else {
                     try {
-                        const response = await fetch('/consultation', {
+                        const response = await fetch('/submit-consultation', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
+                                // Service value
                                 serviceLevel: serviceLevelValue,
+                                // Date and time
                                 date: dateValue,
                                 time: timeValue,
+                                // Facility details
+                                clininName: clinicNameValue,
                                 clinicDepartment: clinicDepartmentValue,
+                                // Expert details
                                 consultant: consultantValue,
+                                // Client details
                                 clientName: clientNameValue,
                                 age: ageValue,
                                 sex: sexValue,
@@ -409,35 +938,149 @@
                                 previousIpOpNumber2: previousIpOpNumber2Value,
                                 previousIpOpNumber3: previousIpOpNumber3Value,
                                 previousIpOpNumberSpecify: previousIpOpNumberSpecifyValue,
-                                diagnosis: diagnosisValue, // Assuming you still want to include diagnosis
+                                county: countyValue,
+                                subCounty: subCountyValue,
+                                location: locationValue,
+                                subLocation: subLocationValue,
+                                // History and investigations
+                                category: selectedCategory,
+                                diagnosis: diagnosisValue,
                                 investigations: investigationsValue,
+                                // Reason for consultation
                                 consultationReason: consultationReasonValue,
+                                // Referring oficer
                                 requestingOfficerName: requestingOfficerNameValue,
                                 designation: designationValue,
                                 phoneNumber: phoneNumberValue,
                                 department: departmentValue,
                                 facility: facilityValue,
-                                requestingOfficerSignature: requestingOfficerSignatureValue,
-                                requestingOfficerDate: requestingOfficerDateValue
                             })
                         });
 
                         if (!response.ok) {
                             throw new Error("Failed to submit consultation. Please try again later.");
                             alert("Something went wrong")
-                        }else{
+                        } else {
                             alert('Data saved successfully');
+                            // Resetting other variables
+                            // Service level
+                            if (serviceLevelInput) serviceLevelInput.value = '';
+                            // Date and time
+                            dateInput.value = '';
+                            timeInput.value = '';
+                            // Facility details
+                            clinicName.value = '';
+                            clinicDepartmentInput.value = '';
+                            // Expert details
+                            consultantInput.value = '';
+                            // Client details
+                            clientNameInput.value = '';
+                            ageInput.value = '';
+                            sexSelect.value = '';
+                            wardClinicInput.value = '';
+                            bedNumberInput.value = '';
+                            currentIpOpNumberInput.value = '';
+                            previousIpOpNumber1Input.value = '';
+                            previousIpOpNumber2Input.value = '';
+                            previousIpOpNumber3Input.value = '';
+                            previousIpOpNumberSpecifyInput.value = '';
+                            // History and investigations
+                            categorySelect.value = '';
+                            diagnosisTextarea.value = '';
+                            investigationsTextarea.value = '';
+                            // Reason for consultation
+                            consultationReasonTextarea.value = '';
+                            // Referring officer details
+                            requestingOfficerNameInput.value = '';
+                            designationInput.value = '';
+                            phoneNumberInput.value = '';
+                            departmentInput.value = '';
+                            facilityInput.value = '';
+
                         }
 
                     } catch (error) {
                         console.error('Error:', error.message);
                     }
-
                 }
             });
 
-            // Collecting outgoing referals 
-            
+
+            const inputField1 = document.getElementById('facility');
+            const suggestionsList1 = document.getElementById('suggestions1');
+
+            inputField1.addEventListener('input', async function () {
+                const userInput = this.value.trim();
+                if (!userInput) {
+                    suggestionsList1.innerHTML = ''; // Clear suggestions if input is empty
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/facilities');
+                    const facilitiesData = await response.json();
+                    const facilityNames = facilitiesData.facilities.map(facility => facility.name.trim());
+
+                    const matchedFacilities = facilityNames.filter(name => name.toLowerCase().includes(userInput.toLowerCase()));
+
+                    // Display suggestions
+                    suggestionsList1.innerHTML = '';
+                    matchedFacilities.forEach(facility => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = facility;
+                        suggestionsList1.appendChild(listItem);
+
+                        // Add click event listener to list item
+                        listItem.addEventListener('click', function () {
+                            // Set the value of the Hospital name field
+                            inputField1.value = facility;
+                            // Clear suggestions
+                            suggestionsList1.innerHTML = '';
+                        });
+                    });
+                } catch (error) {
+                    console.error('Error fetching facilities:', error);
+                }
+            });
+
+
+            const inputField = document.getElementById('clinicName');
+            const suggestionsList = document.getElementById('suggestions2');
+
+            inputField.addEventListener('input', async function () {
+                const userInput = this.value.trim();
+                if (!userInput) {
+                    suggestionsList.innerHTML = ''; // Clear suggestions if input is empty
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/facilities');
+                    const facilitiesData = await response.json();
+                    const facilityNames = facilitiesData.facilities.map(facility => facility.name.trim());
+
+                    const matchedFacilities = facilityNames.filter(name => name.toLowerCase().includes(userInput.toLowerCase()));
+
+                    // Display suggestions
+                    suggestionsList.innerHTML = '';
+                    matchedFacilities.forEach(facility => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = facility;
+                        suggestionsList.appendChild(listItem);
+
+                        // Add click event listener to list item
+                        listItem.addEventListener('click', function () {
+                            // Set the value of the Hospital name field
+                            inputField.value = facility;
+                            // Clear suggestions
+                            suggestionsList.innerHTML = '';
+                        });
+                    });
+                } catch (error) {
+                    console.error('Error fetching facilities:', error);
+                }
+            });
+
         });
     </script>
 </body>

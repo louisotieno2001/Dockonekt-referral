@@ -36,6 +36,12 @@
             /* Subtract top menu height */
         }
 
+        .reason {
+            background-color: yellow;
+            padding: .5em;
+            width: fit-content;
+        }
+
         .left-tab {
             flex: 0 0 300px;
             background-color: #0c1e3e;
@@ -45,6 +51,7 @@
             height: calc(100vh - 40px);
             position: fixed;
             margin-top: 0;
+            opacity: 90%;
         }
 
         .right-tab {
@@ -83,13 +90,20 @@
         /* Submenu */
         .submenu {
             position: absolute;
-            top: 60px;
-            right: 35px;
+            top: 65px;
+            right: 2px;
+            left: 0px;
             background-color: #0c1e3e;
-            border-radius: 5px;
             padding: 10px;
             display: none;
+            width: 100%;
             z-index: 1500;
+        }
+
+        .status {
+            padding: .5em;
+            border-radius: 8px;
+            width: fit-content;
         }
 
         .submenu a {
@@ -123,7 +137,7 @@
         .module-container {
             border: 1px #007bff solid;
             width: max-content;
-            padding: .5em;
+            padding: .8em;
             border-radius: 8px;
             margin: 3px;
         }
@@ -156,37 +170,368 @@
         }
 
         .card {
-            background-color: #007bff;
-            padding: 15px;
+            flex: 1;
+            height: max-content;
+            background-color: #fff;
+            margin: 3px;
+            margin-left: -8px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
             border-radius: 8px;
-            margin-top: 3px;
-
+            padding: .5em;
         }
 
         .data-container {
             display: none;
+            /* background-color: #e2e1e1; */
+            border-radius: 8px;
         }
 
-        .divider{
+        .divider {
             height: 2px;
             background-color: #0c1e3e;
             width: 100%;
             margin-top: 10px;
+            margin-left: -8px;
+            margin-bottom: 5px;
+        }
+
+        #refresher {
+            font-weight: bolder;
+            cursor: pointer;
+        }
+
+        .referral {
+            background-color: #e2e1e1;
+            padding: 1em;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .in-referral {
+            flex: 1;
+            height: max-content;
+            background-color: #fff;
+            margin: 3px;
+            margin-left: -8px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 8px;
+            padding: 1em;
+        }
+
+        .accept-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .accept-btn:hover {
+            background-color: #45a049;
+        }
+
+        .cons-accept-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cons-accept-btn:hover {
+            background-color: #45a049;
+        }
+
+        .spec-accept-btn:hover {
+            background-color: #45a049;
+        }
+
+        .spec-accept-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #accept-submit-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #accept-submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        #refer-reject-submit-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #refer-reject-submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        #cons-reject-submit-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #-cons-reject-submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        #spec-reject-submit-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #spec-reject-submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        #spec-accept-submit-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #spec-accept-submit-btn:hover {
+            background-color: #45a049;
+        }
+
+
+        #cons-accept-submit-btn {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #cons-accept-submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        #accept-dialog {
+            background-color: #0c1e3e;
+            border: none;
+            border-radius: 8px;
+            color: #ccc;
+        }
+
+        #reject-dialog {
+            background-color: #0c1e3e;
+            border: none;
+            border-radius: 8px;
+            color: #ccc;
+        }
+
+        #cons-accept-dialog {
+            background-color: #0c1e3e;
+            border: none;
+            border-radius: 8px;
+            color: #ccc;
+        }
+
+        #cons-reject-dialog {
+            background-color: #0c1e3e;
+            border: none;
+            border-radius: 8px;
+            color: #ccc;
+        }
+
+
+        #spec-accept-dialog {
+            background-color: #0c1e3e;
+            border: none;
+            border-radius: 8px;
+            color: #ccc;
+        }
+
+        #spec-reject-dialog {
+            background-color: #0c1e3e;
+            border: none;
+            border-radius: 8px;
+            color: #ccc;
+        }
+
+        /* Reject button */
+        .reject-btn {
+            background-color: #f44336;
+            /* Red */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .reject-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .cons-reject-btn {
+            background-color: #f44336;
+            /* Red */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .cons-reject-btn:hover {
+            background-color: #d32f2f;
+        }
+
+
+
+        .spec-reject-btn {
+            background-color: #f44336;
+            /* Red */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .spec-reject-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        h5 {
+            background-color: #0c1e3e;
+            color: #ccc;
+            padding: .5em;
+            border-radius: 5px;
+        }
+
+        label {
+            display: inline;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 98%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            background-color: transparent;
+            color: #fff;
         }
 
         /* Styles for small screens */
         @media only screen and (max-width: 768px) {
             .tabs-container {
                 flex-direction: column;
-                margin-top: 45px;
                 height: auto;
                 max-width: 100vw;
                 padding: 0px;
-                margin-top: 85px;
+                margin-top: 60px;
                 overflow: hidden;
                 padding-left: 0px;
                 padding-right: 0;
                 padding-right: 10px;
+                margin-left: -10px;
             }
 
             .left-tab,
@@ -198,6 +543,15 @@
                 margin-left: 0;
             }
 
+            .left-tab {
+                flex: 1;
+                width: 95%;
+                position: static;
+                height: auto;
+                margin-left: 0;
+                display: none;
+            }
+
             .filter-container select {
                 width: 95%;
             }
@@ -206,20 +560,195 @@
                 width: max-content;
                 display: inline;
             }
+
+            #right-tab-icon {
+                cursor: pointer;
+                margin-bottom: 5px;
+                display: none;
+            }
+
+            .submenu {
+                position: absolute;
+                top: 80px;
+                right: 2px;
+                left: 0px;
+                background-color: #0c1e3e;
+                padding: 10px;
+                display: none;
+                width: 100%;
+                z-index: 1500;
+            }
+
+
+            #cont-h1 {
+                font-size: 24px;
+            }
+
+
+            input[type="text"],
+            input[type="tel"],
+            input[type="number"],
+            select,
+            textarea {
+                font-size: 14px;
+            }
+
+            .search-bar input {
+                color: black;
+                background: transparent;
+                border: none;
+            }
+
+            .search-bar input:focus {
+                border: none;
+            }
+        }
+
+        #incoming {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 1px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        #outgoing {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        #spec-incoming {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 1px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        #spec-outgoing {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        #cons-incoming {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 1px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        #cons-outgoing {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        #refTally {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        #consTally {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        #specTally {
+            background-color: #0c1e3e;
+            color: #ccc;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            margin-left: 5px;
+            padding: .5em;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #00e676;
+        }
+
+        input:focus {
+            border: none;
+        }
+
+        .search-bar {
+            background-color: #0c1e3e;
+            border-radius: 35px;
+            padding: .2em;
+            height: max-content;
+            /* margin: 10px; */
+            display: flex;
+            align-items: center;
+            opacity: 90%;
+            margin-bottom: 15px;
+        }
+
+        #search {
+            color: #fff;
+            background: transparent;
+            border: none;
+            font-size: larger;
+            margin: 5px;
+        }
+
+        #search:focus {
+            border: none;
+        }
+
+        #search-icon {
+            color: #fff;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
     <div class="top-menu">
-        <h1>Dockonekt</h1>
+        <center>
+            <h1>Dockonekt
+            </h1>
+        </center>
         <span class="material-symbols-outlined" id="open-menu">menu</span>
         <span class="material-symbols-outlined" id="close-menu">close</span>
         <div class="submenu" id="submenu">
-            <h3><a href="/home">Home</a></h3>
-            <h3><a href="/referral">Referrals</a></h3>
-            <h3><a href="/consultation">Consultations</a></h3>
-            <h3><a href="/specimen-movement">Specimen movement</a></h3>
+            <h3><a href="/home?id='<%= user.id %>'">Home</a></h3>
+            <h3><a href="/referral?id='<%= user.id %>'">Referrals</a></h3>
+            <h3><a href="/consultation?id=<%= user.id %>">Consultations</a></h3>
+            <h3><a href="/specimen-movement?id='<%= user.id %>'">Specimen movement</a></h3>
         </div>
     </div>
     </div>
@@ -259,77 +788,337 @@
         </div>
         <div class="right-tab" id="right-tab">
             <span class="material-symbols-outlined" id="right-tab-icon">tabs</span>
-            <h2>Modules</h2>
+            <h5>Logged in as <%= user.name %>@<%= user.hosipital_id %>
+            </h5>
+            <div class="module-arrow">
+
+                <span class="material-symbols-outlined" id="refresher">
+                    arrow_back
+                </span>
+                <h2>Modules</h2>
+            </div>
+
             <div class="modules-container">
-                <div class="module-container" title="Initiate referral to another hospital" id="referrals-module">
-                    Referrals
+                <div class="module-container" title="Initiate referral to another facility" id="referrals-module">
+                    Referrals <span id="refTally"></span>
                 </div>
                 <div class="module-container" title="Initiate a consultation referral" id="consultation-module">
-                    Consultation referrals
+                    Consultation referrals<span id="consTally"></span>
                 </div>
                 <div class="module-container" title="Initiate a specimen movement" id="specimen-module">
-                    Specimen-movement
+                    Specimen-movement<span id="specTally"></span>
                 </div>
             </div>
+
             <div class="display">
                 <div class="data" id="referrals-filter">
                     <div class="module-container" title="See all incoming referrals" id="referrals-in">
-                        Outgoing Referrals
+                        Incoming Referrals <strong><span id="incoming"></span></strong>
                     </div>
+
                     <div class="module-container" title="See all outgoing referrals" id="referrals-out">
-                        Outgoing Referrals
+                        Outgoing Referrals <strong><span id="outgoing"></span></strong>
                     </div>
                     <div class="module-container" title="See all outgoing referrals" id="referrals-refer">
-                        <a href="/facilities">Initiate patient referral</a>
+                        <a href="/referral?id='<%= user.id %>'">Initiate patient referral</a>
                     </div>
                 </div>
+
                 <div class="data" id="specimen-filter">
                     <div class="module-container" title="See all incoming specimens" id="specimen-in">
-                        Incoming Specimens
+                        Incoming Specimens<strong><span id="spec-incoming"></span></strong>
                     </div>
                     <div class="module-container" title="See all outgoing specimen" id="specimen-out">
-                        Outgoing Specimens
+                        Outgoing Specimens<strong><span id="spec-outgoing"></span></strong>
                     </div>
                     <div class="module-container" title="Initiate an outgoing specimen referral" id="specimen-refer">
-                        <a href="/facilities">Initiate specimens referral</a>
+                        <a href="/specimen-movement?id='<%= user.id %>'">Initiate specimens referral</a>
                     </div>
                 </div>
+
                 <div class="data" id="consultations-filter">
                     <div class="module-container" title="See all incoming consultation" id="consultation-in">
-                        Outgoing Consultations
+                        Incoming Consultations<strong><span id="cons-incoming"></span></strong>
                     </div>
                     <div class="module-container" title="See all outgoing consultations" id="consultation-out">
-                        Outgoing Consultations
+                        Outgoing Consultations<strong><span id="cons-outgoing"></span></strong>
                     </div>
                     <div class="module-container" title="Initiate an outgoing consultations" id="consultation-refer">
-                        <a href="/facilities">Initiate a consultation referral</a>
+                        <a href="/consultation?id='<%= user.id %>'">Initiate a consultation referral</a>
                     </div>
                 </div>
             </div>
             <div class="divider"></div>
-            <div class="data-display">
-                <div class="data-container" id="referralContainer">
-                    <!-- Cards will be added here -->
+            <div class="emergency-contacts" id="contacts">
+                <div class="search-bar">
+                    <input type="text" name="search" id="search" oninput="filterFacilities()" placeholder="Search...">
+                    <span class="material-symbols-outlined" id="search-icon">search</span>
                 </div>
-                <div class="data-container" id="referralInContainer">
-                    <!-- Cards will be added here -->
-                </div>
-                <div class="data-container" id="consultationContainer">
-                    <!-- Cards will be added here -->
-                </div>
-                <div class="data-container" id="consultationInContainer">
-                    <!-- Cards will be added here -->
-                </div>
-                <div class="data-container" id="specimenContainer">
-                    <!-- Cards will be added here -->
-                </div>
-                <div class="data-container" id="specimenInContainer">
-                    <!-- Cards will be added here -->
+                <div class="cards">
+                    <% facilities.forEach(facility=> { %>
+                        <div class="card" data-name="<%= facility.name %>">
+                            <h3>
+                                <%= facility.name %>
+                            </h3>
+                            <p><strong>Telephone:</strong>
+                                <%= facility.telephone %>
+                            </p>
+                            <p><strong>Email:</strong>
+                                <%= facility.email %>
+                            </p>
+                            <p><strong>NHIF Number:</strong>
+                                <%= facility.nhif_number %>
+                            </p>
+                            <p><strong>Postal Address:</strong>
+                                <%= facility.postal_address %>
+                            </p>
+                        </div>
+                        <% }); %>
                 </div>
             </div>
+
+            <div class="display">
+                <div class="data-container" id="referralContainer">
+                    <h1 id="cont-h1">Outgoing patient referrals</h1>
+                    <div class="filter-buttons">
+                        <button onclick="filterBy('today')">Today</button>
+                        <button onclick="filterBy('last_week')">Last Week</button>
+                        <button onclick="filterBy('last_month')">Last Month</button>
+                        <button onclick="filterBy('all_time')">All Time</button>
+                    </div>
+                    <% if (referrals && referrals.length> 0) { %>
+                        <% referrals.forEach(referral=> { %>
+                            <div class="in-referral" data-date="<%= referral.referral_date %>">
+                                <h3 class="status">
+                                    <%= referral.request_status %>
+                                </h3>
+                                <p class="reason">
+                                    <%= referral.rejection_reason %>
+                                </p>
+                                <p>Referral ID: <%= referral.id %>
+                                </p>
+                                <p>Referring Facility Name: <%= referral.referring_facility_name %>
+                                </p>
+                                <p>Referral Date: <%= referral.referral_date %>
+                                </p>
+                            </div>
+                            <% }); %>
+                                <% } else { %>
+                                    <p>No outgoing patient referrals</p>
+                                    <% } %>
+                </div>
+
+                <div class="data-container" id="referralInContainer">
+                    <h1 id="cont-h1">Incoming patient referrals</h1>
+                    <div class="filter-buttons">
+                        <button onclick="filterIncomingBy('today')">Today</button>
+                        <button onclick="filterIncomingBy('last_week')">Last Week</button>
+                        <button onclick="filterIncomingBy('last_month')">Last Month</button>
+                        <button onclick="filterIncomingBy('all_time')">All Time</button>
+                    </div>
+                    <% if (incomingReferrals && incomingReferrals.length > 0) { %>
+                        <% incomingReferrals.forEach(incomingReferral => { %>
+                            <div class="in-referral" data-date="<%= incomingReferral.referral_date %>">
+                                <h3 class="status">
+                                    <%= incomingReferral.request_status %>
+                                </h3>
+                                <p>Referral ID: <%= incomingReferral.id %></p>
+                                <p>Receiving Facility Name: <%= incomingReferral.receiving_facility_name %></p>
+                                <button class="accept-btn" id="accept" data-card-id="<%= incomingReferral.id %>"
+                                    onclick="handleAccept('<%= incomingReferral.id %>')">Accept</button>
+                                <button class="reject-btn" id="reject" data-card-id="<%= incomingReferral.id %>"
+                                    onclick="handleReject('<%= incomingReferral.id %>')">Reject</button>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>No incoming patient referrals</p>
+                    <% } %>
+                </div>                
+
+                <div class="data-container" id="consultationContainer">
+                    <h1 id="cont-h1">Outgoing patient consultations</h1>
+                    <div class="filter-buttons">
+                        <button onclick="filterConsultationsBy('today')">Today</button>
+                        <button onclick="filterConsultationsBy('last_week')">Last Week</button>
+                        <button onclick="filterConsultationsBy('last_month')">Last Month</button>
+                        <button onclick="filterConsultationsBy('all_time')">All Time</button>
+                    </div>
+                    <% if (consultations && consultations.length > 0) { %>
+                        <% consultations.forEach(consultation => { %>
+                            <div class="in-referral" data-date="<%= consultation.consultation_date %>">
+                                <h3 class="status">
+                                    <%= consultation.request_status %>
+                                </h3>
+                                <p class="reason">
+                                    <%= consultation.rejection_reason %>
+                                </p>
+                                <p>Referral ID: <%= consultation.id %></p>
+                                <p>Referring Facility Name: <%= consultation.requesting_officer_facility %></p>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>No outgoing patient consultations</p>
+                    <% } %>
+                </div>
+                
+
+                <div class="data-container" id="consultationInContainer">
+                    <h1 id="cont-h1">Incoming patient consultations</h1>
+                    <div class="filter-buttons">
+                        <button onclick="filterIncomingConsultationsBy('today')">Today</button>
+                        <button onclick="filterIncomingConsultationsBy('last_week')">Last Week</button>
+                        <button onclick="filterIncomingConsultationsBy('last_month')">Last Month</button>
+                        <button onclick="filterIncomingConsultationsBy('all_time')">All Time</button>
+                    </div>
+                    <% if (incomingConsultations && incomingConsultations.length > 0) { %>
+                        <% incomingConsultations.forEach(incomingConsultation => { %>
+                            <div class="in-referral" data-date="<%= incomingConsultation.consultation_date %>">
+                                <h3 class="status">
+                                    <%= incomingConsultation.request_status %>
+                                </h3>
+                                <p>Referral ID: <%= incomingConsultation.id %></p>
+                                <p>Receiving Facility Name: <%= incomingConsultation.receiving_clinic %></p>
+                                <button class="cons-accept-btn" id="accept" data-card-id="<%= incomingConsultation.id %>"
+                                    onclick="handleConsAccept('<%= incomingConsultation.id %>')">Accept</button>
+                                <button class="cons-reject-btn" id="reject" data-card-id="<%= incomingConsultation.id %>"
+                                    onclick="handleConsReject('<%= incomingConsultation.id %>')">Reject</button>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>No incoming patient consultations</p>
+                    <% } %>
+                </div>
+                
+
+                <div class="data-container" id="specimenContainer">
+                    <h1 id="cont-h1">Outgoing specimen data</h1>
+                    <div class="filter-buttons">
+                        <button onclick="filterSpecimensBy('today')">Today</button>
+                        <button onclick="filterSpecimensBy('last_week')">Last Week</button>
+                        <button onclick="filterSpecimensBy('last_month')">Last Month</button>
+                        <button onclick="filterSpecimensBy('all_time')">All Time</button>
+                    </div>
+                    <% if (specimens && specimens.length > 0) { %>
+                        <% specimens.forEach(specimen => { %>
+                            <div class="in-referral" data-date="<%= specimen.specimen_date %>">
+                                <h3 class="status">
+                                    <%= specimen.request_status %>
+                                </h3>
+                                <p class="reason">
+                                    <%= specimen.rejection_reason %>
+                                </p>
+                                <p>Referral ID: <%= specimen.id %></p>
+                                <p>Referring Facility Name: <%= specimen.referring_facility %></p>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>No outgoing specimen data</p>
+                    <% } %>
+                </div>
+                
+
+                <div class="data-container" id="specimenInContainer">
+                    <h1 id="cont-h1">Incoming specimen data</h1>
+                    <div class="filter-buttons">
+                        <button onclick="filterIncomingSpecimensBy('today')">Today</button>
+                        <button onclick="filterIncomingSpecimensBy('last_week')">Last Week</button>
+                        <button onclick="filterIncomingSpecimensBy('last_month')">Last Month</button>
+                        <button onclick="filterIncomingSpecimensBy('all_time')">All Time</button>
+                    </div>
+                    <% if (incomingSpecimens && incomingSpecimens.length > 0) { %>
+                        <% incomingSpecimens.forEach(incomingSpecimen => { %>
+                            <div class="in-referral" data-date="<%= incomingSpecimen.specimen_date %>">
+                                <h3 class="status">
+                                    <%= incomingSpecimen.request_status %>
+                                </h3>
+                                <p>Referral ID: <%= incomingSpecimen.id %></p>
+                                <p>Receiving Facility Name: <%= incomingSpecimen.receiving_facility %></p>
+                                <button class="spec-accept-btn" id="accept" data-card-id="<%= incomingSpecimen.id %>"
+                                    onclick="handleSpecAccept('<%= incomingSpecimen.id %>')">Accept</button>
+                                <button class="spec-reject-btn" id="reject" data-card-id="<%= incomingSpecimen.id %>"
+                                    onclick="handleSpecReject('<%= incomingSpecimen.id %>')">Reject</button>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <p>No incoming specimen data</p>
+                    <% } %>
+                </div>
+                
+
+            </div>
+            <dialog id="accept-dialog">
+                <div class="details-container">
+                    <h2>Receiving Officer</h2>
+                    <input type="hidden" name="card-id" id="accept-refer-id">
+                    <label for="receiving-officer-name">Receiving officer name</label>
+                    <input type="text" name="receiving-officer" id="refer-receiving-officer">
+                    <label for="receiving-officer-phone">Receiving officer phone</label>
+                    <input type="tel" name="receiving-officer-phone" id="refer-receiving-officer-phone">
+                    <button id="refer-accept-submit-btn">Submit</button>
+                </div>
+
+            </dialog>
+            <dialog id="reject-dialog">
+                <h2>Receiving Officer</h2>
+                <input type="hidden" name="card-id" id="reject-refer-id">
+                <label for="rejecting-officer-name">Receiving officer name</label>
+                <input type="text" name="rejecting-officer" id="rejecting-officer">
+                <label for="receiving-officer-phone">Receiving officer phone</label>
+                <input type="tel" name="rejecting-officer-phone" id="rejecting-officer-phone">
+                <label for="rejectionReason">Reason for rejection</label>
+                <textarea name="rejectionReason" id="rejectionReason" cols="30" rows="10"></textarea>
+                <button id="refer-reject-submit-btn">Submit</button>
+            </dialog>
+
+            <dialog id="cons-accept-dialog">
+                <div class="details-container">
+                    <h2>Receiving Officer</h2>
+                    <input type="text" name="card-id" id="cons-accept-id">
+                    <label for="receiving-officer">Receiving officer name</label>
+                    <input type="text" name="receiving-officer" id="cons-receiving-officer">
+                    <label for="receiving-officer-phone">Receiving officer phone</label>
+                    <input type="tel" name="receiving-officer-phone" id="cons-receiving-officer-phone">
+                    <button id="cons-accept-submit-btn">Submit</button>
+                </div>
+
+            </dialog>
+            <dialog id="cons-reject-dialog">
+                <h2>Receiving Officer</h2>
+                <input type="text" name="card-id" id="cons-reject-id">
+                <label for="rejecting-officer">Receiving officer name</label>
+                <input type="text" name="rejecting-officer" id="cons-rejecting-officer">
+                <label for="rejecting-officer-phone">Receiving officer phone</label>
+                <input type="tel" name="rejecting-officer-phone" id="cons-rejecting-officer-phone">
+                <label for="rejectionReason">Reason for rejection</label>
+                <textarea name="rejectionReason" id="cons-rejectionReason" cols="30" rows="10"></textarea>
+                <button id="cons-reject-submit-btn">Submit</button>
+            </dialog>
+
+            <dialog id="spec-accept-dialog">
+                <div class="details-container">
+                    <h2>Receiving Officer</h2>
+                    <input type="text" name="card-id" id="spec-accept-id">
+                    <label for="receiving-officer-name">Receiving officer name</label>
+                    <input type="text" name="receiving-officer" id="spec-receiving-officer">
+                    <label for="receiving-officer-phone">Receiving officer phone</label>
+                    <input type="tel" name="receiving-officer-phone" id="spec-receiving-officer-phone">
+                    <button id="spec-accept-submit-btn">Submit</button>
+                </div>
+
+            </dialog>
+            <dialog id="spec-reject-dialog">
+                <h2>Receiving Officer</h2>
+                <input type="text" name="card-id" id="spec-reject-id">
+                <label for="rejecting-officer-name">Receiving officer name</label>
+                <input type="text" name="rejecting-officer" id="spec-rejecting-officer">
+                <label for="receiving-officer-phone">Receiving officer phone</label>
+                <input type="tel" name="receiving-officer-phone" id="spec-rejecting-officer-phone">
+                <label for="rejectionReason">Reason for rejection</label>
+                <textarea name="rejectionReason" id="spec-rejectionReason" cols="30" rows="10"></textarea>
+                <button id="spec-reject-submit-btn">Submit</button>
+            </dialog>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
             const rightTabBtn = document.getElementById('right-tab-icon');
@@ -345,10 +1134,333 @@
             const referralChild = document.getElementById('referrals-filter');
             const consultationChild = document.getElementById('consultations-filter');
             const specimenChild = document.getElementById('specimen-filter');
+            const refresher = document.getElementById('refresher');
+            const contactCard = document.getElementById('contacts');
+            // Referral displays
             const referralsOut = document.getElementById('referrals-out');
             const referralsIn = document.getElementById('referrals-in');
+            const referralContainer = document.getElementById('referralContainer')
+            const referralInContainer = document.getElementById('referralInContainer');
+            // Consultations dsplays
             const consultationsOut = document.getElementById('consultation-out');
+            const consultationIn = document.getElementById('consultation-in');
+            const consultationContainer = document.getElementById('consultationContainer');
+            const consultationInContainer = document.getElementById('consultationInContainer');
+            // Specimen displays
             const specimensOut = document.getElementById('specimen-out');
+            const specimenIn = document.getElementById('specimen-in');
+            const specimenInContainer = document.getElementById('specimenInContainer');
+            const specimenOutContainer = document.getElementById('specimenContainer')
+
+            // Referrals
+            const totalReferrals = `<%= referrals.length %>`; // Get the length of the referrals array
+            const totalReferralsCountElement = document.getElementById('outgoing');
+            totalReferralsCountElement.textContent = totalReferrals; // Update the content of the span element
+
+            const totalIncomingReferrals = `<%= incomingReferrals.length %>`; // Get the length of the referrals array
+            const incoming = document.getElementById('incoming');
+            incoming.textContent = totalIncomingReferrals;
+
+            const tallyReferrals = `<%= referrals.length + incomingReferrals.length %>`;
+            const tallyDisplay = document.getElementById("refTally");
+            tallyDisplay.textContent = tallyReferrals;
+
+            // Consultations
+            const totalConsultations = `<%= consultations.length %>`; // Get the length of the referrals array
+            const totalConsultCountElement = document.getElementById('cons-outgoing');
+            totalConsultCountElement.textContent = totalConsultations; // Update the content of the span element
+
+            const totalIncomingConsultations = `<%= incomingConsultations.length %>`; // Get the length of the referrals array
+            const consIncoming = document.getElementById('cons-incoming');
+            consIncoming.textContent = totalIncomingConsultations;
+
+            const tallyCons = `<%= consultations.length + incomingConsultations.length %>`;
+            const consTallyDisplay = document.getElementById("consTally");
+            consTallyDisplay.textContent = tallyCons;
+
+            // Specimen
+            const totalSpecimen = `<%= specimens.length %>`; // Get the length of the referrals array
+            const totalSpecCountElement = document.getElementById('spec-outgoing');
+            totalSpecCountElement.textContent = totalSpecimen; // Update the content of the span element
+
+            const totalIncomingSpec = `<%= incomingSpecimens.length %>`; // Get the length of the referrals array
+            const specIncoming = document.getElementById('spec-incoming');
+            specIncoming.textContent = totalIncomingSpec;
+
+            const specTallyCons = `<%= specimens.length + incomingSpecimens.length %>`;
+            const specTallyDisplay = document.getElementById("specTally");
+            specTallyDisplay.textContent = specTallyCons;
+
+            const acceptDialog = document.getElementById('accept-dialog');
+            const rejectDialog = document.getElementById('reject-dialog');
+            const consAcceptDialog = document.getElementById('cons-accept-dialog');
+            const consRejectDialog = document.getElementById('cons-reject-dialog');
+            const specAcceptDialog = document.getElementById('spec-accept-dialog');
+            const specRejectDialog = document.getElementById('spec-reject-dialog');
+
+            const acceptSubmit = document.getElementById('refer-accept-submit-btn');
+            const consAcceptSubmit = document.getElementById('cons-accept-submit-btn');
+            const specAcceptSubmit = document.getElementById('spec-accept-submit-btn');
+
+            const rejectSubmit = document.getElementById('refer-reject-submit-btn');
+            const consRejectSubmit = document.getElementById('cons-reject-submit-btn');
+            const specRejectSubmit = document.getElementById('spec-reject-submit-btn');
+
+            // Filter buttons
+            const searchBtn = document.getElementById('search-icon');
+            const searchInput = document.getElementById('search');
+
+
+            acceptSubmit.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                // Get values from the form
+                const id = document.getElementById('accept-refer-id').value.trim();
+                const referOfficer = document.getElementById('refer-receiving-officer').value.trim();
+                const referOfficerPhone = document.getElementById('refer-receiving-officer-phone').value.trim();
+
+                // Create a data object to send in the request body
+                const data = {
+                    id: id,
+                    referOfficer: referOfficer,
+                    referOfficerPhone: referOfficerPhone
+                };
+
+                console.log("Accepted", data);
+
+                try {
+                    const response = await fetch('/update-accepted-referrals', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        // Handle success
+                        alert('Referral updated successfully!');
+                        acceptDialog.close();
+                    } else {
+                        // Handle error
+                        console.error('Failed to update referral.');
+                    }
+                } catch (error) {
+                    // Handle network error
+                    console.error('Error:', error);
+                }
+            });
+
+            rejectSubmit.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                // Get values from the form
+                const id = document.getElementById('accept-refer-id').value.trim();
+                const rejectingOfficer = document.getElementById('rejecting-officer').value.trim();
+                const rejectingOfficerPhone = document.getElementById('rejecting-officer-phone').value.trim();
+                const rejectionReason = document.getElementById('rejectionReason').value.trim();
+
+                // Create a data object to send in the request body
+                const data = {
+                    id: id,
+                    rejectingOfficer: rejectingOfficer,
+                    rejectingOfficerPhone: rejectingOfficerPhone,
+                    rejectionReason: rejectionReason
+                };
+
+                try {
+                    const response = await fetch('/update-rejected-referrals', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        // Handle success
+                        alert('Referral updated successfully!');
+                        rejectDialog.close();
+                    } else {
+                        // Handle error
+                        console.error('Failed to update referral.');
+                    }
+                } catch (error) {
+                    // Handle network error
+                    console.error('Error:', error);
+                }
+            });
+
+            consAcceptSubmit.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                // Get values from the form
+                const id = document.getElementById('cons-accept-id').value.trim();
+                const consOfficer = document.getElementById('cons-receiving-officer').value.trim();
+                const consOfficerPhone = document.getElementById('cons-receiving-officer-phone').value.trim();
+
+                // Create a data object to send in the request body
+                const data = {
+                    id: id,
+                    consOfficer: consOfficer,
+                    consOfficerPhone: consOfficerPhone
+                };
+
+                console.log("Accepted", data);
+
+                try {
+                    const response = await fetch('/update-accepted-consultations', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        // Handle success
+                        alert('Consultation updated successfully!');
+                        consAcceptDialog.close();
+                    } else {
+                        // Handle error
+                        console.error('Failed to update.');
+                    }
+                } catch (error) {
+                    // Handle network error
+                    console.error('Error:', error);
+                }
+            });
+
+            consRejectSubmit.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                // Get values from the form
+                const id = document.getElementById('cons-reject-id').value.trim();
+                const rejectingOfficer = document.getElementById('cons-rejecting-officer').value.trim();
+                const rejectingOfficerPhone = document.getElementById('cons-rejecting-officer-phone').value.trim();
+                const rejectionReason = document.getElementById('cons-rejectionReason').value.trim();
+
+                // Create a data object to send in the request body
+                const data = {
+                    id: id,
+                    consRejectingOfficer: rejectingOfficer,
+                    consRejectingOfficerPhone: rejectingOfficerPhone,
+                    consRejectionReason: rejectionReason
+                };
+
+                console.log("Rejected", data)
+
+                try {
+                    const response = await fetch('/update-rejected-consultations', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        // Handle success
+                        alert('Consultation updated successfully!');
+                        consRejectDialog.close();
+                    } else {
+                        // Handle error
+                        console.error('Failed to update.');
+                    }
+                } catch (error) {
+                    // Handle network error
+                    console.error('Error:', error);
+                }
+            });
+
+            specAcceptSubmit.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                // Get values from the form
+                const id = document.getElementById('spec-accept-id').value.trim();
+                const specOfficer = document.getElementById('spec-receiving-officer').value.trim();
+                const specOfficerPhone = document.getElementById('spec-receiving-officer-phone').value.trim();
+
+                // Create a data object to send in the request body
+                const data = {
+                    id: id,
+                    specOfficer: specOfficer,
+                    specOfficerPhone: specOfficerPhone
+                };
+
+                console.log("Accepted", data);
+
+                try {
+                    const response = await fetch('/update-accepted-specimens', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        // Handle success
+                        alert('Updated successfully!');
+                        specAcceptDialog.close();
+                        window.location.reload()
+                    } else {
+                        // Handle error
+                        console.error('Failed to update.');
+                    }
+                } catch (error) {
+                    // Handle network error
+                    console.error('Error:', error);
+                }
+            });
+
+            specRejectSubmit.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                // Get values from the form
+                const id = document.getElementById('spec-reject-id').value.trim();
+                const rejectingOfficer = document.getElementById('spec-rejecting-officer').value.trim();
+                const rejectingOfficerPhone = document.getElementById('spec-rejecting-officer-phone').value.trim();
+                const rejectionReason = document.getElementById('spec-rejectionReason').value.trim();
+
+                // Create a data object to send in the request body
+                const data = {
+                    id: id,
+                    specRejectingOfficer: rejectingOfficer,
+                    specRejectingOfficerPhone: rejectingOfficerPhone,
+                    specRejectionReason: rejectionReason
+                };
+
+                console.log("Rejected", data)
+
+                try {
+                    const response = await fetch('/update-rejected-specimens', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        // Handle success
+                        alert('Updated successfully!');
+                        specRejectDialog.close();
+                    } else {
+                        // Handle error
+                        console.error('Failed to update.');
+                    }
+                } catch (error) {
+                    // Handle network error
+                    console.error('Error:', error);
+                }
+            });
+
+
+
+            refresher.addEventListener('click', async (e) => {
+                window.location.reload();
+            });
 
             leftTabBtn.addEventListener('click', async (e) => {
                 leftTab.style.display = 'none';
@@ -391,218 +1503,193 @@
                 referralChild.style.display = 'block';
                 consultationModule.style.display = 'none';
                 specimenModule.style.display = 'none';
+                contactCard.style.display = 'none'
             });
 
             consultationModule.addEventListener('click', async (e) => {
                 consultationChild.style.display = 'block';
                 referralModule.style.display = 'none';
                 specimenModule.style.display = 'none';
+                contactCard.style.display = 'none'
             });
 
             specimenModule.addEventListener('click', async (e) => {
                 specimenChild.style.display = 'block';
                 consultationModule.style.display = 'none';
                 referralModule.style.display = 'none';
+                contactCard.style.display = 'none'
             });
-
-            // Fetch data from backend and display in cards
-            try {
-                const response = await fetch('/fetch-outgoing-referrals', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({}) // If you need to pass any data to the backend
-                });
-                const data = await response.json();
-
-                // console.log("Data:",data);
-
-                const referralContainer = document.getElementById('referralContainer');
-
-                // Iterate through the data and create cards
-                data.forEach(referral => {
-                    const card = document.createElement('div');
-                    card.classList.add('card');
-
-                    // Customize the structure of the card based on your data
-                    card.innerHTML = `
-                        <h2>Referral Information For Patient ${referral.id}</h2>
-                        <p><strong>Service Level:</strong> ${referral.service_level}</p>
-                        <p><strong>Referral Type:</strong> ${referral.referral_type}</p>
-                        <p><strong>Date:</strong> ${referral.date}</p>
-                        <p><strong>Time:</strong> ${referral.time}</p>
-                        <p><strong>Facility Code:</strong> ${referral.facility_code}</p>
-                        <p><strong>Client Name:</strong> ${referral.client_name}</p>
-                        <p><strong>Client Age:</strong> ${referral.client_age}</p>
-                        <p><strong>Client Sex:</strong> ${referral.client_sex}</p>
-                        <p><strong>Client IP/OP Number:</strong> ${referral.client_ipop_number}</p>
-                        <p><strong>Client ID Number:</strong> ${referral.client_id_number}</p>
-                        <p><strong>Client NHIF Number:</strong> ${referral.client_nhif_number}</p>
-                        <p><strong>Client Phone:</strong> ${referral.client_phone}</p>
-                        <p><strong>Client Physical Address:</strong> ${referral.client_physical_address}</p>
-                        <p><strong>Client County:</strong> ${referral.client_county}</p>
-                        <p><strong>Client Subcounty:</strong> ${referral.client_subcounty}</p>
-                        <p><strong>Client Sublocation:</strong> ${referral.client_sublocation}</p>
-                        <p><strong>Assistant Chief Name:</strong> ${referral.assistchief_name}</p>
-                        <p><strong>Assistant Chief Phone Number:</strong> ${referral.assistchief_phonenumber}</p>
-                        <p><strong>Referring Facility:</strong> ${referral.referring_facility}</p>
-                        <p><strong>Receiving Facility:</strong> ${referral.receiving_facility}</p>
-                        <p><strong>Client History:</strong> ${referral.client_history}</p>
-                        <p><strong>Client Diagnosis:</strong> ${referral.client_diagnosis}</p>
-                        <p><strong>Reason for Referral:</strong> ${referral.reason_for_referral}</p>
-                        <p><strong>Referring Officer Name:</strong> ${referral.referring_officer_name}</p>
-                        <p><strong>Referring Officer Designation:</strong> ${referral.referring_officer_designation}</p>
-                        <p><strong>Referring Officer Phone:</strong> ${referral.referring_officer_phone}</p>
-                        <p><strong>Referring Officer Signature:</strong> ${referral.referring_officer_signature}</p>
-                        <p><strong>Next of Kin Name:</strong> ${referral.nextofkin_name}</p>
-                        <p><strong>Next of Kin Relationship:</strong> ${referral.nextofkin_relationship}</p>
-                        <p><strong>Next of Kin Phone:</strong> ${referral.nextofkin_phone}</p>
-                        <p><strong>Specimen Description:</strong> ${referral.specimen_description}</p>
-                        <p><strong>Specimen Source:</strong> ${referral.specimen_source}</p>
-                        <p><strong>Collection Date:</strong> ${referral.collection_date}</p>
-                        <p><strong>Collection Time:</strong> ${referral.collection_time}</p>
-                        <p><strong>Preservation Date:</strong> ${referral.preservation_date}</p>
-                        <p><strong>Preservation Method:</strong> ${referral.preservation_method}</p>
-                    `;
-
-                    referralContainer.appendChild(card);
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-
-            try {
-                const response = await fetch('/fetch-outgoing-consultations', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({}) // If you need to pass any data to the backend
-                });
-                const data = await response.json();
-
-                // console.log("Data:",data);
-                const consultationContainer = document.getElementById('consultationContainer');
-
-                // Iterate through the data and create cards
-                data.forEach(consultation => {
-                    const card = document.createElement('div');
-                    card.classList.add('card');
-
-                    // Customize the structure of the card based on your data
-                    card.innerHTML = `
-                        <h2>Consultation Information For Patient ${consultation.id}</h2>
-                        <p><strong>Service Level:</strong> ${consultation.service_level}</p>
-                        <p><strong>Date:</strong> ${consultation.date}</p>
-                        <p><strong>Time:</strong> ${consultation.time}</p>
-                        <p><strong>Clinic Department:</strong> ${consultation.clinic_department}</p>
-                        <p><strong>Consultant:</strong> ${consultation.consultant}</p>
-                        <p><strong>Client Name:</strong> ${consultation.client_name}</p>
-                        <p><strong>Age:</strong> ${consultation.age}</p>
-                        <p><strong>Sex:</strong> ${consultation.sex}</p>
-                        <p><strong>Ward/Clinic:</strong> ${consultation.ward_clinic}</p>
-                        <p><strong>Bed Number:</strong> ${consultation.bed_number}</p>
-                        <p><strong>Current IP/OP Number:</strong> ${consultation.current_ip_op_number}</p>
-                        <p><strong>Previous IP/OP Number 1:</strong> ${consultation.previous_ip_op_number1}</p>
-                        <p><strong>Previous IP/OP Number 2:</strong> ${consultation.previous_ip_op_number2}</p>
-                        <p><strong>Previous IP/OP Number 3:</strong> ${consultation.previous_ip_op_number3}</p>
-                        <p><strong>Specify Previous IP/OP Number:</strong> ${consultation.previous_ip_op_number_specify}</p>
-                        <p><strong>Diagnosis:</strong> ${consultation.diagnosis}</p>
-                        <p><strong>Investigations:</strong> ${consultation.investigations}</p>
-                        <p><strong>Consultation Reason:</strong> ${consultation.consultation_reason}</p>
-                        <p><strong>Requesting Officer Name:</strong> ${consultation.requesting_officer_name}</p>
-                        <p><strong>Designation:</strong> ${consultation.designation}</p>
-                        <p><strong>Phone Number:</strong> ${consultation.phone_number}</p>
-                        <p><strong>Department:</strong> ${consultation.department}</p>
-                        <p><strong>Facility:</strong> ${consultation.facility}</p>
-                        <p><strong>Requesting Officer Signature:</strong> ${consultation.requesting_officer_signature}</p>
-                        <p><strong>Requesting Officer Date:</strong> ${consultation.requesting_officer_date}</p>
-                    `;
-
-                    consultationContainer.appendChild(card);
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-
-            try {
-                const response = await fetch('/fetch-outgoing-specimen', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({}) // If you need to pass any data to the backend
-                });
-                const data = await response.json();
-
-                // console.log("Data:",data);
-
-                const specimenContainer = document.getElementById('specimenContainer');
-
-                // Iterate through the data and create cards
-                data.forEach(specimen => {
-                    const card = document.createElement('div');
-                    card.classList.add('card');
-
-                    // Customize the structure of the card based on your data
-                    card.innerHTML = `
-                        <h2>Specimen Information</h2>
-                        <p><strong>Reference Number:</strong> ${specimen.refno}</p>
-                        <p><strong>IP/OP Number:</strong> ${specimen.ip_op_number}</p>
-                        <p><strong>Patient Name:</strong> ${specimen.patient_name}</p>
-                        <p><strong>Age:</strong> ${specimen.age}</p>
-                        <p><strong>Sex:</strong> ${specimen.sex}</p>
-                        <p><strong>Residence:</strong> ${specimen.residence}</p>
-                        <p><strong>Postal Address:</strong> ${specimen.postal_address}</p>
-                        <p><strong>Specimen Type:</strong> ${specimen.specimen}</p>
-                        <p><strong>Source:</strong> ${specimen.source}</p>
-                        <p><strong>Collection Date:</strong> ${specimen.collection_date}</p>
-                        <p><strong>Collection Time:</strong> ${specimen.collection_time}</p>
-                        <p><strong>Preservation Date:</strong> ${specimen.preservation_date}</p>
-                        <p><strong>Preservation Method:</strong> ${specimen.preservation_method}</p>
-                        <p><strong>Referring Lab:</strong> ${specimen.referring_lab}</p>
-                        <p><strong>Referrer Name:</strong> ${specimen.referrer_name}</p>
-                        <p><strong>Designation:</strong> ${specimen.designation}</p>
-                        <p><strong>Mobile Number:</strong> ${specimen.mobile_no}</p>
-                        <p><strong>Email:</strong> ${specimen.email}</p>
-                        <p><strong>Signature:</strong> ${specimen.signature}</p>
-                        <p><strong>Investigations Requested:</strong> ${specimen.investigations_requested}</p>
-                        <p><strong>Lab Referred To:</strong> ${specimen.lab_referred_to}</p>
-                        <p><strong>Receiver Name:</strong> ${specimen.receiver_name}</p>
-                        <p><strong>Receiver Designation:</strong> ${specimen.receiver_designation}</p>
-                        <p><strong>Receiver Mobile Number:</strong> ${specimen.receiver_mobile_no}</p>
-                        <p><strong>Receiver Email:</strong> ${specimen.receiver_email}</p>
-                        <p><strong>Receiver Signature:</strong> ${specimen.receiver_signature}</p>
-                    `;
-                    specimenContainer.appendChild(card);
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
 
             referralsOut.addEventListener('click', async (e) => {
                 e.preventDefault()
                 referralContainer.style.display = 'block';
+                referralInContainer.style.display = 'none';
             });
 
             referralsIn.addEventListener('click', async (e) => {
                 e.preventDefault()
                 referralInContainer.style.display = 'block';
+                referralContainer.style.display = 'none';
             });
 
             consultationsOut.addEventListener('click', async (e) => {
                 e.preventDefault()
                 consultationContainer.style.display = 'block';
+                consultationInContainer.style.display = 'none';
+            });
+
+            consultationIn.addEventListener('click', async (e) => {
+                e.preventDefault()
+                consultationInContainer.style.display = 'block';
+                consultationContainer.style.display = 'none';
             });
 
             specimensOut.addEventListener('click', async (e) => {
                 e.preventDefault()
-                specimenContainer.style.display = 'block';
+                specimenOutContainer.style.display = 'block';
+                specimenInContainer.style.display = 'none';
             });
-        });
 
+            specimenIn.addEventListener('click', async (e) => {
+                e.preventDefault()
+                specimenInContainer.style.display = 'block';
+                specimenOutContainer.style.display = 'none';
+            });
+
+
+            // Function to handle accept button click
+            function handleAccept(cardId) {
+                // Set the card ID in the hidden input field
+                document.getElementById('accept-refer-id').value = cardId;
+                // Show the accept dialog modal
+                acceptDialog.showModal();
+            }
+
+            function handleReject(cardId) {
+                // Set the card ID in the hidden input field
+                document.getElementById('reject-refer-id').value = cardId;
+                // Show the reject dialog modal
+                rejectDialog.showModal();
+            }
+
+            // Add event listeners to accept buttons
+            const acceptButtons = document.querySelectorAll('.accept-btn');
+            acceptButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    // Get the card ID from the clicked button's data attribute or any other relevant source
+                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    // Call handleAccept function with the card ID
+                    handleAccept(cardId);
+                });
+            });
+
+            // Add event listeners to reject buttons
+            const rejectButtons = document.querySelectorAll('.reject-btn');
+            rejectButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    // Get the card ID from the clicked button's data attribute or any other relevant source
+                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    // Call handleReject function with the card ID
+                    handleReject(cardId);
+                });
+            });
+
+
+            function handleConsAccept(cardId) {
+                // Set the card ID in the hidden input field
+                document.getElementById('cons-accept-id').value = cardId;
+                // Show the accept dialog modal
+                consAcceptDialog.showModal();
+            }
+
+            function handleConsReject(cardId) {
+                // Set the card ID in the hidden input field
+                document.getElementById('cons-reject-id').value = cardId;
+                // Show the reject dialog modal
+                consRejectDialog.showModal();
+            }
+
+            // Add event listeners to accept buttons
+            const acceptCons = document.querySelectorAll('.cons-accept-btn');
+            acceptCons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    // Get the card ID from the clicked button's data attribute or any other relevant source
+                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    // Call handleConsAccept function with the card ID
+                    handleConsAccept(cardId);
+                });
+            });
+
+            // Add event listeners to reject buttons
+            // Add event listeners to reject buttons
+            const rejectCons = document.querySelectorAll('.cons-reject-btn');
+            rejectCons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    // Get the card ID from the clicked button's data attribute or any other relevant source
+                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    // Call handleConsReject function with the card ID
+                    handleConsReject(cardId);
+                });
+            });
+
+            function handleSpecAccept(cardId) {
+                // Set the card ID in the hidden input field
+                document.getElementById('spec-accept-id').value = cardId;
+                // Show the accept dialog modal
+                specAcceptDialog.showModal();
+            }
+
+            function handleSpecReject(cardId) {
+                // Set the card ID in the hidden input field
+                document.getElementById('spec-reject-id').value = cardId;
+                // Show the reject dialog modal
+                specRejectDialog.showModal();
+            }
+
+            // Add event listeners to accept buttons
+            const acceptSpec = document.querySelectorAll('.spec-accept-btn');
+            acceptSpec.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    // Get the card ID from the clicked button's data attribute or any other relevant source
+                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    // Call handleSpecAccept function with the card ID
+                    handleSpecAccept(cardId);
+                });
+            });
+
+            // Add event listeners to reject buttons
+            const rejectSpec = document.querySelectorAll('.spec-reject-btn');
+            rejectSpec.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    // Get the card ID from the clicked button's data attribute or any other relevant source
+                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    // Call handleSpecReject function with the card ID
+                    handleSpecReject(cardId);
+                });
+            });
+
+            const elements = document.querySelectorAll('.status');
+
+            elements.forEach(element => {
+                const value = element.textContent.trim().toLowerCase();
+                switch (value) {
+                    case 'accepted':
+                        element.style.backgroundColor = 'green';
+                        element.textContent += ' ✔';
+                        break;
+                    case 'rejected':
+                        element.style.backgroundColor = 'red';
+                        element.textContent += ' ✖';
+                        break;
+                    default:
+                        element.style.backgroundColor = 'gray'; // Default color for other values
+                        break;
+                }
+            });
+
+        });
     </script>
+    <script src="/javascript/filter.js"></script>
 </body>
 
 </html>

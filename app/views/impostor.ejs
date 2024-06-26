@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impostor</title>
+    <style>
+        body {
+            background-color: #0c1e3e;
+        }
+
+        .display {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            color: antiquewhite;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .display {
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+                max-width: 300px;
+            }
+
+            h1{
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="display">
+        <h1>You are an impostor</h1>
+        <p>If you can see this page, it means you are not a verified health officer in any hospital</p>
+        <p>If you feel this is a mistake, contact you hospital administrator for further assisance</p>
+
+    </div>
+</body>
+
+</html>

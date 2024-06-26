@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #d1cfcf;
+        }
+
+        .top-menu {
+            background-color: #0c1e3e;
+            color: #fff;
+            padding: 0px 10px;
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+            height: 80px;
+        }
+
+        .top-menu h1 {
+            margin-top: 20px;
+        }
+
+        .submenu {
+            position: absolute;
+            top: 65px;
+            right: 2px;
+            left: 0px;
+            background-color: #0c1e3e;
+            padding: 10px;
+            display: none;
+            width: 100%;
+            z-index: 1500;
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        #close-menu {
+            display: none;
+            padding-right: 1em;
+            padding-top: 1.28em;
+            cursor: pointer;
+        }
+
+        #open-menu {
+            padding-right: 1em;
+            padding-top: 1.28em;
+            cursor: pointer;
+        }
+
+        .display {
+            display: flex;
+            height: 650px;
+            margin-top: 80px;
+        }
+
+        .referral-container {
+            flex: 1;
+            height: 100%;
+            background-color: #fff;
+            margin: 10px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            border-radius: 8px;
+        }
+
+        .consultation-container {
+            flex: 1;
+            height: 100%;
+            background-color: #fff;
+            margin: 10px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 8px;
+        }
+
+        .display-total {
+            background: conic-gradient(from 60deg, #0c1e3e 0deg 320deg, white 0deg 360deg);
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            margin: 15px;
+            padding: .5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .number {
+            background-color: white;
+            border-radius: 50%;
+            height: 80px;
+            width: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h3 {
+            text-align: center;
+            margin: 0;
+        }
+
+        .top-summary {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title {
+            padding: .5em;
+            background-color: #0c1e3e;
+            color: #fff;
+        }
+
+        .data-cards {
+            display: flex;
+            justify-content: space-between;
+            margin: .5em;
+        }
+
+        .data {
+            flex: 1;
+            height: 100%;
+            background-color: #fff;
+            margin: 10px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .head {
+            background-color: #0c1e3e;
+            padding: 5px;
+            color: #fff;
+        }
+
+        .male,
+        .female {
+            padding: 3px;
+        }
+
+        .male {
+            background-color: #f0f0f0;
+        }
+
+        .female {
+            background-color: #e0e0e0;
+        }
+
+        .span {
+            background-color: #0c1e3e;
+        }
+
+        .graph {
+            margin: 1em;
+            background-color: #0c1e3e;
+            opacity: 90%;
+            height: 200px;
+            border-radius: 8px;
+            background-image: url('/sim.jpg');
+            background-position: center;
+            background-size: cover;
+            margin-top: 10px;
+        }
+
+        .button-64 {
+            align-items: center;
+            background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+            border: 0;
+            border-radius: 8px;
+            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            display: flex;
+            font-family: Phantomsans, sans-serif;
+            font-size: 20px;
+            justify-content: center;
+            line-height: 1em;
+            max-width: 100%;
+            min-width: 140px;
+            padding: 3px;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            cursor: pointer;
+            padding: .5em;
+        }
+
+        .button-64:active,
+        .button-64:hover {
+            outline: 0;
+        }
+
+        .button-64 span {
+            background-color: rgb(5, 6, 45);
+            padding: 16px 24px;
+            border-radius: 6px;
+            width: 100%;
+            height: 100%;
+            transition: 300ms;
+        }
+
+        .button-64:hover span {
+            background: none;
+        }
+
+        @media (min-width: 768px) {
+            .button-64 {
+                font-size: 24px;
+                min-width: 196px;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+
+            .submenu {
+                position: absolute;
+                top: 80px;
+                right: 2px;
+                left: 0px;
+                background-color: #0c1e3e;
+                padding: 10px;
+                display: none;
+                width: 100%;
+                z-index: 1500;
+            }
+
+            .display {
+                display: flex;
+                height: 100vh;
+                flex-direction: column;
+                margin-top: 75px;
+            }
+
+
+            .display-total {
+                background: conic-gradient(from 60deg, #0c1e3e 0deg 320deg, white 0deg 360deg);
+                height: 55px;
+                width: 55px;
+                border-radius: 50%;
+                margin: 15px;
+                padding: .3em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .number {
+                background-color: white;
+                border-radius: 50%;
+                height: 55px;
+                width: 55px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .title {
+                font-size: 17px;
+                background-color: #0c1e3e;
+                color: #fff;
+            }
+
+            .data-cards {
+                display: flex;
+                flex-direction: column;
+                margin: .2em;
+            }
+
+            .referral-container {
+                flex: 1;
+                height: max-content;
+                background-color: #fff;
+                margin: 10px;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+                border-radius: 8px;
+            }
+
+            .consultation-container {
+                flex: 1;
+                height: max-content;
+                background-color: #fff;
+                margin: 10px;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+                border-radius: 8px;
+            }
+
+            .display {
+                display: flex;
+                height: 100vh;
+                margin-top: 80px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-menu">
+        <center>
+            <h1>Dockonekt
+            </h1>
+        </center>
+        <span class="material-symbols-outlined" id="open-menu">menu</span>
+        <span class="material-symbols-outlined" id="close-menu">close</span>
+        <div class="submenu" id="submenu">
+            <h2><a href="/sub/department/dashboard">Home</a></h2>
+            <h2><a href="/sub/department/referrals/analytics">Referrals</a></h2>
+            <h2><a href="/sub/department/consultations/analytics">Consultations</a></h2>
+        </div>
+
+    </div>
+    <div class="display">
+        <div class="referral-container">
+            <span class="span">
+                <h2 class="title">
+                    <%= user.departments %> Related Referrals in <%= user.sub_county %>
+                </h2>
+            </span>
+            <div class="display-total">
+                <div class="number">
+                    <h3 style="color: red;"><%= referrals.totalRefs > 99 ? '99+' : referrals.totalRefs %></h3>
+                </div>                
+            </div>
+            <div class="data-cards">
+                <div class="data">
+                    <div class="head">
+                        <h4>Adults 18+</h4>
+                    </div>
+                    <div class="male">
+                        <h4>Male: <%= referrals.adults.male %></h4>
+                    </div>
+                    <div class="female">
+                        <h4>Female: <%= referrals.adults.female %></h4>
+                    </div>
+                </div>
+                <div class="data">
+                    <div class="head">
+                        <h4>Children 1-18</h4>
+                    </div>
+                    <div class="male">
+                        <h4>Male: <%= referrals.children.male %></h4>
+                    </div>
+                    <div class="female">
+                        <h4>Female: <%= referrals.children.female %></h4>
+                    </div>
+                </div>
+                <div class="data">
+                    <div class="head">
+                        <h4>Infants 0-1</h4>
+                    </div>
+                    <div class="male">
+                        <h4>Male: <%= referrals.infants.male %></h4>
+                    </div>
+                    <div class="female">
+                        <h4>Female: <%= referrals.infants.female %></h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="graph">
+                <button id="referral" class="button-64" >View Advanced Analytics</button>
+            </div>
+        </div>
+        <div class="consultation-container">
+            <span class="span">
+                <h2 class="title">
+                    <%= user.departments %> Related Consultations in <%= user.sub_county %>
+                </h2>
+            </span>
+
+            <div class="display-total">
+                <div class="number">
+                    <h3 style="color: red;"><%= consultations.totalConsultats > 99 ? '99+' : consultations.totalConsults %></h3>
+                </div>
+            </div>
+            <div class="data-cards">
+                <div class="data">
+                    <div class="head">
+                        <h4>Adults 18+</h4>
+                    </div>
+                    <div class="male">
+                        <h4>Male: <%= consultations.adults.male %></h4>
+                    </div>
+                    <div class="female">
+                        <h4>Female: <%= consultations.adults.female %></h4>
+                    </div>
+                </div>
+                <div class="data">
+                    <div class="head">
+                        <h4>Children 1-18</h4>
+                    </div>
+                    <div class="male">
+                        <h4>Male: <%= consultations.children.male %></h4>
+                    </div>
+                    <div class="female">
+                        <h4>Female: <%= consultations.children.female %></h4>
+                    </div>
+                </div>
+                <div class="data">
+                    <div class="head">
+                        <h4>Infants 0-1</h4>
+                    </div>
+                    <div class="male">
+                        <h4>Male: <%= consultations.infants.male %></h4>
+                    </div>
+                    <div class="female">
+                        <h4>Female: <%= consultations.infants.female %></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="graph">
+                <button id="cons" class="button-64" >View Advanced Analytics</button>
+            </div>
+           
+        </div>
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const closeMenu = document.getElementById('close-menu');
+            const openMenu = document.getElementById('open-menu');
+            const referralAnalytics = document.getElementById('referral');
+            const consultationsAnalytics = document.getElementById('cons');
+
+            referralAnalytics.addEventListener('click', async(e)=>{
+                window.location.href = '/sub/department/referrals/analytics'
+            })
+
+            consultationsAnalytics.addEventListener('click', async(e)=>{
+                window.location.href = '/sub/department/consultations/analytics'
+            })
+
+            openMenu.addEventListener('click', async (e) => {
+                openMenu.style.display = 'none';
+                closeMenu.style.display = 'block';
+                submenu.style.display = 'block'; // Show submenu
+            });
+
+            closeMenu.addEventListener('click', async (e) => {
+                closeMenu.style.display = 'none';
+                openMenu.style.display = 'block';
+                submenu.style.display = 'none'; // Hide submenu
+            });
+
+        });
+    </script>
+</body>
+
+</html>

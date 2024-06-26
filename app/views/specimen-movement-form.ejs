@@ -21,14 +21,16 @@
         /* Submenu */
         .submenu {
             position: absolute;
-            top: 60px;
-            right: 35px;
+            top: 85px;
+            right: 2px;
+            left: 0px;
             background-color: #0c1e3e;
-            border-radius: 5px;
             padding: 10px;
             display: none;
+            width: 100%;
             z-index: 1500;
         }
+
 
         .top-menu {
             background-color: #0c1e3e;
@@ -75,7 +77,7 @@
         h1,
         h2 {
             font-family: 'Orbitron', sans-serif;
-            /* Space-themed font */
+
         }
 
         h1 {
@@ -87,6 +89,7 @@
         h2 {
             font-size: 24px;
             margin-bottom: 10px;
+            color: #007bff;
         }
 
         p {
@@ -146,13 +149,14 @@
         }
 
         button[type="submit"] {
-            padding: 10px 20px;
+            padding: 15px 20px;
             background-color: #007bff;
             /* Blue button */
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         button[type="submit"]:hover {
@@ -164,6 +168,54 @@
         body {
             background-size: cover;
             background-repeat: no-repeat;
+        }
+
+        .suggestions-div {
+            background-color: #0941a1;
+            opacity: 95%;
+            border-radius: 8px;
+            margin-top: -10px;
+            z-index: 1000;
+            position: relative;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        #suggestions1 {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #suggestions1 li {
+            cursor: pointer;
+            padding: 5px;
+            margin: 15px;
+            color: #00e676;
+        }
+
+        #suggestions1 li:hover {
+            background-color: #032766;
+            border-radius: 8px;
+        }
+
+        #suggestions2 {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #suggestions2 li {
+            cursor: pointer;
+            padding: 5px;
+            margin: 15px;
+            color: #00e676;
+        }
+
+        #suggestions2 li:hover {
+            background-color: #535151;
+            border-radius: 8px;
         }
 
         /* Additional styles for smaller screens */
@@ -191,8 +243,32 @@
                 font-size: 14px;
             }
 
-            button{
-                margin: 5px;
+            button {
+                margin-top: 15px;
+            }
+
+            .suggestions-div {
+                background-color: rgba(0, 0, 0, 0.9);
+                opacity: 95%;
+                border-radius: 8px;
+                margin-top: -10px;
+                z-index: 1000;
+                position: relative;
+                width: 100%;
+                max-height: 200px;
+                overflow-y: auto;
+            }
+
+            .submenu {
+                position: absolute;
+                top: 80px;
+                right: 2px;
+                left: 0px;
+                background-color: #0c1e3e;
+                padding: 10px;
+                display: none;
+                width: 100%;
+                z-index: 1500;
             }
         }
     </style>
@@ -200,23 +276,22 @@
 
 <body>
     <div class="top-menu">
-        <h1>Dockonekt</h1>
+        <h1>
+           Dockonekt
+        </h1>
         <span class="material-symbols-outlined" id="open-menu">menu</span>
         <span class="material-symbols-outlined" id="close-menu">close</span>
         <div class="submenu" id="submenu">
-            <h3><a href="/home">Home</a></h3>
-            <h3><a href="/referral">Referrals</a></h3>
-            <h3><a href="/consultation">Consultations</a></h3>
-            <h3><a href="/specimen-movement">Specimen movement</a></h3>
+            <h3><a href="/home?id=<%= user.id %>">Home</a></h3>
+            <h3><a href="/referral?id=<%= user.id %>">Referrals</a></h3>
+            <h3><a href="/consultation?id=<%= user.id %>">Consultations</a></h3>
+            <h3><a href="/specimen-movement?id=<%= user.id %>">Specimen movement</a></h3>
         </div>
     </div>
     <div class="container">
-        <h1>Sample and Specimen Referral Form</h1>
-        <p>Note: Incompletely filled forms will not be processed</p>
+        <h1>Specimen Form</h1>
         <div class="section">
-            <label for="refno">Specimen reference number:</label>
-            <input type="text" id="refno" name="refno">
-            <h2>I. Patient and Specimen Details</h2>
+            <h2> Patient Details</h2>
             <div class="section-row">
                 <label for="ipOpNumber">IP/OP No.:</label>
                 <input type="text" id="ipOpNumber" name="ipOpNumber">
@@ -241,6 +316,9 @@
                 <textarea id="postalAddress" name="postalAddress" rows="4" cols="50"></textarea>
             </div>
             <div class="section-row">
+                <h2>Specimen Details</h2>
+                <label for="refno">Specimen reference number:</label>
+                <input type="text" id="refno" name="refno">
                 <label for="specimen">Specimen and Description:</label>
                 <textarea id="specimen" name="specimen" rows="4" cols="50"></textarea>
                 <label for="source">Source:</label>
@@ -259,9 +337,15 @@
                 <input type="text" id="preservationMethod" name="preservationMethod">
             </div>
         </div>
-        <h2>II. Referring Lab (name and address)</h2>
-        <textarea id="referringLab" name="referringLab" rows="4" cols="50"></textarea>
-        <h2>III. Details of Person Referring Sample</h2>
+        <h2>Referring Institution</h2>
+
+        <div class="value-suggestion">
+            <input type="text" name="referringLab" id="referringLab">
+            <div class="suggestions-div">
+                <ul id="suggestions1"></ul>
+            </div>
+        </div>
+        <h2>Details of Person Referring Sample</h2>
         <div class="section-row">
             <label for="referrrerName">Name:</label>
             <input type="text" id="referrerName" name="referrrerName">
@@ -271,30 +355,19 @@
             <input type="tel" id="mobileNo" name="mobileNo">
         </div>
         <div class="section-row">
-            <label for="email">Email:</label>
+            <label for="email">Institution Email:</label>
             <input type="email" id="email" name="email">
-            <label for="signature">Signature:</label>
-            <input type="text" id="signature" name="signature">
         </div>
-        <h2>IV. Investigations Requested</h2>
+        <h2>Investigations Requested</h2>
         <textarea id="investigationsRequested" name="investigationsRequested" rows="4" cols="50"></textarea>
-        <h2>V. Lab Referred to (name and address)</h2>
-        <textarea id="labReferredTo" name="labReferredTo" rows="4" cols="50"></textarea>
-        <h2>VI. Details of the Person Receiving Sample</h2>
-        <div class="section-row">
-            <label for="receiverName">Name:</label>
-            <input type="text" id="receiverName" name="receiverName">
-            <label for="receiverDesignation">Designation:</label>
-            <input type="text" id="receiverDesignation" name="receiverDesignation">
-            <label for="mobileNo">Mobile No.:</label>
-            <input type="tel" id="receiverMobileNo" name="mobileNo">
-            <label for="email">Email:</label>
-            <input type="email" id="receiverEmail" name="email">
-            <label for="signature">Signature:</label>
-            <input type="text" id="receiverSignature" name="signature">
+        <h2>Institution Referred to</h2>
+        <div class="value-suggestion">
+            <input type="text" name="labReferredTo" id="labReferredTo">
+            <div class="suggestions-div">
+                <ul id="suggestions2"></ul>
+            </div>
         </div>
         <button type="submit" id="submit-specimen">Save Specimen Data</button>
-        <button type="submit" id="send-specimen">Send Specimen</button>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
@@ -302,14 +375,6 @@
             const openMenu = document.getElementById('open-menu');
             const submenu = document.getElementById('submenu');
             const submitSpecimen = document.getElementById('submit-specimen');
-            function getQueryParam(name) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(name);
-            }
-
-            const facilityPath = getQueryParam('facilityPath');
-
-            console.log(facilityPath);
 
             openMenu.addEventListener('click', async (e) => {
                 openMenu.style.display = 'none';
@@ -326,32 +391,31 @@
             submitSpecimen.addEventListener('click', async (e) => {
                 e.preventDefault();
 
-                const refnoValue = document.getElementById('refno').value;
-                const ipOpNumberValue = document.getElementById('ipOpNumber').value;
-                const patientNameValue = document.getElementById('patientName').value;
-                const ageValue = document.getElementById('age').value;
-                const sexValue = document.getElementById('sex').value;
-                const residenceValue = document.getElementById('residence').value;
-                const postalAddressValue = document.getElementById('postalAddress').value;
-                const specimenValue = document.getElementById('specimen').value;
-                const sourceValue = document.getElementById('source').value;
-                const collectionDateValue = document.getElementById('collectionDate').value;
-                const collectionTimeValue = document.getElementById('collectionTime').value;
-                const preservationDateValue = document.getElementById('preservationDate').value;
-                const preservationMethodValue = document.getElementById('preservationMethod').value;
-                const referringLabValue = document.getElementById('referringLab').value;
-                const referrrerNameValue = document.getElementById('referrerName').value;
-                const designationValue = document.getElementById('designation').value;
-                const mobileNoValue = document.getElementById('mobileNo').value;
-                const emailValue = document.getElementById('email').value;
-                const signatureValue = document.getElementById('signature').value;
-                const investigationsRequestedValue = document.getElementById('investigationsRequested').value;
-                const labReferredToValue = document.getElementById('labReferredTo').value;
-                const receiverNameValue = document.getElementById('receiverName').value;
-                const receiverDesignationValue = document.getElementById('receiverDesignation').value;
-                const receiverMobileNoValue = document.getElementById('receiverMobileNo').value;
-                const receiverEmailValue = document.getElementById('receiverEmail').value;
-                const receiverSignatureValue = document.getElementById('receiverSignature').value;
+                // Patient details
+                const ipOpNumberValue = document.getElementById('ipOpNumber').value.trim();
+                const patientNameValue = document.getElementById('patientName').value.trim();
+                const ageValue = document.getElementById('age').value.trim();
+                const sexValue = document.getElementById('sex').value.trim();
+                const residenceValue = document.getElementById('residence').value.trim();
+                const postalAddressValue = document.getElementById('postalAddress').value.trim();
+                // Speciment details
+                const refnoValue = document.getElementById('refno').value.trim();
+                const specimenValue = document.getElementById('specimen').value.trim();
+                const sourceValue = document.getElementById('source').value.trim();
+                const collectionDateValue = document.getElementById('collectionDate').value.trim();
+                const collectionTimeValue = document.getElementById('collectionTime').value.trim();
+                const preservationDateValue = document.getElementById('preservationDate').value.trim();
+                const preservationMethodValue = document.getElementById('preservationMethod').value.trim();
+                // Referring facility details
+                const referringLabValue = document.getElementById('referringLab').value.trim();
+                const receivingLabValue = document.getElementById('labReferredTo').value.trim();
+                // Referring ofiicer details
+                const referrrerNameValue = document.getElementById('referrerName').value.trim();
+                const designationValue = document.getElementById('designation').value.trim();
+                const mobileNoValue = document.getElementById('mobileNo').value.trim();
+                const emailValue = document.getElementById('email').value.trim();
+                // Investigation required details
+                const investigationsRequestedValue = document.getElementById('investigationsRequested').value.trim();
 
                 if (
                     refnoValue === "" ||
@@ -372,64 +436,159 @@
                     designationValue === "" ||
                     mobileNoValue === "" ||
                     emailValue === "" ||
-                    signatureValue === "" ||
-                    investigationsRequestedValue === "" ||
-                    labReferredToValue === "" ||
-                    receiverNameValue === "" ||
-                    receiverDesignationValue === "" ||
-                    receiverMobileNoValue === "" ||
-                    receiverEmailValue === "" ||
-                    receiverSignatureValue === ""
+                    investigationsRequestedValue === ""||receivingLabValue===""
                 ) {
-                    alert("All fields are required");
-                } else {
+                    let missingDetails = "Please fill in the following details:\n";
+
+                    if (refnoValue === "") missingDetails += "- Reference Number\n";
+                    if (ipOpNumberValue === "") missingDetails += "- IP/OP Number\n";
+                    if (patientNameValue === "") missingDetails += "- Patient Name\n";
+                    if (ageValue === "") missingDetails += "- Age\n";
+                    if (sexValue === "") missingDetails += "- Sex\n";
+                    if (residenceValue === "") missingDetails += "- Residence\n";
+                    if (postalAddressValue === "") missingDetails += "- Postal Address\n";
+                    if (specimenValue === "") missingDetails += "- Specimen\n";
+                    if (sourceValue === "") missingDetails += "- Source\n";
+                    if (collectionDateValue === "") missingDetails += "- Collection Date\n";
+                    if (collectionTimeValue === "") missingDetails += "- Collection Time\n";
+                    if (preservationDateValue === "") missingDetails += "- Preservation Date\n";
+                    if (preservationMethodValue === "") missingDetails += "- Preservation Method\n";
+                    if (referringLabValue === "") missingDetails += "- Referring Lab\n";
+                    if (receivingLabValue === "") missingDetails += "- Receiving Lab\n";
+                    if (referrrerNameValue === "") missingDetails += "- Referrer Name\n";
+                    if (designationValue === "") missingDetails += "- Designation\n";
+                    if (mobileNoValue === "") missingDetails += "- Mobile Number\n";
+                    if (emailValue === "") missingDetails += "- Email\n";
+                    if (investigationsRequestedValue === "") missingDetails += "- Investigations Requested\n";
+
+                    alert(missingDetails);
+                }
+                else {
 
                     try {
 
-                        const response = await fetch('/specimen-movement', {
+                        const response = await fetch('/submit-specimen', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                refno: refnoValue,
+                                // Patient details
                                 ipOpNumber: ipOpNumberValue,
                                 patientName: patientNameValue,
                                 age: ageValue,
                                 sex: sexValue,
                                 residence: residenceValue,
                                 postalAddress: postalAddressValue,
+                                // Specimen details
+                                refno: refnoValue,
                                 specimen: specimenValue,
                                 source: sourceValue,
                                 collectionDate: collectionDateValue,
                                 collectionTime: collectionTimeValue,
                                 preservationDate: preservationDateValue,
                                 preservationMethod: preservationMethodValue,
+                                // Referrng facility details
                                 referringLab: referringLabValue,
+                                receivingLab: receivingLabValue,
+                                // Referring officer details
                                 referrrerName: referrrerNameValue,
                                 designation: designationValue,
                                 mobileNo: mobileNoValue,
                                 email: emailValue,
-                                signature: signatureValue,
+                                // Investigations required
                                 investigationsRequested: investigationsRequestedValue,
-                                labReferredTo: labReferredToValue,
-                                receiverName: receiverNameValue,
-                                receiverDesignation: receiverDesignationValue,
-                                receiverMobileNo: receiverMobileNoValue,
-                                receiverEmail: receiverEmailValue,
-                                receiverSignature: receiverSignatureValue
                             })
                         });
 
                         if (!response.ok) {
                             alert("Data not submitted. Try again");
                         }
+
+                        alert('Submitted successfully');
+                        window.location.href = "/home";
                     } catch (error) {
                         alert("Something went wrong");
                     }
                 }
 
             });
+
+            const inputField1 = document.getElementById('referringLab');
+            const suggestionsList1 = document.getElementById('suggestions1');
+
+            inputField1.addEventListener('input', async function () {
+                const userInput = this.value.trim();
+                if (!userInput) {
+                    suggestionsList1.innerHTML = ''; // Clear suggestions if input is empty
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/facilities');
+                    const facilitiesData = await response.json();
+                    const facilityNames = facilitiesData.facilities.map(facility => facility.name.trim());
+
+                    const matchedFacilities = facilityNames.filter(name => name.toLowerCase().includes(userInput.toLowerCase()));
+
+                    // Display suggestions
+                    suggestionsList1.innerHTML = '';
+                    matchedFacilities.forEach(facility => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = facility;
+                        suggestionsList1.appendChild(listItem);
+
+                        // Add click event listener to list item
+                        listItem.addEventListener('click', function () {
+                            // Set the value of the Hospital name field
+                            inputField1.value = facility;
+                            // Clear suggestions
+                            suggestionsList1.innerHTML = '';
+                        });
+                    });
+                } catch (error) {
+                    console.error('Error fetching facilities:', error);
+                }
+            });
+
+
+            const inputField = document.getElementById('labReferredTo');
+            const suggestionsList = document.getElementById('suggestions2');
+
+            inputField.addEventListener('input', async function () {
+                const userInput = this.value.trim();
+                if (!userInput) {
+                    suggestionsList.innerHTML = ''; // Clear suggestions if input is empty
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/facilities');
+                    const facilitiesData = await response.json();
+                    const facilityNames = facilitiesData.facilities.map(facility => facility.name.trim());
+
+                    const matchedFacilities = facilityNames.filter(name => name.toLowerCase().includes(userInput.toLowerCase()));
+
+                    // Display suggestions
+                    suggestionsList.innerHTML = '';
+                    matchedFacilities.forEach(facility => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = facility;
+                        suggestionsList.appendChild(listItem);
+
+                        // Add click event listener to list item
+                        listItem.addEventListener('click', function () {
+                            // Set the value of the Hospital name field
+                            inputField.value = facility;
+                            // Clear suggestions
+                            suggestionsList.innerHTML = '';
+                        });
+                    });
+                } catch (error) {
+                    console.error('Error fetching facilities:', error);
+                }
+            });
+
         });
     </script>
 </body>

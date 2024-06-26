@@ -10,7 +10,7 @@ const pgSession = require('connect-pg-simple')(session);
 const axios = require('axios');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3005;
 const url = process.env.DIRECTUS_URL;
 const token = process.env.TOKEN;
 const saltRounds = 10;

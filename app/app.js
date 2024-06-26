@@ -220,13 +220,12 @@ async function getFacilities() {
   let res = await query(`/items/Hospitals/`, {
     method: 'GET',
   });
-  console.log("Function response", res)
   return await res.json();
 }
 
 app.get('/cache-facilities', async (req, res) => {
   const cachedData = await redis.get('cachedData');
- console.log("Cached",cachedData)
+
   if (cachedData) {
     // If data exists in the cache, return it
     res.send(JSON.parse(cachedData));
@@ -383,7 +382,7 @@ app.get('/facilities', async (req, res) => {
   try {
     // Check if facilities data is available in the cache
     const cachedData = await redis.get('cachedData');
-   console.log("From facilities route", cachedData);
+ 
     if (cachedData) {
       // If data exists in the cache, send it as the response
       const facilities = JSON.parse(cachedData);

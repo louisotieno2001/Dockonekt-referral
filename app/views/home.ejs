@@ -519,6 +519,16 @@
             color: #fff;
         }
 
+        .filter{
+            color: #ccc;
+            border: none;
+            background-color: #0c1e3e;
+            padding: .8em;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 3px;
+        }
+
         /* Styles for small screens */
         @media only screen and (max-width: 768px) {
             .tabs-container {
@@ -707,7 +717,7 @@
 
         .search-bar {
             background-color: #0c1e3e;
-            border-radius: 35px;
+            border-radius: 5px;
             padding: .2em;
             height: max-content;
             /* margin: 10px; */
@@ -749,6 +759,7 @@
             <h3><a href="/referral?id='<%= user.id %>'">Referrals</a></h3>
             <h3><a href="/consultation?id=<%= user.id %>">Consultations</a></h3>
             <h3><a href="/specimen-movement?id='<%= user.id %>'">Specimen movement</a></h3>
+            <h3><a href="/login">Logout</a></h3>
         </div>
     </div>
     </div>
@@ -851,8 +862,8 @@
             <div class="divider"></div>
             <div class="emergency-contacts" id="contacts">
                 <div class="search-bar">
-                    <input type="text" name="search" id="search" oninput="filterFacilities()" placeholder="Search...">
                     <span class="material-symbols-outlined" id="search-icon">search</span>
+                    <input type="text" name="search" id="search" oninput="filterFacilities()" placeholder="Search...">
                 </div>
                 <div class="cards">
                     <% facilities.forEach(facility=> { %>
@@ -881,10 +892,10 @@
                 <div class="data-container" id="referralContainer">
                     <h1 id="cont-h1">Outgoing patient referrals</h1>
                     <div class="filter-buttons">
-                        <button onclick="filterBy('today')">Today</button>
-                        <button onclick="filterBy('last_week')">Last Week</button>
-                        <button onclick="filterBy('last_month')">Last Month</button>
-                        <button onclick="filterBy('all_time')">All Time</button>
+                        <button onclick="filterBy('today')" class="filter">Today</button>
+                        <button onclick="filterBy('last_week')" class="filter">Last Week</button>
+                        <button onclick="filterBy('last_month')" class="filter">Last Month</button>
+                        <button onclick="filterBy('all_time')" class="filter">All Time</button>
                     </div>
                     <% if (referrals && referrals.length> 0) { %>
                         <% referrals.forEach(referral=> { %>
@@ -911,10 +922,10 @@
                 <div class="data-container" id="referralInContainer">
                     <h1 id="cont-h1">Incoming patient referrals</h1>
                     <div class="filter-buttons">
-                        <button onclick="filterIncomingBy('today')">Today</button>
-                        <button onclick="filterIncomingBy('last_week')">Last Week</button>
-                        <button onclick="filterIncomingBy('last_month')">Last Month</button>
-                        <button onclick="filterIncomingBy('all_time')">All Time</button>
+                        <button onclick="filterIncomingBy('today')" class="filter">Today</button>
+                        <button onclick="filterIncomingBy('last_week')" class="filter">Last Week</button>
+                        <button onclick="filterIncomingBy('last_month')" class="filter">Last Month</button>
+                        <button onclick="filterIncomingBy('all_time')" class="filter">All Time</button>
                     </div>
                     <% if (incomingReferrals && incomingReferrals.length > 0) { %>
                         <% incomingReferrals.forEach(incomingReferral => { %>
@@ -938,10 +949,10 @@
                 <div class="data-container" id="consultationContainer">
                     <h1 id="cont-h1">Outgoing patient consultations</h1>
                     <div class="filter-buttons">
-                        <button onclick="filterConsultationsBy('today')">Today</button>
-                        <button onclick="filterConsultationsBy('last_week')">Last Week</button>
-                        <button onclick="filterConsultationsBy('last_month')">Last Month</button>
-                        <button onclick="filterConsultationsBy('all_time')">All Time</button>
+                        <button onclick="filterConsultationsBy('today')" class="filter">Today</button>
+                        <button onclick="filterConsultationsBy('last_week')" class="filter">Last Week</button>
+                        <button onclick="filterConsultationsBy('last_month')" class="filter">Last Month</button>
+                        <button onclick="filterConsultationsBy('all_time')" class="filter">All Time</button>
                     </div>
                     <% if (consultations && consultations.length > 0) { %>
                         <% consultations.forEach(consultation => { %>
@@ -960,15 +971,14 @@
                         <p>No outgoing patient consultations</p>
                     <% } %>
                 </div>
-                
 
                 <div class="data-container" id="consultationInContainer">
                     <h1 id="cont-h1">Incoming patient consultations</h1>
                     <div class="filter-buttons">
-                        <button onclick="filterIncomingConsultationsBy('today')">Today</button>
-                        <button onclick="filterIncomingConsultationsBy('last_week')">Last Week</button>
-                        <button onclick="filterIncomingConsultationsBy('last_month')">Last Month</button>
-                        <button onclick="filterIncomingConsultationsBy('all_time')">All Time</button>
+                        <button onclick="filterIncomingConsultationsBy('today')" class="filter">Today</button>
+                        <button onclick="filterIncomingConsultationsBy('last_week')" class="filter">Last Week</button>
+                        <button onclick="filterIncomingConsultationsBy('last_month')" class="filter">Last Month</button>
+                        <button onclick="filterIncomingConsultationsBy('all_time')" class="filter">All Time</button>
                     </div>
                     <% if (incomingConsultations && incomingConsultations.length > 0) { %>
                         <% incomingConsultations.forEach(incomingConsultation => { %>
@@ -988,15 +998,14 @@
                         <p>No incoming patient consultations</p>
                     <% } %>
                 </div>
-                
 
                 <div class="data-container" id="specimenContainer">
                     <h1 id="cont-h1">Outgoing specimen data</h1>
                     <div class="filter-buttons">
-                        <button onclick="filterSpecimensBy('today')">Today</button>
-                        <button onclick="filterSpecimensBy('last_week')">Last Week</button>
-                        <button onclick="filterSpecimensBy('last_month')">Last Month</button>
-                        <button onclick="filterSpecimensBy('all_time')">All Time</button>
+                        <button onclick="filterSpecimensBy('today')" class="filter">Today</button>
+                        <button onclick="filterSpecimensBy('last_week')" class="filter">Last Week</button>
+                        <button onclick="filterSpecimensBy('last_month')" class="filter">Last Month</button>
+                        <button onclick="filterSpecimensBy('all_time')" class="filter">All Time</button>
                     </div>
                     <% if (specimens && specimens.length > 0) { %>
                         <% specimens.forEach(specimen => { %>
@@ -1015,15 +1024,14 @@
                         <p>No outgoing specimen data</p>
                     <% } %>
                 </div>
-                
 
                 <div class="data-container" id="specimenInContainer">
                     <h1 id="cont-h1">Incoming specimen data</h1>
                     <div class="filter-buttons">
-                        <button onclick="filterIncomingSpecimensBy('today')">Today</button>
-                        <button onclick="filterIncomingSpecimensBy('last_week')">Last Week</button>
-                        <button onclick="filterIncomingSpecimensBy('last_month')">Last Month</button>
-                        <button onclick="filterIncomingSpecimensBy('all_time')">All Time</button>
+                        <button onclick="filterIncomingSpecimensBy('today')" class="filter">Today</button>
+                        <button onclick="filterIncomingSpecimensBy('last_week')" class="filter">Last Week</button>
+                        <button onclick="filterIncomingSpecimensBy('last_month')" class="filter">Last Month</button>
+                        <button onclick="filterIncomingSpecimensBy('all_time')" class="filter">All Time</button>
                     </div>
                     <% if (incomingSpecimens && incomingSpecimens.length > 0) { %>
                         <% incomingSpecimens.forEach(incomingSpecimen => { %>
@@ -1043,7 +1051,6 @@
                         <p>No incoming specimen data</p>
                     <% } %>
                 </div>
-                
 
             </div>
             <dialog id="accept-dialog">
@@ -1456,8 +1463,6 @@
                 }
             });
 
-
-
             refresher.addEventListener('click', async (e) => {
                 window.location.reload();
             });
@@ -1577,7 +1582,7 @@
             acceptButtons.forEach(button => {
                 button.addEventListener('click', function (event) {
                     // Get the card ID from the clicked button's data attribute or any other relevant source
-                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    const cardId = event.target.dataset.cardId; 
                     // Call handleAccept function with the card ID
                     handleAccept(cardId);
                 });
@@ -1588,7 +1593,7 @@
             rejectButtons.forEach(button => {
                 button.addEventListener('click', function (event) {
                     // Get the card ID from the clicked button's data attribute or any other relevant source
-                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    const cardId = event.target.dataset.cardId; 
                     // Call handleReject function with the card ID
                     handleReject(cardId);
                 });
@@ -1614,19 +1619,18 @@
             acceptCons.forEach(button => {
                 button.addEventListener('click', function (event) {
                     // Get the card ID from the clicked button's data attribute or any other relevant source
-                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    const cardId = event.target.dataset.cardId; 
                     // Call handleConsAccept function with the card ID
                     handleConsAccept(cardId);
                 });
             });
 
             // Add event listeners to reject buttons
-            // Add event listeners to reject buttons
             const rejectCons = document.querySelectorAll('.cons-reject-btn');
             rejectCons.forEach(button => {
                 button.addEventListener('click', function (event) {
                     // Get the card ID from the clicked button's data attribute or any other relevant source
-                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    const cardId = event.target.dataset.cardId;
                     // Call handleConsReject function with the card ID
                     handleConsReject(cardId);
                 });
@@ -1651,7 +1655,7 @@
             acceptSpec.forEach(button => {
                 button.addEventListener('click', function (event) {
                     // Get the card ID from the clicked button's data attribute or any other relevant source
-                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    const cardId = event.target.dataset.cardId; 
                     // Call handleSpecAccept function with the card ID
                     handleSpecAccept(cardId);
                 });
@@ -1662,7 +1666,7 @@
             rejectSpec.forEach(button => {
                 button.addEventListener('click', function (event) {
                     // Get the card ID from the clicked button's data attribute or any other relevant source
-                    const cardId = event.target.dataset.cardId; // Assuming you have a data attribute named 'data-card-id'
+                    const cardId = event.target.dataset.cardId;
                     // Call handleSpecReject function with the card ID
                     handleSpecReject(cardId);
                 });

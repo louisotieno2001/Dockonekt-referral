@@ -9,6 +9,7 @@
   "author": "Louis Ochieng",
   "license": "ISC",
   "dependencies": {
+    "ag-charts": "^0.0.1",
     "axios": "^1.7.2",
     "body-parser": "^1.20.2",
     "connect-pg-simple": "^9.0.1",

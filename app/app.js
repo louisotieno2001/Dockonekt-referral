@@ -220,7 +220,6 @@ async function getFacilities() {
   let res = await query(`/items/Hospitals/`, {
     method: 'GET',
   });
-  console.log("Function response", res)
   return await res.json();
 }
 
@@ -813,7 +812,6 @@ app.post('/update-accepted-specimens', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 async function updateRejectedSpecimens(rejectedSpecimensData) {
   try {
@@ -3195,6 +3193,16 @@ app.get('/health/ministry/referrals/analytics', async (req, res) => {
   }
 })
 
+app.get('/ministry/referrals/analytics', async (req, res) => {
+  try {
+    const referrals = await getReferrals();
+    res.status(200).json(referrals); // Send JSON response with referrals data
+  } catch (error) {
+    console.error("Error fetching referrals:", error);
+    res.status(500).json({ error: 'Internal Server Error' }); // Handle errors appropriately
+  }
+});
+
 app.get('/health/ministry/consultations/analytics', async (req, res) => {
   try {
     const user = req.session.user;
@@ -3375,6 +3383,10 @@ app.post('/ministry-login', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+app.get('/charts', async(req, res)=>{
+  res.render('charts', {});
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -140,6 +140,40 @@
             border-radius: 8px;
         }
 
+        .response {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #error {
+            color: red;
+            text-align: center;
+            width: max-content;
+        }
+
+        #success {
+            color: green;
+            text-align: center;
+            width: max-content;
+        }
+
+        #pass-error {
+            color: red;
+        }
+
+        #email-error {
+            color: red;
+        }
+
+        #phone-error {
+            color: red;
+        }
+
+        #name-error {
+            color: red;
+        }
 
         /* Styles for small screens */
         @media only screen and (max-width: 600px) {
@@ -189,6 +223,7 @@
                 max-height: 200px;
                 overflow-y: auto;
             }
+
             .submenu {
                 position: absolute;
                 top: 100px;
@@ -199,6 +234,10 @@
                 display: none;
                 width: 100%;
                 z-index: 1500;
+            }
+
+            .info {
+                padding-left: 1em;
             }
 
         }
@@ -215,18 +254,21 @@
                 </span>
                 <input type="text" id="fullName" name="fullName" required placeholder="Name">
             </div>
+            <p class="info" id="name-error"></p>
             <div class="input-div">
                 <span class="material-symbols-outlined">
                     mail
                 </span>
                 <input type="email" id="email" name="email" required placeholder="Email">
             </div>
+            <p class="info" id="email-error"></p>
             <div class="input-div">
                 <span class="material-symbols-outlined">
                     phone_enabled
                 </span>
                 <input type="tel" name="phone" id="phone" placeholder="Phone" required>
             </div>
+            <p class="info" id="phone-error"></p>
             <div class="value-suggestions">
                 <div class="input-div">
                     <span class="material-symbols-outlined">
@@ -247,10 +289,14 @@
                     visibility
                 </span>
             </div>
-
+            <p class="info" id="pass-error"></p>
             <button type="submit" id="submit">Register</button>
             <h3>Already have an account? <span id="login">Login</span></h3>
         </form>
+        <div class="response">
+            <p id="success"></p>
+            <p id="error"></p>
+        </div>
     </div>
 
     <script>
@@ -259,6 +305,79 @@
             const toggleVisibility = document.getElementById('pass-visibility');
             const passField = document.getElementById('password');
             const loginLink = document.getElementById('login');
+            const errorDisplay = document.getElementById('error');
+            const successDisplay = document.getElementById('success');
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            const phoneError = document.getElementById('phone-error')
+            const passError = document.getElementById('pass-error');
+
+            // Function to handle name validation and display error messages
+            function validateName(name) {
+                const result = sanitizeName(name);
+
+                if (!result.isValid) {
+                    nameError.innerHTML = result.errorMessage;
+                } else {
+                    nameError.innerHTML = ''; // Clear error message if the name is valid
+                }
+            }
+
+            // Example usage
+            const nameInput = document.getElementById('fullName');
+            nameInput.addEventListener('input', function () {
+                validateName(nameInput.value);
+            });
+
+            // Function to handle phone number validation and display error messages
+            function validatePhoneNumber(phoneNumber) {
+                const result = sanitizePhoneNumber(phoneNumber);
+
+                if (!result.isValid) {
+                    phoneError.innerHTML = result.errorMessage;
+                } else {
+                    phoneError.innerHTML = ''; // Clear error message if the phone number is valid
+                }
+            }
+
+            // Example usage
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function () {
+                validatePhoneNumber(phoneInput.value);
+            });
+
+
+            function validateEmail(email) {
+                const result = sanitizeEmail(email);
+
+                if (!result.isValid) {
+                    emailError.innerHTML = result.errorMessage;
+                } else {
+                    emailError.innerHTML = '';
+                }
+            }
+
+            // Example usage
+            const emailInput = document.getElementById('email');
+            emailInput.addEventListener('input', function () {
+                validateEmail(emailInput.value);
+            });
+
+
+            function validatePassword(password) {
+                const result = isStrongPassword(password);
+
+                if (!result.isValid) {
+                    passError.innerHTML = result.reason;
+                } else {
+                    passError.innerHTML = '';
+                }
+            }
+
+            const passwordField = document.getElementById('password');
+            passwordField.addEventListener('input', function () {
+                validatePassword(passwordField.value);
+            });
 
             submitBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
@@ -270,9 +389,36 @@
                 const password = document.getElementById('password').value.trim();
 
                 // Validation
-                if (!fullName || !email || !phone || !hospital || !password) {
-                    // If any field is empty, display an error message
-                    alert('Please fill in all fields.');
+                const nameResult = sanitizeName(fullName);
+                const emailResult = sanitizeEmail(email);
+                const phoneResult = sanitizePhoneNumber(phone);
+                const passwordResult = isStrongPassword(password);
+
+                let isValid = true;
+
+                // Check if each field passed validation
+                if (!nameResult.isValid) {
+                    nameError.innerHTML += `<p>${nameResult.errorMessage}</p>`;
+                    isValid = false;
+                }
+
+                if (!emailResult.isValid) {
+                    emailError.innerHTML += `<p>${emailResult.errorMessage}</p>`;
+                    isValid = false;
+                }
+
+                if (!phoneResult.isValid) {
+                    phoneError.innerHTML += `<p>${phoneResult.errorMessage}</p>`;
+                    isValid = false;
+                }
+
+                if (!passwordResult.isValid) {
+                    passError.innerHTML += `<p>${passwordResult.reason}</p>`;
+                    isValid = false;
+                }
+
+                // If any field is invalid, stop form submission
+                if (!isValid) {
                     return;
                 }
 
@@ -283,9 +429,9 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            fullName: fullName,
-                            email: email,
-                            phone: phone,
+                            fullName: nameResult.sanitizedName,
+                            email: emailResult.sanitizedEmail,
+                            phone: phoneResult.sanitizedPhoneNumber,
                             hospital: hospital,
                             password: password
                         })
@@ -293,15 +439,18 @@
 
                     if (response.ok) {
                         // Registration successful
+                        successDisplay.innerHTML = ' Registration successful ';
                         window.location.href = '/login';
                     } else {
                         // Registration failed
                         console.error('Registration failed:', response.statusText);
                         // Handle the error accordingly
+                        errorDisplay.innerHTML = 'Registration failed:', response.statusText;
                     }
                 } catch (error) {
                     console.error('Error during registration:', error);
                     // Handle the error accordingly
+                    errorDisplay.innerHTML = 'Error during registration:', error;
                 }
             });
 
@@ -349,11 +498,13 @@
                     });
                 } catch (error) {
                     console.error('Error fetching facilities:', error);
+                    errorDisplay.innerHTML = 'Error displaying hospital names:', error;
                 }
             });
 
         });
     </script>
+    <script src="/javascript/sanitize.js"></script>
 </body>
 
 </html>

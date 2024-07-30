@@ -117,6 +117,27 @@
             cursor: pointer;
         }
 
+        .response{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #error{
+            color: red;
+            background-color: rgb(216, 123, 123);
+            text-align: center;
+            width: max-content;
+        }
+
+        #success{
+            color: green;
+            background-color: rgb(124, 187, 124);
+            text-align: center;
+            width: max-content;
+        }
+
         /* Media query for small screens */
         @media only screen and (max-width: 600px) {
             .container {
@@ -179,6 +200,10 @@
             <button type="submit" id="submit">Login</button>
             <h3>Don't have an account? <span id="register">Register</span></h3>
         </form>
+        <div class="response">
+            <p id="success"></p>
+            <p id="error"></p>
+        </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -188,6 +213,8 @@
             const toggleVisibility = document.getElementById('pass-visibility');
             const passField = document.getElementById('password');
             const emailField = document.getElementById('email');
+            const errorDisplay = document.getElementById('error');
+            const successDisplay = document.getElementById('success');
 
             submitBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
@@ -208,14 +235,17 @@
                 if (!response.ok) {
                     // Handle non-JSON error responses
                     const text = await response.text();
-                    alert(text); // Display the error message
+                    // Display the error message
+                    errorDisplay.innerText = text;
+                    // alert(text); 
                     return;
                 }
 
                 try {
                     const data = await response.json();
                     console.log(data);
-                    alert('Login successful');
+                    successDisplay.innerHTML = 'Success: Login successful';
+                    // alert('Login successful');
 
                     // Check if the response contains a redirect URL
                     if (data.redirect) {
@@ -225,7 +255,8 @@
                 } catch (error) {
                     console.error('Error parsing JSON response:', error);
                     // Handle invalid JSON response
-                    alert('Error processing response');
+                    errorDisplay.innerHTML = 'Error parsing JSON response:', error
+                    // alert('Error processing response');
                 }
             });
 

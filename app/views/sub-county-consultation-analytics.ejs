@@ -7,6 +7,7 @@
     <title>Analytics</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <script src="https://cdn.jsdelivr.net/npm/ag-charts-community/dist/umd/ag-charts-community.js"></script>
 </head>
 <style>
     body {
@@ -123,14 +124,16 @@
     }
 
     .data {
-        flex: 1;
-        height: 100%;
+        /* flex: 1; */
+        height: max-content;
         background-color: #fff;
         margin: 10px;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-        border-radius: 8px;
-        overflow: hidden;
+        border-radius: 15px;
+        /* overflow: hidden; */
         width: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .head {
@@ -176,6 +179,19 @@
             display: none;
             width: 100%;
             z-index: 1500;
+        }
+
+        .data {
+            /* flex: 1; */
+            height: max-content;
+            background-color: #fff;
+            margin: 10px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .display {
@@ -269,7 +285,7 @@
                     <h4>Female: <%= consultations.adults.female %>
                     </h4>
                 </div>
-                <div class="adult-chart"></div>
+                <div id="adult-chart"></div>
             </div>
             <div class="data">
                 <div class="head">
@@ -283,7 +299,7 @@
                     <h4>Female: <%= consultations.children.female %>
                     </h4>
                 </div>
-                <div class="children-chart"></div>
+                <div id="children-chart"></div>
             </div>
             <div class="data">
                 <div class="head">
@@ -297,7 +313,7 @@
                     <h4>Female: <%= consultations.infants.female %>
                     </h4>
                 </div>
-                <div class="infant-chart"></div>
+                <div id="infant-chart"></div>
             </div>
         </div>
     </div>

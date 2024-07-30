@@ -117,6 +117,27 @@
             cursor: pointer;
         }
 
+        .response {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #error {
+            color: red;
+            background-color: rgb(216, 123, 123);
+            text-align: center;
+            width: max-content;
+        }
+
+        #success {
+            color: green;
+            background-color: rgb(124, 187, 124);
+            text-align: center;
+            width: max-content;
+        }
+
         /* Media query for small screens */
         @media only screen and (max-width: 600px) {
             .container {
@@ -167,6 +188,7 @@
                 </span>
                 <input type="email" id="email" name="email" required placeholder="Email">
             </div>
+
             <div class="input-div">
                 <span class="material-symbols-outlined">
                     security
@@ -179,6 +201,10 @@
             <button type="submit" id="submit">Login</button>
             <h3>Don't have an account? <span id="register">Register</span></h3>
         </form>
+        <div class="response">
+            <p id="success"></p>
+            <p id="error"></p>
+        </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -188,6 +214,8 @@
             const toggleVisibility = document.getElementById('pass-visibility');
             const passField = document.getElementById('password');
             const emailField = document.getElementById('email');
+            const errorDisplay = document.getElementById('error');
+            const successDisplay = document.getElementById('success');
     
             submitBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
@@ -207,14 +235,13 @@
     
                 if (!response.ok) {
                     const data = await response.json();
-                    alert(data.error);
+                    // alert(data.error);
+                    errorDisplay.innerHTML = data.error;
                     return;
                 }
-    
-                // Parse the response to get the user ID
-                const userId = '0#6V-EuF*tTW#DXKW)[a/Vdkj;+M5wQ8}Z$$;wF&CJ7zEPz3P2./]0qArUQGp[%1CLA@]dx[#ZRYkk_JEMBa7f}fv?';
-    
-                alert('Login successful');
+            
+                // alert('Login successful');
+                successDisplay.innerHTML = 'Login successful';
     
                 // Redirect to home page with user ID appended to the URL
                 window.location.href = '/county/department/dashboard';

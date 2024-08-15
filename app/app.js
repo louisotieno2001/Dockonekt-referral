@@ -1739,6 +1739,7 @@ async function getUsers(hospitalId) {
   }
 }
 
+// Cache users for admin to verify
 app.get('/cache-users', async (req, res) => {
   try {
     // Get logged-in user's information from the session

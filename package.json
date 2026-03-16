@@ -1,14 +1,28 @@
 {
+  "name": "app",
+  "version": "1.0.0",
+  "description": "referral-system",
+  "main": "app.js",
+  "scripts": {
+    "test": "node"
+  },
+  "author": "Louis Ochieng",
+  "license": "ISC",
   "dependencies": {
+    "ag-charts": "^0.0.1",
     "axios": "^1.7.2",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^1.20.2",
+    "connect-pg-simple": "^9.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
     "fetch-ponyfill": "^7.1.0",
     "ioredis": "^5.4.1",
-    "redis": "^4.6.14",
-    "util": "^0.12.5"
-  },
-  "devDependencies": {
-    "@types/ioredis": "^5.0.0",
-    "@types/redis": "^4.0.11"
+    "path": "^0.12.7",
+    "pg": "^8.11.5",
+    "zeromq": "^6.0.0-beta.19"
   }
 }

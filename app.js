@@ -10,12 +10,12 @@ const pgSession = require('connect-pg-simple')(session);
 const axios = require('axios');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
-const port = process.env.PORT || 3005;
+const port = process.env.EXPRESS_PORT || 4000;
 const url = process.env.DIRECTUS_URL;
-const token = process.env.TOKEN;
+const token = process.env.DIRECTUS_TOKEN;
 const saltRounds = 10;
 const Redis = require('ioredis'); // Changed import to require
-const redis = new Redis(); // Redis client initialization
+const redis = new Redis(process.env.REDIS_URL || 'redis://redis:6379'); // Redis client initialization
 const { promisify } = require('util');
 const { fetch } = require('fetch-ponyfill')();
 const fetchAsync = promisify(fetch);
